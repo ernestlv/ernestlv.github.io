@@ -27,6 +27,7 @@ a[rel=me] {
 
 @media (max-width: 40em) { /* mobile */
     h1 {
+    	color: red;
     	font-weight: bold;
 		font-size: 1.8rem;
     }
