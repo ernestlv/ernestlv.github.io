@@ -1,39 +1,43 @@
 div {
-	position: absolute;
+	position: fixed; /* works better in mobile */
 	top: 50%;
 	left: 50%;
-	margin-top: -0.67em;
-	margin-left: -2.8em;
+	margin-top: -1.5em;
+	margin-left: -5em;
 	font-family: sans-serif;
 	text-align: right;
 }
 
-h1 {
-	margin: 0.1em 0em;
-	font-weight: lighter;
+a {
+    text-decoration: none;
+    color: #808080;
 }
 
-a {
-	color: #000;
-    text-decoration: none;
-} 
+h1 {
+	margin: 0.1em 0em;
+}
 
-a[rel=me] {
+h1 a {
+	font-weight: lighter;
+	color: #000;
+}
+
+b {
 	font-family: serif;
     font-style: italic;
-    font-size: 0.85em;
+    font-weight: lighter;
+    font-size: 1.3rem;
 	color: #808080;
 }
 
-@media (max-width: 40em) { /* mobile */
-    h1 {
-    	color: red;
-    	font-weight: bold;
-		font-size: 1.8rem;
-    }
+@media (max-width: 30em) { /* mobile portrait */
+    
+}
 
-    a[rel=me]{
-    	font-size: 1.5rem;
-    }
+@media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+    
+}
 
+@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+    
 }
