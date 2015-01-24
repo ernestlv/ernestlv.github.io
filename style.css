@@ -1,0 +1,25 @@
+div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -0.67em;
+	margin-left: -2.8em;
+	font-family: sans-serif;
+	text-align: right;
+}
+
+h1 {
+	margin: 0.1em 0em;
+	font-weight: lighter;
+}
+
+a {
+    text-decoration: none;
+}
+
+a[rel=me] {
+	font-family: serif;
+    font-style: italic;
+    font-size: 0.85em;
+	color: silver;
+}
