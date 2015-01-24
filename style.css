@@ -18,6 +18,10 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+	text-decoration: underline;
+}
+
 a[rel=me] {
 	font-family: serif;
     font-style: italic;
