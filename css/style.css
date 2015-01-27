@@ -48,18 +48,43 @@ li {
 
 li a {
 	color: #808080;
+	font-family: sans-serif;
+} 
+
+li .red:hover {
+	color: #E80000;
 }
 
-li a:hover{
-	color: #7BF;
+li .blue:hover {
+	color: #0066CC;
+}
+
+li .green:hover {
+	color: #009966;
+}
+
+li a:hover {
+	color: #0099FF;
 }
 
 @media (max-width: 30em) { /* mobile portrait */
-    
+    li {
+    	display: none;
+    }
+
+    .mobile {
+    	display: inline;
+    }
 }
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
-  
+  ul {
+  	margin: 0 0 0.3em;
+  }
+
+  li a {
+  	font-size: 0.9em;
+  }
 }
 
 @media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
