@@ -1,0 +1,6 @@
+{
+  "name": "ernestlv.github.io",
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}
