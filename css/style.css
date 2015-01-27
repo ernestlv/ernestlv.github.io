@@ -32,8 +32,8 @@ b {
 
 nav {
 	position: fixed;
-	bottom: 0;
-	right: 1em;
+	top: 0;
+	left: 1em;
 }
 
 ul {
@@ -79,7 +79,7 @@ li a:hover {
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
   ul {
-  	margin: 0 0 0.3em;
+  	--margin: 0.5em 0;
   }
 
   li a {
