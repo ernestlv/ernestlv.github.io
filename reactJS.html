@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+  <script type="text/jsx">
+      var PanelHeader = React.createClass({
+        render: function(){
+          return (
+
+           <div className="panel-heading">
+              <h2 className="panel-title">Patient Health Questionnaire (PHQ-9)</h2>
+           </div>
+
+          );
+        }
+      });
+
+      var Question = React.createClass({
+        render: function(){
+          return (
+
+           <h4>Over the last two weeks, how often have you been bothered by any of the following problems?</h4>
+
+          );
+        }
+      });
+
+      var Symptom = React.createClass({
+        getInitialState: function() {
+          return {
+            value: ""
+          };
+        },
+
+        handleClick: function(event){
+          debugger
+          var v = event.target.getAttribute("data-value")
+          this.setState({value: v});
+          this.props.updateTotal(v);
+        },
+
+        content: function(){
+          var options = [
+            "Not at all",
+            "Several days",
+            "More than half the days",
+            "Nearly every day"
+          ];
+
+          return this.state.value ? options[this.state.value] : (
+
+            <ul className="list-group" onClick={this.handleClick}>
+              {options.map(function(ele, inx){
+                return <li className="list-group-item"><a href="#" data-value={inx}>{ele}</a></li>;
+              })}
+            </ul>
+
+          );
+        },
+
+        render: function(){
+          return (
+
+              <div className="row">
+                <div className="col-sm-8">{this.props.desc}</div>
+                <div className="col-sm-4">
+                  {this.content()}
+                </div>
+              </div>
+
+          );
+        }
+      });
+
+      var Total = React.createClass({
+        getDesc: function(value){
+          var green = {color:'green'};
+          var yellow = {color:'gold'};
+          var red = {color:'red'};
+          var desc;
+          if (value <5 ) desc = <h3 style={green}>none</h3>;
+          else if (value <10 ) desc = <h3 style={green}>mild</h3>;
+          else if (value <15 ) desc = <h3 style={yellow}>modarate</h3>;
+          else if (value <20 ) desc = <h3 style={red}>moderately severe</h3>;
+          else desc = <h3 style={red}>severe</h3>;
+          return desc
+        },
+
+        render: function(){
+          debugger
+          return (
+            <div className="row">
+              <div className="col-sm-6"><h3>Total = {this.props.value}/27</h3></div>
+              <div className="col-sm-6">{this.getDesc(this.props.value)}</div>
+              <div className="col-sm-12"><h4>Depression Severity: 0-4 none, 5-9 mild, 10-14 moderate, 15-19 moderately severe, 20-27 severe.</h4></div>
+            </div>
+          );
+        }
+      });
+
+      var Therapists = React.createClass({
+        handleTherapist: function(){
+          alert("Thanks for your participation the Therapists will contact you very soon! cheer up!");
+        },
+        render : function(){
+           debugger
+           var content = "";
+           if ((this.props.value-0) > 9){ 
+              content = (
+                <div className="col-sm-12">
+                    <h4>You qualify for one of our renown specialist. Please click one to select it:</h4>
+                    <ul className="list-group" onClick={this.handleTherapist}>
+                      <li className="list-group-item"><a href="#">Sigmund Freud</a></li>
+                      <li className="list-group-item"><a href="#">Dolly Parton</a></li>
+                      <li className="list-group-item"><a href="#">Tony Stark</a></li>
+                    </ul>
+                </div>
+              );
+          }
+
+          return (
+             <div className="row">
+              {content}
+            </div>
+          );
+        }
+      });
+
+      var Symptoms = React.createClass({
+        getInitialState: function(){
+          return {
+            total: 0
+          };
+        },
+
+        handleUpdateTotal: function(value){
+          debugger
+          this.setState({total: this.state.total + (value-0)});
+        },
+
+        getSymptomList: function(){
+          var symptomDescs = [
+            "Little interest or pleasure in doing things?",
+            "Feeling down, depressed, or hopeless?",
+            "Trouble falling or staying asleep, or sleeping too much?",
+            "Feeling tired or having little energy?",
+            "Poor appetite or overeating?",
+            "Feeling bad about yourself - or that you are a failure or have let yourself or your family down?",
+            "Trouble concentrating on things, such as reading the newspaper or watching television?",
+            "Moving or speaking so slowly that other people could have noticed? Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual?",
+            "Thoughts that you would be better off dead, or of hurting yourself in some way?"
+          ];
+
+          var symptomList = symptomDescs.map(function(desc){
+              return <Symptom desc={desc} updateTotal={this.handleUpdateTotal.bind(this)}/>;
+          }.bind(this));
+
+          return symptomList;
+        },
+
+        render: function(){
+          
+
+          return (
+
+            <div className="container">
+
+              <Total value={this.state.total}/>
+             
+              {this.getSymptomList()}
+
+              <Therapists value={this.state.total}/>
+
+            </div>
+
+          );
+        }
+      });
+
+      var PanelBody = React.createClass({
+        render: function(){
+          return (
+
+            <div className="panel-body">
+              <Question />
+              <Symptoms />
+            </div>
+
+          );
+        }
+      });
+
+
+      React.render(
+        <div className="panel panel-primary">
+          <PanelHeader />
+          <PanelBody />
+        </div>,
+        document.body
+      );
+    </script>
+</head>
+<body></body>
+</html>
