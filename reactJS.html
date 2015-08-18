@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Ernest's ReactJS Test</title>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
@@ -35,10 +40,10 @@
         },
 
         handleClick: function(event){
-          debugger
           var v = event.target.getAttribute("data-value")
           this.setState({value: v});
           this.props.updateTotal(v);
+          return false;
         },
 
         content: function(){
@@ -64,7 +69,7 @@
           return (
 
               <div className="row">
-                <div className="col-sm-8">{this.props.desc}</div>
+                <div className="col-sm-8"><h5>{this.props.desc}</h5></div>
                 <div className="col-sm-4">
                   {this.content()}
                 </div>
@@ -80,12 +85,12 @@
           var yellow = {color:'gold'};
           var red = {color:'red'};
           var desc;
-          if (value <5 ) desc = <h3 style={green}>none</h3>;
-          else if (value <10 ) desc = <h3 style={green}>mild</h3>;
-          else if (value <15 ) desc = <h3 style={yellow}>modarate</h3>;
-          else if (value <20 ) desc = <h3 style={red}>moderately severe</h3>;
-          else desc = <h3 style={red}>severe</h3>;
-          return desc
+          if (value <5 ) desc = <b style={green}>none</b>;
+          else if (value <10 ) desc = <b style={green}>mild</b>;
+          else if (value <15 ) desc = <b style={yellow}>modarate</b>;
+          else if (value <20 ) desc = <b style={red}>moderately severe</b>;
+          else desc = <b style={red}>severe</b>;
+          return <h3>Depression Severity: {desc}</h3>
         },
 
         render: function(){
@@ -94,7 +99,6 @@
             <div className="row">
               <div className="col-sm-6"><h3>Total = {this.props.value}/27</h3></div>
               <div className="col-sm-6">{this.getDesc(this.props.value)}</div>
-              <div className="col-sm-12"><h4>Depression Severity: 0-4 none, 5-9 mild, 10-14 moderate, 15-19 moderately severe, 20-27 severe.</h4></div>
             </div>
           );
         }
@@ -166,10 +170,10 @@
           return (
 
             <div className="container">
-
-              <Total value={this.state.total}/>
              
               {this.getSymptomList()}
+
+              <Total value={this.state.total}/>
 
               <Therapists value={this.state.total}/>
 
