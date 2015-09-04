@@ -73,6 +73,14 @@ li a:hover {
     .portrait {
     	display: inline;
     }
+    
+    div {
+    	top: 40%;
+    }
+    
+    blockquote {
+    	font-family: sans-serif;
+    }
 }
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
