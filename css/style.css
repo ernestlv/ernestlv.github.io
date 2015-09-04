@@ -79,7 +79,8 @@ li a:hover {
     }
     
     blockquote {
-    	font-family: sans-serif;
+    	font-size: 0.9em;
+    	font-family: inherit;
     }
 }
 
@@ -96,8 +97,14 @@ li a:hover {
   	font-size: 0.9em;
   }
   
+  div {
+    	top: 35%;
+    }
+  
   blockquote {
-    	font-family: sans-serif;
+  	font-size: 0.9em;
+    	font-family: inherit;
+    	
     }
     
 }
