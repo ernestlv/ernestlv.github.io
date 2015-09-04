@@ -95,6 +95,14 @@ li a:hover {
   li a {
   	font-size: 0.9em;
   }
+  
+  blockquote {
+    	font-family: sans-serif;
+    }
+    
+ blockquote p {
+ 	display: none;
+ }
 }
 
 @media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
