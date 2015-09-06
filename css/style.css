@@ -65,6 +65,12 @@ li a:hover {
 	color: #0099FF;
 }
 
+.verse {
+	margin: 1em 15em;
+	font-family: cursive;
+	line-height: 1.5em;
+}
+
 @media (max-width: 30em) { /* mobile portrait */
     li {
     	display: none;
