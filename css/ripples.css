@@ -57,7 +57,7 @@ body {
     }
 }
 
-@media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+@media (max-width: 48em) { /* mobile landscape */
 
     .container figure figcaption {
         padding: 0;
@@ -72,7 +72,7 @@ body {
     }
 }
 
-@media (min-width: 48em) and (max-width: 62em){  /* tablet */
+@media (max-width: 62em){  /* tablet */
     .container figure figcaption {
         padding: 0;
     }
@@ -82,4 +82,11 @@ body {
 		margin-left: 1em;
 		text-align: left
 	}
+}
+
+@media (max-width: 65em){  /* small laptop */
+
+    .container p {
+        font-size: 1em;
+    }
 }
