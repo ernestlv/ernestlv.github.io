@@ -50,21 +50,33 @@ body {
     }
     .container p {
     	margin: 1em 3em;
-    	font-size: 0.9em;
+        font-family: sans-serif;
+        font-size: 1em;
+    	line-height: 2.2em;
     	text-align: center;
     }
 }
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+
+    .container figure figcaption {
+        padding: 0;
+    }
   
     .container p {
-    	font-size: 0.9em;
+        font-family: sans-serif;
+        font-size: 1em;
+    	line-height: 2.2em;
+        margin-left: 1em;
     	text-align: left;
-    	margin-left: 1em;
     }
 }
 
 @media (min-width: 48em) and (max-width: 62em){  /* tablet */
+    .container figure figcaption {
+        padding: 0;
+    }
+    
 	.container p {
 		font-size: 1em;
 		margin-left: 1em;
