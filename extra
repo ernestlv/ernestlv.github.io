@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="keywords" content="ernesto, ernest, ernee, ernie, leyva, ernestolv, ernestlv, eleyva, vazquez, atomictumato, tumato, html, css, javascript, grunt, nodejs, adobe aem, lotus notes, java, cranford, mexico">
+	<meta name="description" content="ernest's personal public website">
+	<meta name="author" content="Ernest Leyva">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
+	<meta name="p:domain_verify" content="fdefe289722ab1afdebfc185109f7e01"/><!-- pinterest -->
+	<title>Verses By Ernest</title>
+	<!-- bower:css -->
+	<link rel="stylesheet" type="text/css"  href="css/icons.css" />
+	<!-- endbower -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" type="text/css" href="css/styleieold.css">
+	<![endif]-->
+</head>
+<body>
+<article>
+<h4>Ripples in The Water</h4>
+<p>This idea of you is like ripples in the water, you are the rock and I am the pond, your face distorted by the ripples in the water, dreams of a perfect sunset in a quite lake, in silence, I watch your image and you watch mine, thru the ripples in the water, and your eyes are one with the blue sky and my memories are gone, and the lake is settle and I search for another rock, I dive and dunk, underneath I find a thousand colors, fields of wheat and shiny stars but there are no ripples in the water.</p>
+</article>
+</body>
+</html>
