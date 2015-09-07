@@ -1,0 +1,40 @@
+body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.container {
+	text-align: center;
+}
+
+.container p {
+	margin: 1em 10em;
+	line-height: 2.4em;
+	font-size:1.2rem;
+	font-weight: 100;
+}
+
+.container p::first-letter {
+	font-size: 2.5em;
+    font-weight: 900;
+    color: #AA0000;
+    vertical-align: text-top;
+    letter-spacing: 0.25em;
+}
+
+
+.container figure {
+	margin: 0.7em 1em;
+	float:left;
+	width: 10em;
+}
+
+.container figure img {
+    width: 100%;
+}
+
+
+.container figure figcaption {
+	font-size: 0.5em;
+	text-align: right;
+	padding-right: 5.8em;
+}
