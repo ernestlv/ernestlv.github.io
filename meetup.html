@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Ernest's ReactJS Test</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<style type="text/css">
+	.btn_unfav {
+		display: none;
+	}
+
+	.event_grp {
+		font-weight: 200;
+		color: gray;
+	}
+
+	.event_desc {
+		font-size: 1.5em;
+	}
+
+	.event_location {
+		font-weight: 200;
+	}
+
+	.event_rsvp {
+		color: gray;
+	}
+
+	.icn_fav {
+		display: none;
+	}
+
+	.icn_unfav {
+		display: inline;
+	}
+
+	.favorite {
+		background-color: red;
+	}
+
+	.favorite .icn_fav {
+		color: #0277bd;
+		display: inline;
+	}
+
+	.favorite .icn_unfav {
+		display: none;
+	}
+
+	.favorite .btn_fav {
+		display: none;
+	}
+
+	.favorite .btn_unfav {
+		display: block;
+	}
+	</style>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+	<script type="text/jsx">
+
+		function displayEvents(data){
+			function getParent(el){
+				return $(el).parents('.event-entry');
+			}
+
+			function favoriteEvent( el ){
+				var $li = getParent(el.target);
+				$li.toggleClass('favorite');
+			}
+
+			function unfavoriteEvent( el ){
+				var $li = getParent(el);
+				li.setAttribute('class', li.className.replace(/favorite/g, ''));
+			}
+
+			function getTime(event){
+				var tm = moment(event.time);
+				return <div className="col s2"><time datetime={tm.format()} itemprop="startDate">{tm.format('ddd, hA')}</time></div>;
+			}
+
+			function getDescription(event){
+				var venue = event.venue;
+				var url = event.event_url;
+
+				return <div className="col s5">
+				    <h6 className="event_grp">{event.group.name}</h6>
+				    <p className="event_desc" itemprop="name">{event.name}</p>
+				    <p className="event_location" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+				    	<span>{ venue ? venue['address_1'] : "" }</span><br/>
+				    	<span itemprop="addressLocality">{ venue ? venue['city'] : "" }</span> - <span>{ venue ? venue['zip'] : "" }</span><br />
+				    	<a href={ url ? url : "#" } itemprop="url">event link</a>
+				    </p>
+				    <p className="event_rsvp">RSVP: <span>{event.yes_rsvp_count}</span></p>
+				 </div>;
+			}
+
+			function getFavIcon(){
+				return <div className="col s1">
+					<i className="icn_unfav">&nbsp;</i>
+					<i className="material-icons icn_fav">thumb_up</i>
+				</div>;
+			}
+
+			function getActions(){
+				var btn_fav = <button className="btn_fav btn waves_effect waves_light right">Favorite</button>;
+				var btn_unfav = <button className="btn_unfav btn waves_effect waves_light right">Unfavorite</button>;
+				return <div className="col s4" onClick={favoriteEvent}>{btn_fav}{btn_unfav}</div>;
+			}
+
+			function createEvent(event){
+				var row = <div className="row">{getTime(event)}{getDescription(event)}{getFavIcon()}{getActions()}</div>
+				return <li className="collection-item event-entry" key={event.id}>{row}</li>;
+			}
+
+			function doEvents(data){
+				var events = data.results.splice(0, 10);
+				return <ul className="collection event-list">{events.map(createEvent)}</ul>;
+			}
+
+			React.render(<div id="events" className="container" itemscope itemtype="http://schema.org/Event">
+				<h1>Today's Events</h1>
+				{ doEvents(data) }
+			</div>, document.body);
+		}
+
+		var head = document.getElementsByTagName('head')[0];
+		var script = document.createElement('script');
+
+		var params = new RegExp('[\\?&]zip=([^&#]*)').exec(window.location.href);
+		var zip = params ? params[1] : '07016';
+
+		script.src = 'https://api.meetup.com/2/open_events.json?time=1d,&key=6752511f3291b2b182ee4d2ef312&callback=displayEvents&zip='+zip;
+		head.appendChild(script);
+
+	</script>
+</head>
+<body></body>
+</html>
