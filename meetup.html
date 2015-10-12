@@ -9,55 +9,62 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<style type="text/css">
-	.btn_unfav {
-		display: none;
-	}
+		.event_instructions {
+			font-size: 0.5;
+			font-weight: 200;
+			font-style: italic;
+			color: silver;
+		}
+		
+		.btn_unfav {
+			display: none;
+		}
 
-	.event_grp {
-		font-weight: 200;
-		color: gray;
-	}
+		.event_grp {
+			font-weight: 200;
+			color: gray;
+		}
 
-	.event_desc {
-		font-size: 1.5em;
-	}
+		.event_desc {
+			font-size: 1.5em;
+		}
 
-	.event_location {
-		font-weight: 200;
-	}
+		.event_location {
+			font-weight: 200;
+		}
 
-	.event_rsvp {
-		color: gray;
-	}
+		.event_rsvp {
+			color: gray;
+		}
 
-	.icn_fav {
-		display: none;
-	}
+		.icn_fav {
+			display: none;
+		}
 
-	.icn_unfav {
-		display: inline;
-	}
+		.icn_unfav {
+			display: inline;
+		}
 
-	.favorite {
-		background-color: red;
-	}
+		.favorite {
+			background-color: red;
+		}
 
-	.favorite .icn_fav {
-		color: #0277bd;
-		display: inline;
-	}
+		.favorite .icn_fav {
+			color: #0277bd;
+			display: inline;
+		}
 
-	.favorite .icn_unfav {
-		display: none;
-	}
+		.favorite .icn_unfav {
+			display: none;
+		}
 
-	.favorite .btn_fav {
-		display: none;
-	}
+		.favorite .btn_fav {
+			display: none;
+		}
 
-	.favorite .btn_unfav {
-		display: block;
-	}
+		.favorite .btn_unfav {
+			display: block;
+		}
 	</style>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
@@ -122,6 +129,7 @@
 			}
 
 			React.render(<div id="events" className="container" itemscope itemtype="http://schema.org/Event">
+				<span className="event_instructions">Type a zip code in the address above</span>
 				<h1><img src="http://img2.meetupstatic.com/img/8308650022681532654/header/logo-2x.png" width="68" height="45" alt="Meetup logo"/> Today's Events</h1>
 				{ doEvents(data) }
 			</div>, document.body);
