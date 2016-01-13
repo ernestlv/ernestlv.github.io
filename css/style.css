@@ -4,6 +4,10 @@ body {
     font-weight: 300;
 }
 
+.projects .title {
+    font-weight: 100;
+}
+
 .projects .circle a {
     font-size: 2em;
 }
@@ -80,6 +84,10 @@ header h1 a {
 
 .content blockquote {
     font-weight: lighter;
+}
+
+.projects .title {
+    color: silver;
 }
 
 .projects .red {
@@ -212,7 +220,7 @@ footer nav a:hover {
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
 
     header h1 {
-        margin: 0.5em 0;
+        margin: 0.2em 0;
     }
 
     header blockquote {
