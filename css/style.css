@@ -1,11 +1,103 @@
-div {
-	position: fixed; /* works better in mobile */
-	top: 45%;
-	left: 0;
-	margin-top: -1.5em;
-	margin-left: 0;
-	font-family: sans-serif;
-	text-align: center;
+/* fonts */
+
+body {
+    font-weight: 300;
+}
+
+.projects .circle a {
+    font-size: 2em;
+}
+
+/* layout */
+
+body {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    padding: 0 0.5em;
+}
+
+blockquote {
+    margin: inherit;
+    padding: 0;
+    border: 0;
+}
+
+header {
+    min-height: 10em;
+    text-align: center;
+}
+
+
+header h1 {
+    margin-top: 2em;
+}
+
+.content .wrapper {
+    text-align: center;
+}
+
+.projects .circle {
+    display:inline-block; 
+    margin: 0.5em;
+    padding:0.4em; 
+    width:6.4em; 
+    line-height:5.4em; 
+    text-align:center;
+    border-radius: 4em;
+}
+
+footer .wrapper {
+    margin-top: 4em;
+    text-align: center
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* colors */
+
+header h1 a {
+    font-weight: lighter;
+    color: #000;
+}
+
+.content blockquote {
+    font-weight: lighter;
+}
+
+.projects .red {
+    background-color:red;
+}
+
+.projects  .blue {
+    background-color:blue;
+}
+
+.projects  .green {
+    background-color:green;
+}
+
+.projects  .yellow {
+    background-color:#ffd11a;
+}
+
+.projects  .circle a {
+    color:#FFF;
+}
+
+.projects  .circle a[rel=me] {
+    color:#000;
 }
 
 a {
@@ -13,108 +105,131 @@ a {
     color: #808080;
 }
 
-h1 {
-	margin: 0.1em 0em;
+/* icons */
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: contain;
 }
 
-h1 a {
-	font-weight: lighter;
-	color: #000;
+.icon.blog {
+    background-image: url(justvector/svg/blogger.svg);
 }
 
-blockquote {
-    font-family: cursive;
-    font-style: italic;
-    font-weight: lighter;
+.icon.twitter {
+    background-image: url(justvector/svg/twitter.svg);
 }
 
-nav {
-	position: fixed;
-	top: 0;
-	left: 1em;
+.icon.git {
+    background-image: url(justvector/svg/github.svg);
 }
 
-ul {
-	list-style-type: none;
-	padding: 0;
+
+.icon.linkedin {
+    background-image: url(justvector/svg/linkedin_alt.svg);
 }
 
-li {
-	display: inline;
-	padding: 0 0.5em;
+/* effects */
+
+.projects .circle {
+    transition: width, 1s;
 }
 
-li a {
-	color: #808080;
-	font-family: sans-serif;
-} 
-
-li .red:hover {
-	color: #E80000;
+.projects  .circle:hover {
+    width: 12.8em;
 }
 
-li .blue:hover {
-	color: #0066CC;
+.projects  .circle a[rel=me]:hover {
+    color: #0099FF;
 }
 
-li .green:hover {
-	color: #009966;
+footer nav a:hover {
+    color: #007fff;
 }
 
-li a:hover {
-	color: #0099FF;
-}
-
-.verse {
-	margin: 1em 15em;
-	font-family: cursive;
-	line-height: 1.5em;
-}
 
 @media (max-width: 30em) { /* mobile portrait */
-    li {
-    	display: none;
+    header h1 {
+        margin: 0.5em 0;
     }
 
-    .portrait {
-    	display: inline;
+    header blockquote {
+        font-size: 0.9em;
+        font-family: inherit;
     }
-    
-    div {
-    	top: 37%;
+
+    .projects {
+        width: 18em;
+        margin: auto;
     }
-    
-    blockquote {
-    	font-size: 0.9em;
-    	font-family: inherit;
+
+    .projects  .circle:hover {
+        width: 6.4em;
+    }
+
+    footer {
+        position: static;
+    }
+
+    footer .wrapper {
+        margin: 0;
+        text-align: left;
+    }
+
+    footer nav {
+        line-height: inherit; /* reset materialize style */
+        width: auto; /* reset materialize style */
+        height: auto; /* reset materialize style */
+    }
+
+    footer nav li {
+        display:block;
+        border-top: 1px solid green;
+        padding: 0.7em;
+    }
+
+    footer nav li {
+        transition: none; /* reset materialize style */
+        float: none; /* reset materialize style */
+    }   
+
+    footer nav a {
+        font-size: 1.5em;
+        padding: 0;
     }
 }
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
-  li {
-    	display: none;
+
+    header h1 {
+        margin: 0.5em 0;
     }
 
-    .landscape {
-    	display: inline;
+    header blockquote {
+        font-size: 0.9em;
+        font-family: inherit;
+        
     }
 
-  li a {
-  	font-size: 0.9em;
-  }
-  
-  div {
-    	top: 35%;
+    .projects  .circle:hover {
+        width: 6.4em;
     }
-  
-  blockquote {
-  	font-size: 0.9em;
-    	font-family: inherit;
-    	
-    }
-    
+
+    footer nav li:first-child{
+        display: none;
+    } 
 }
 
 @media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
-    
+
+}
+
+@media (max-height: 26em){ /* fix footer for some tablets */
+    footer {
+        position: static;
+    }
 }

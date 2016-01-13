@@ -1,0 +1,120 @@
+div {
+	position: fixed; /* works better in mobile */
+	top: 45%;
+	left: 0;
+	margin-top: -1.5em;
+	margin-left: 0;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #808080;
+}
+
+h1 {
+	margin: 0.1em 0em;
+}
+
+h1 a {
+	font-weight: lighter;
+	color: #000;
+}
+
+blockquote {
+    font-family: cursive;
+    font-style: italic;
+    font-weight: lighter;
+}
+
+nav {
+	position: fixed;
+	top: 0;
+	left: 1em;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+li {
+	display: inline;
+	padding: 0 0.5em;
+}
+
+li a {
+	color: #808080;
+	font-family: sans-serif;
+} 
+
+li .red:hover {
+	color: #E80000;
+}
+
+li .blue:hover {
+	color: #0066CC;
+}
+
+li .green:hover {
+	color: #009966;
+}
+
+li a:hover {
+	color: #0099FF;
+}
+
+.verse {
+	margin: 1em 15em;
+	font-family: cursive;
+	line-height: 1.5em;
+}
+
+@media (max-width: 30em) { /* mobile portrait */
+    li {
+    	display: none;
+    }
+
+    .portrait {
+    	display: inline;
+    }
+    
+    div {
+    	top: 37%;
+    }
+    
+    blockquote {
+    	font-size: 0.9em;
+    	font-family: inherit;
+    }
+}
+
+@media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+  li {
+    	display: none;
+    }
+
+    .landscape {
+    	display: inline;
+    }
+
+  li a {
+  	font-size: 0.9em;
+  }
+  
+  div {
+    	top: 35%;
+    }
+  
+  blockquote {
+  	font-size: 0.9em;
+    	font-family: inherit;
+    	
+    }
+    
+}
+
+@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+    
+}

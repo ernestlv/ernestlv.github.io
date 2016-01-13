@@ -7,40 +7,82 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
 	<meta name="p:domain_verify" content="fdefe289722ab1afdebfc185109f7e01"/><!-- pinterest -->
 	<title>Hello World By Ernest</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<!-- bower:css -->
 	<link rel="stylesheet" type="text/css"  href="css/icons.css" />
 	<!-- endbower -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<!--[if lte IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/styleieold.css">
-	<![endif]-->
 </head>
 <body>
-	<div class="vcard">
-		<h1><a class="url" title="click to know more about me!" href="//www.about.me/eleyva"> Hello World</a></h1>
+	<header>
+		<h1><a href="//www.about.me/eleyva" rel="me" title="click to know more about me!">Hello World</a></h1>
 		<blockquote>
 			<!--<p>"...The point is not to be an expert in a framework, but to be an expert in technology, only experience gives you the feeling to select the coolest ideas..."</p>-->
-			<p>"...Front End Development is about taking a document and transform it in a clear web page that conveys information. It is not art, but very similar, in that art takes a subject and uses a medium to transmit an emotion..."</p>
-			<cite">ernest</cite>
+			<p>"...Front End Development is about taking a document and transform it in a clear web page that conveys information..."</p>
+			<cite>ernest</cite>
 		</blockquote>
-	</div>
-	<nav>
-		<ul>
-			<li class="landscape"><a title="about me!" href="//www.about.me/eleyva" target="_blank"><span class="glyphicon glyphicon-link"></span> me</a></li>
-			<li class="landscape"><a class="red" title="my work @ foodnetwork" href="//www.foodnetwork.com" target="_blank"><span class="glyphicon glyphicon-link"></span> fn</a></li>
-			<li class="landscape"><a class="blue" title="my work @ siriusxm" href="//www.siriusxm.com/programschedules" target="_blank"><span class="glyphicon glyphicon-link"></span> xm</a></li>
-			<li class="landscape"><a class="green" title="my work @ conservation international" href="//www.conservation.org/pages/nature.aspx" target="_blank"><span class="glyphicon glyphicon-link"></span> ci</a></li>
-			<li><a title="my github account" href="//github.com/ernestlv?tab=repositories" target="_blank"><span class="glyphicon glyphicon-link"></span> code</a></li>
-			<li><a title="snippets about how to vertical center in css" href="center.html" target="_blank"><span class="glyphicon glyphicon-link"></span> css</a></li>
-			<li><a title="responsive grid" href="grid.html" target="_blank"><span class="glyphicon glyphicon-link"></span> grid</a></li>
-			<li><a title="reactJS sample" href="reactJS.html" target="_blank"><span class="glyphicon glyphicon-link"></span> reactJS</a></li>
-			<li><a title="connect to meetup API using reactJS" href="meetup.html?zip=10012" target="_blank"><span class="glyphicon glyphicon-link"></span> Meetup</a></li>
-			<li><a title="my blog" href="//atomictumato.blogspot.com" target="_blank"><span class="glyphicon glyphicon-link"></span> blog</a></li>
-			<li class="landscape"><a title="sample of a responsive text" href="ripples.html" target="_blank"><span class="glyphicon glyphicon-link"></span> ripples</a></li>
-			<li><a title="follow me on twitter" href="//twitter.com/ernest_fee" target="_blank"><span class="glyphicon glyphicon-link"></span> twitter</a></li>
-			<li class="portrait landscape"><a title="my resume" href="//bit.ly/1J1v5fX" target="_blank"><span class="glyphicon glyphicon-link"></span> resume</a></li>
-			<li class="portrait landscape"><a title="click to contact me!" href="mailto:ernestolv@hotmail.com"><span class="glyphicon glyphicon-envelope"></span></a></li>
-		</ul>	
-	</nav>
+	</header>
+	<main class="content">
+		<div class="wrapper">
+			<div class="projects">
+				<ul>
+					<li class="circle yellow">
+						<a href="//www.about.me/eleyva" rel="me" title="about me!" target="_blank">me</a>
+					</li>
+					<li class="circle red">
+						<a href="//www.foodnetwork.com" title="project: @ foodnetwork" target="_blank">fn</a>
+					</li>
+					<li class="circle blue">
+						<a href="//www.siriusxm.com/programschedules" title="project: @ siriusxm" target="_blank">xm</a>
+					</li>
+					<li class="circle green">
+						<a href="//www.conservation.org/pages/nature.aspx" title="project: @ conservation international" target="_blank">ci</a>
+					</li>
+	<!--				<li>
+						<a href="meetup.html?zip=10012" title="code sample: meetup API, reactJS & materialize" target="_blank"><span class="glyphicon glyphicon-link"></span> meetup</a>
+					</li>
+					<li>
+						<a href="center.html" title="code sampe: how to center in css" target="_blank"><span class="glyphicon glyphicon-link"></span> css</a>
+					</li>
+					<li>
+						<a href="grid.html" title="code sample: responsive grid" target="_blank"><span class="glyphicon glyphicon-link"></span> grid</a>
+					</li>
+					<li>
+						<a href="reactJS.html" title="code sample: reactJS app" target="_blank"><span class="glyphicon glyphicon-link"></span> reactJS</a>
+					</li>
+					<li class="landscape">
+						<a href="ripples.html" title="code sample: responsive text" target="_blank"><span class="glyphicon glyphicon-link"></span> ripples</a>
+					</li> -->
+				</ul>	
+			</div>
+		</div>
+	</main>
+	<footer>
+		<div class="wrapper">
+			<nav class="green">
+				<ul>
+					<li>
+						<a href="//github.com/ernestlv?tab=repositories" title="my github account" target="_blank"><span class="icon git"></span> git</a>
+					</li>
+					<li>
+						<a href="//atomictumato.blogspot.com" title="my blog" target="_blank"><span class="icon blog"></span> blog</a>
+					</li>
+					<li>
+						<a href="//twitter.com/ernest_fee" title="follow me on twitter" target="_blank"><span class="icon twitter"></span> twitter</a>
+					</li>
+					<li>
+						<a href="//www.linkedin.com/in/ernestlv" title="my linkedIn profile" target="_blank"><span class="icon linkedin"></span> LinkedIn</a>
+					</li>
+					<li>
+						<a href="//bit.ly/1J1v5fX" title="my resume" target="_blank"><span class="glyphicon glyphicon-paperclip"></span> resume</a>
+					</li>
+					<li>
+						<a href="mailto:ernestolv@hotmail.com" title="click to contact me!"><span class="glyphicon glyphicon-envelope"></span> email</a>
+					</li>		
+				</ul>
+			</nav>	
+		</div>	
+	</footer>
 </body>
 </html>
