@@ -46,10 +46,10 @@ header h1 {
 
 .projects .circle {
     display:inline-block; 
-    margin: 0.5em;
-    padding:0.4em; 
+    margin: 0.5em; 
+    padding: 0;
     width:6.4em; 
-    line-height:5.4em; 
+    line-height:6em; 
     text-align:center;
     border-radius: 4em;
 }
@@ -169,12 +169,21 @@ footer nav a:hover {
     }
 
     .projects {
-        width: 18em;
+        width: 16em;
         margin: auto;
     }
 
-    .projects .circle:hover {
-        width: 6.4em;
+    .projects .circle {
+        clear: both;
+        transition: width 1s;
+        transition-timing-function: ease-in;
+    }
+
+    .projects .circle.active {
+        transition: width 2.5s;
+        transition-delay: 0.7s;
+        transition-timing-function: ease-out;
+        width: 14em;
     }
 
     footer {
