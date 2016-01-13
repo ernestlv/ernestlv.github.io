@@ -168,7 +168,7 @@ footer nav a:hover {
 
 @media (max-width: 30em) { /* mobile portrait */
     header h1 {
-        margin: 0.5em 0;
+        margin: 0.3em 0;
     }
 
     header blockquote {
