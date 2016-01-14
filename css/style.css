@@ -4,10 +4,6 @@ body {
     font-weight: 300;
 }
 
-.projects .title {
-    font-weight: 100;
-}
-
 .projects .circle a {
     font-size: 2em;
 }
@@ -88,10 +84,6 @@ header h1 a {
 
 .content blockquote {
     font-weight: lighter;
-}
-
-.projects .title {
-    color: silver;
 }
 
 .projects .red {
@@ -223,8 +215,8 @@ footer nav a:hover {
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
 
-    ul {
-        margin: 0.6em;
+    header h1 {
+        margin: 0.5em 0;
     }
 
     header blockquote {
@@ -247,12 +239,6 @@ footer nav a:hover {
 }
 
 /* fine tune the position of the footer for small screens */
-
-@media (max-wdith: 34em) {
-    header h1 {
-        margin: 0.2em 0;
-    }
-}
 
 @media (max-height: 30em){ /* fix footer for some tablets */
     footer {
