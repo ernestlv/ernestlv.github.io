@@ -44,6 +44,10 @@ header h1 {
     margin-top: 2em;
 }
 
+header .description {
+    padding: 0 4em;
+}
+
 .content .wrapper {
     text-align: center;
 }
@@ -219,10 +223,6 @@ footer nav a:hover {
 
 @media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
 
-    header h1 {
-        margin: 0.2em 0;
-    }
-
     header blockquote {
         font-size: 0.9em;
         font-family: inherit;
@@ -242,7 +242,15 @@ footer nav a:hover {
 
 }
 
-@media (max-height: 26em){ /* fix footer for some tablets */
+/* fine tune the position of the footer for small screens */
+
+@media (max-height: 25em){
+    header h1 {
+        margin: 0.2em 0;
+    }
+}
+
+@media (max-height: 30em){ /* fix footer for some tablets */
     footer {
         position: static;
     }
