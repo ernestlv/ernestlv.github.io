@@ -227,6 +227,10 @@ footer nav a:hover {
         margin: 0.6em;
     }
 
+    header h1 {
+        --margin: 0.2em 0;
+    }
+
     header blockquote {
         font-size: 0.9em;
         font-family: inherit;
@@ -248,7 +252,7 @@ footer nav a:hover {
 
 /* fine tune the position of the footer for small screens */
 
-@media (max-wdith: 34em) {
+@media (max-height: 25em){
     header h1 {
         margin: 0.2em 0;
     }
