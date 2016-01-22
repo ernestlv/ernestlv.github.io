@@ -114,7 +114,7 @@ header h1 a {
     color:#FFF;
 }
 
-.projects  .circle a[rel=me] {
+.projects  .circle a[rel=me], .projects  .circle a.sample {
     color:#000;
 }
 
