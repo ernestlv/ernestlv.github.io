@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="description" content="connect to instagram and display images in grid">
+	<meta name="author" content="Ernest Leyva">
+	<title>Clipper Player</title>
+	<style>
+		body {
+			font-size: 10px;
+		}
+
+		div.col {
+			float: left;
+			box-sizing: border-box;
+			padding-right: 1em;
+			width: 50%;
+		}
+
+		img {
+			max-width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="content"></div>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+		   
+		    var req = $.ajax({
+		    	url: 'https://api.instagram.com/v1/users/self/media/recent/?access_token=321800930.0a55143.8a16d377fa864a61868c823c2deb8ba4',
+		    	dataType: 'jsonp'
+		    })
+
+		    req.done(function(data){
+
+		    	var filterData = data.data.filter(function(ele){
+		    		return ele.type === 'image' && ele.tags.indexOf('flexcollar') !== -1;
+		    	})
+
+		    	var content = document.querySelector('div.content');
+		    	filterData.forEach(function(ele){
+		    		var imgObj = ele.images.standard_resolution;
+		    		var img = document.createElement('img');
+		    		img.setAttribute('src', imgObj.url);
+		    		img.setAttribute('width', imgObj.width);
+		    		img.setAttribute('height', imgObj.height);
+		    		var div = document.createElement('div');
+		    		div.classList.add('col');
+		    		div.appendChild(img);
+		    		content.appendChild(div);
+		    	});
+		    });
+
+		});
+	</script>
+</body>
+</html>
