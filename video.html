@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="description" content="creates video clips">
+	<meta name="author" content="Ernest Leyva">
+	<title>Clipper Player</title>
+	<style>
+		/* fonts */
+		body {
+			font-family: sans-serif;
+		}
+
+		header cite {
+			font-size: 0.25em;
+			font-style: italic;
+			font-weight: 100;
+		}
+
+		div.edit {
+			font-size: 0.75em;
+		}
+
+		/* layout */
+		header h1 {
+			text-align: center;
+		}
+
+		header cite {
+			margin-left: 1em;
+		}
+
+		main.content {
+			margin: auto;
+			width: 40em;
+		}
+
+		div.player {
+			margin: 0.5em auto;
+			padding: 1em;
+		}
+
+		div.edit label {
+			margin-left: 1em;
+			margin-right: 1em;
+		}
+
+		div.edit label:first-child {
+			margin-left: 0;
+		}
+
+		ol.clips li {
+			margin: 0.5em 0;
+			padding: 0.5em 0;
+		}
+
+		ol.clips span.desc {
+			display: inline-block;
+			width: 20em;
+			margin: 0 0.5em;
+		}
+
+		ol.clips button {
+			margin: 0 0.5em;
+		}
+
+		button {
+			padding: 0.75em 1em;
+    		line-height: 1.5em;
+		}
+
+		button.save {
+			margin-left: 1em;
+		}
+
+		video {
+			width: 600px;
+			max-width: 100%; 
+		}
+
+		/* colors */
+		header cite {
+			color: #c0c0c0;
+		}
+
+		div.player {
+			background-color: #000;
+			border: 1px solid #e0e0e0;
+			border-radius: 1em;
+		}
+
+		ol.clips {
+			border-top: 1px solid #e0e0e0;
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		ol.clips li:nth-child(even) {
+			background-color:  #e0e0e0;
+		}
+
+		ol.clips li:last-child{
+			border: 0;
+		}
+
+		button {
+			border: 0;
+			border-radius: 0.5em;
+		}
+
+		button.play {
+			background-color: #009900;
+		}
+
+		button.play:before {
+			content:'play';
+		}
+
+		button.edit {
+			background-color: #ffcc00;
+		}
+
+		button.edit:before {
+			content:'edit';
+		}
+
+		button.remove {
+			background-color: #cc3300;
+		}
+
+		button.remove:before {
+			content:'remove';
+		}
+
+		button.save {
+			background-color: #0099cc;
+		}
+
+		button.save:before {
+			content:'save'
+		}
+	</style>
+	<script src="//fb.me/react-0.14.6.min.js"></script>
+	<script src="//fb.me/JSXTransformer-0.12.2.js"></script>
+  	<script type="text/jsx">
+  		(function(){
+
+  			/* Utility classes */
+  			function getID() {
+			 	return Math.random() * (1000000 - 0) + 0 | 0;
+			}
+
+			function formatTimeValue(timeValue){
+				var v = "0:00"
+				var x = timeValue - 0;
+				var s;
+				if (x>9){
+					s = v.replace(/00$/, x);
+				}else{
+					s= v.replace(/0$/, x);
+				}
+				return s;
+			}
+
+  			function createClip(nameValue, frmValue, toValue){
+				return <li id={getID()} data-name={nameValue} data-time={frmValue+','+toValue}>
+							<span className="desc">CLIP: {nameValue} From {formatTimeValue(frmValue)} To {formatTimeValue(toValue)}</span>
+							<button className="play" />
+							<button className="edit" />
+							<button className="remove" />
+						</li>;
+			}
+
+			function playClip(ele){
+					var video = document.querySelector('video');
+				    var source = document.querySelector('source');
+				    var url = source.getAttribute('data-original');
+				    var time = ele.parentNode.getAttribute('data-time');
+				    var src = url+'#t='+time;
+					source.setAttribute('src', src);
+				    video.load();
+				    video.play();
+			}
+
+			function editClip(ele){
+				var div = document.querySelector('div.edit');
+				div.setAttribute('data-index', ele.parentNode.id);
+				var nom = div.querySelector('input#name');
+				var frm = div.querySelector('input#from');
+				var to  = div.querySelector('input#to');
+				var nameValue = ele.parentNode.getAttribute('data-name');
+				var timeValue = ele.parentNode.getAttribute('data-time');
+				var timeArr = timeValue.split(',');
+				nom.value = nameValue;
+				frm.value = timeArr[0];
+				to.value = timeArr[1];
+			}
+
+			function removeClip(ele){
+				debugger
+				var li = ele.parentNode;
+				var clips = document.querySelector('ol.clips')
+				if (clips.children.item(0).id !== li.id){
+					clips.removeChild(li);
+				}else{
+					alert('full move cannot be removed')
+				}
+			}
+
+			function updateClip(inx, nameValue, frmValue, toValue){
+				var li = document.getElementById(inx);
+				li.setAttribute('data-name', nameValue);
+				li.setAttribute('data-time', frmValue+','+toValue);
+				var span = li.querySelector('span');
+				span.textContent = "CLIP: "+nameValue+" From "+formatTimeValue(frmValue)+' To '+formatTimeValue(toValue);
+				var div = document.querySelector('div.edit');
+				div.setAttribute('data-index', '');
+			}
+
+			function insertClip(nameValue, frmValue, toValue){
+				var li  = document.createElement('li');
+				li.setAttribute('id', getID());
+				li.setAttribute('data-name', nameValue);
+				li.setAttribute('data-time', frmValue+','+toValue);
+				var span = document.createElement('span');
+				span.classList.add('desc');
+				span.textContent = "CLIP: "+nameValue+" From "+formatTimeValue(frmValue)+' To '+formatTimeValue(toValue);
+				li.appendChild(span);
+				var btn = document.createElement('button')
+				btn.classList.add('play');
+				li.appendChild(btn);
+				btn = document.createElement('button')
+				btn.classList.add('edit');
+				li.appendChild(btn);
+				var btn = document.createElement('button')
+				btn.classList.add('remove');
+				li.appendChild(btn);
+				document.querySelector('ol.clips').appendChild(li);
+			}
+
+			function saveClip(ele){
+				var div = ele.parentNode;
+				var inxValue = div.getAttribute('data-index');
+				var nom = div.querySelector('input#name');
+				var frm = div.querySelector('input#from');
+				var to  = div.querySelector('input#to');
+				var nameValue = nom.value;
+				var frmValue = frm.value;
+				var toValue = to.value;
+				if (!nameValue ) throw 'invalid name value';
+				if (!frmValue ) throw 'invalid from value';
+				if (!toValue ) throw 'invalid to value';
+				nom.value = '';
+				frm.value = '';
+				to.value = '';
+				if (inxValue){
+					updateClip(inxValue, nameValue, frmValue, toValue);
+				}else{
+					insertClip(nameValue, frmValue, toValue);
+				}
+			}
+
+			/* React Components */
+
+		  	var Header = React.createClass({
+		  		render: function(){
+		  			return <header>
+								<h1>Video CLIP Player<cite>by ernest</cite></h1>
+							</header>;
+		  		}
+		  	});
+
+		  	var Player = React.createClass({
+		  		render: function(){
+		  			return <div className="player">
+								<video controls>
+								    <source data-original="http://www.w3schools.com/html/mov_bbb.mp4" type='video/mp4' />
+								    	Your browser does not support HTML5 video.
+							  	</video>
+						  	</div>;
+		  		}
+		  	});
+
+		  	var Edit = React.createClass({
+		  		render: function(){
+		  			return <div className="edit">
+						  		<p>To add a new CLIP enter a range in Seconds. e.g. From 3 To 5</p>
+						  		<label>Name</label> <input type="text" id="name"  />
+						  		<label>From</label> <input type="text" id="from"  />
+						  		<label>To</label> <input type="text" id="to"  />
+						  		<button className="save" />
+						    </div>;
+		  		}
+		  	});
+
+		  	var List = React.createClass({
+
+		  		render: function(){
+		  			return <div>
+		  						<h3>Video Clip List</h3>
+		  				  		<ol className="clips">
+		  				  			{createClip('Full Movie', 0, 10)}
+		  				  			{createClip('Butterfly', 0, 4)}
+		  				  			{createClip('Happy Bunny', 5, 7)}
+		  				  			{createClip('Strawberry', 7, 9)}
+		  				  		</ol>
+		  				   </div>;
+		  		}
+		  	});
+
+		  	var Main = React.createClass({
+
+		  		clickHandler: function(e) {
+			        	var t = e.target;
+			        	if (t.classList.contains('play'))   playClip(t);
+			        	if (t.classList.contains('edit'))   editClip(t);
+			        	if (t.classList.contains('remove')) removeClip(t);
+			        	if (t.classList.contains('save'))   saveClip(t);
+			    },
+
+		  		render: function(){
+		  			return <main className="content" onClick={this.clickHandler}>
+				  				<Player />
+				  				<Edit />
+				  				<List />
+				  		   </main>;
+		  		}
+		  	});
+
+	  		React.render(
+	  			<div>
+	  				<Header />
+	  				<Main />
+	  			</div>,
+	  			document.body
+	  		);
+  		})();
+  	</script>
+</head>
+<body></body>
+</html>
