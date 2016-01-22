@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="description" content="creates surveys">
+	<meta name="author" content="Ernest Leyva">
+	<title>Survey Maker</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		#submit {
+			font-size: 2em;
+		}
+
+		/* layout */
+		.row {
+			padding: 1em 0.5em;
+		}
+		.row:nth-child(even) {
+			background-color: #f0f0f0
+		}
+
+		.row.list h4{
+			margin-top: 0;
+		}
+
+		.row.list li {
+			padding: 0.25em;
+		}
+
+		label {
+			display: inline-block;
+			width: 5em;
+			margin-right: 1em;
+		}
+
+		input[type=text] {
+			width: 50%;
+			height: 2em;
+			margin-right: 1em;
+		}
+
+		.row:last-child {
+			text-align: center
+		}
+
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Survey Maker</h1>
+	</header>
+	<main class="content">
+		<p>Please enter the following information to create your survey</p>
+		<form>
+				<div class="row">
+					<label>Title</label><input name="title" type="text" value="">
+				</div>
+				<div class="row">	
+					<label>Decription</label><input name="description" type="text" value="">
+				</div>
+				<div class="row">
+					<label>Points</label>
+					<input name="points" type="radio" value="1" checked> 1 pt
+					<input name="points" type="radio" value="2"> 2 pts
+					<input name="points" type="radio" value="3"> 3 pts 
+					<input name="points" type="radio" value="4"> 4 pts 
+					<input name="points" type="radio" value="5"> 5 pts
+				</div>
+				<div class="row">
+					<label>Question</label><input name="question" type="text" value=""><button id="add_question">Add Question</button>
+				</div>
+				<div class="row list">
+					<h4>List of Questions</h4>
+					<ol id="question_list"></ol>
+				</div>
+				<div class="row">
+					<input id="submit" type="submit" value="create survey">
+				</div>
+		</form>
+	</main>
+	<script src="//code.jquery.com/jquery-1.12.0.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			var surveys = [];
+			var questions = [];
+
+
+			function resetQuestion(){
+				document.querySelector('input[name=question]').value = '';
+			}
+
+			function updateQuestionArray(questions){
+				var q = document.querySelector('input[name=question]').value;
+				questions.push({title: q});
+			}
+
+			function updateQuestionList(questions){
+				var html = questions.map(function(q){
+					return '<li>'+q.title+'</q>';
+				})
+				$('#question_list').html(html);
+			}
+
+			function createSurvey(questions){
+				var title = document.querySelector('input[name=title]').value;
+				var description = document.querySelector('input[name=description]').value;
+				var points = document.querySelector('input[name=points]:checked').value;
+				return {
+					title: title,
+					pointValue: points - 0,
+					description: description,
+					questions: questions.concat([])
+				}
+			}
+
+			function isValidSurvey(survey){
+				if ( survey.title.length > 99) throw "max title less than 100 chars";
+				if ( survey.description.length > 499) throw "max description less than 500 chars";
+				if ( survey.questions.length === 0) throw "invalid number of questions at least 1";
+
+				return true;
+			}
+
+			function saveSurvey(survey){
+				surveys.push(survey);
+			}
+
+			function resetQuestions(){
+				resetQuestion();
+				document.querySelector('#question_list').innerHTML = '';
+				questions = [];
+			}
+
+			function resetSurvey(){
+				document.querySelector('input[name=title]').value = '';
+				document.querySelector('input[name=description]').value = '';
+				document.querySelector('input[name=points][value="1"]').checked = true;
+				resetQuestions();
+			}
+
+			$('#add_question').on('click', function(e){
+				e.preventDefault();
+				updateQuestionArray(questions);
+				updateQuestionList(questions);
+				resetQuestion();
+			});
+
+			$('#submit').on('click', function(e){
+				try{
+					e.preventDefault();
+					var survey = createSurvey(questions);
+					if (isValidSurvey(survey)){
+						saveSurvey(survey);
+						resetSurvey();
+						alert('your survey was created!!!');
+					}
+				}catch(e){
+					alert(e);
+				}
+			})
+			
+		});
+	</script>
+</body>
+</html>
