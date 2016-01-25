@@ -16,6 +16,10 @@
 			font-weight: 100;
 		}
 
+		p.desc {
+			font-weight: 100;
+		}
+
 		div.edit {
 			font-size: 0.75em;
 		}
@@ -75,7 +79,7 @@
 			max-width: 100%; 
 		}
 
-		p {
+		p.desc {
 			padding: 0 2em;
 		}
 
@@ -139,6 +143,18 @@
 		button.save:before {
 			content:'save'
 		}
+
+		/* decoration */
+
+		div.circle {
+			position: absolute;
+			top: -12.5em;
+			left: -12.5em;
+			width: 25em;
+			height: 25em;
+			background-color: #ff9933;
+			border-radius: 12.5em;
+		}
 	</style>
 </head>
 <body>
@@ -152,7 +168,8 @@
 			    	Your browser does not support HTML5 video.
 		  	</video>
 	  	</div>
-	  	<p>This is me sliding the hills of Echo Lake Park after the blizzard of January 2016. The video runs in slow motion so you can truly appreciate the bouncing of my feet :-)</p>
+	  	<p class="desc">This is me, sliding the hills of Echo Lake Park, after the blizzard of January 2016. The video runs in slow motion so you can truly appreciate the bouncing of my feet :-)</p>
+	  	<div class="circle"></div>
 	</main>
 </body>
 </html>
