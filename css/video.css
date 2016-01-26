@@ -18,18 +18,18 @@
 		}
 
 		/* layout */
+		div.wrapper {
+			margin: auto;		
+			width: 40em;
+			max-width: 100%;
+		}
+
 		header h1 {
 			text-align: center;
 		}
 
 		header cite {
 			margin-left: 1em;
-		}
-
-		main.content {
-			margin: auto;
-			width: 40em;
-			max-width: 100%;
 		}
 
 		div.player {
@@ -149,4 +149,94 @@
 			background-color: #ff9933;
 			border-radius: 15em;
 			z-index: -1;
+		}
+
+
+		@media (min-width: 30em) and (max-width: 48em){
+
+			div.wrapper {
+				width: auto;
+				margin: 0;
+			}
+
+			header {
+				float: right;
+				width: 40%;
+				margin-top:3em;
+			}
+
+			header h1 {
+				font-size: 1.5em;
+				text-align: left;
+				margin-top: 0;
+			}
+			
+			div.player {
+				float:left;
+				width: 50%;
+				margin-top:3em;
+			}
+
+			p.desc {
+				font-size: 0.8em;
+				float: right;
+				width: 40%;
+				padding: 0;
+			}
+		}
+
+		@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+
+			header {
+				float: none;
+				width: auto;
+
+			}
+
+			header h1 {
+				font-size: 2em;
+				text-align: center;
+			}
+
+			div.wrapper {
+				width: 40em;
+				height: 33em;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+			}
+
+			div.player {
+				float: none;
+				margin-top: auto;
+				width: auto;
+			}
+
+			p.desc {
+				float: none;
+				width: auto;
+				font-size: 1.5em;
+				padding: 0 2em;
+			}
+
+		}
+
+		@media (min-width: 60em) and (max-width: 64em) { /* tablet landscape */
+			div.wrapper {
+				width: 40em;
+				height: 33em;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+			}
+
+			p.desc {
+				font-size: 1.5em;
+			}
 		}
