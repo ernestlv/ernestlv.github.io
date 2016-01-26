@@ -16,6 +16,10 @@
 		}
 
 		div.circle {
+			background-color: #ff00ff;
+		}
+
+		div.circle.psychedelic {
 		    animation-name: psychedelic;
 		    animation-duration: 5s;
 		    animation-iteration-count: infinite;
@@ -37,5 +41,27 @@
 		  	<p class="desc">Pai and Me in the new medowlands stadium watching the AC/DC Concert on August 2015 (wait for it!)</p>
 	</div>
 	<div class="circle"></div>
+	<script type="">
+
+	(function(){
+		var circle = document.querySelector('.circle');
+
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			circle.classList.add('psychedelic');
+		}else{
+			var video = document.querySelector('video');
+			video.addEventListener('play', function(){
+				circle.classList.add('psychedelic');
+			});
+			//video.addEventListener('pause', function(){
+			//	circle.classList.remove('psychedelic');
+			//});
+			video.addEventListener('ended', function(){
+				circle.classList.remove('psychedelic');
+			});
+		}
+	})();
+	
+	</script>
 </body>
 </html>
