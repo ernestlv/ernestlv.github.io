@@ -152,11 +152,18 @@
 		}
 
 
-		@media (min-width: 30em) and (max-width: 48em){
+		/* @media (min-width: 30em) and (max-width: 48em){ */
+		@media (max-height: 28em){ /* portrait */
 
 			div.wrapper {
-				width: auto;
-				margin: 0;
+				width: 40em;
+				height: 20em;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
 			}
 
 			header {
@@ -185,58 +192,17 @@
 			}
 		}
 
-		@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+	@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
 
-			header {
-				float: none;
-				width: auto;
-
-			}
-
-			header h1 {
-				font-size: 2em;
-				text-align: center;
-			}
-
-			div.wrapper {
-				width: 40em;
-				height: 33em;
-				position: absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				margin: auto;
-			}
-
-			div.player {
-				float: none;
-				margin-top: auto;
-				width: auto;
-			}
-
-			p.desc {
-				float: none;
-				width: auto;
-				font-size: 1.5em;
-				padding: 0 2em;
-			}
-
+		p.desc {
+			font-size: 1em;
 		}
 
-		@media (min-width: 60em) and (max-width: 64em) { /* tablet landscape */
-			div.wrapper {
-				width: 40em;
-				height: 33em;
-				position: absolute;
-				top: 0;
-				left: 0;
-				bottom: 0;
-				right: 0;
-				margin: auto;
-			}
+	}
 
-			p.desc {
-				font-size: 1.5em;
-			}
+	@media (min-width: 60em) and (max-width: 64em) { /* tablet landscape */
+
+		p.desc {
+			font-size: 1em;
 		}
+	}
