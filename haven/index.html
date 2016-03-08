@@ -22,21 +22,44 @@
 		    src: url(font/Gotham-Book.otf);
 		}
 
+		@font-face {
+			font-family: havenMediumFont;
+		    src: url(font/Gotham-Medium.otf);
+		}
+
+		header li {
+			font-family: havenMediumFont, verdana, sans-serif;
+		}
+
 		aside .lbl {
-			font-family: havenFont;
+			font-family: havenFont, verdana, sans-serif;
 			font-size: 0.9em;
 			font-weight: normal;
+		}
+
+		.bottom .top-line {
+			font-family: havenMediumFont, verdana, sans-serif;
+		}
+
+		.bottom .bottom-line{
+			font-family: havenFont, verdana, sans-serif;
+			font-size: 0.9em;
 		}
 		
 
 		/* layout */
+
+		header {
+			height: 10em;
+			line-height: 10em;
+		}
 
 		header nav ul {
 			margin-bottom: 0;
 		}
 
 		header nav li {
-			line-height: 100px;
+			margin-left: 30px;
 		}
 
 		aside {
@@ -46,7 +69,7 @@
 		aside .options a {
 			display: block;
 			padding: 1em;
-			padding-left: 5em;
+			padding-left: 3em;
 		}
 
 		aside .sub {
@@ -58,7 +81,7 @@
 		}
 
 		aside .sub.expand a {
-			padding-left: 7em;
+			padding-left: 5em;
 		}
 
 		.bottom {
@@ -70,16 +93,41 @@
 			box-sizing: border-box;
 		}
 
+		.bottom .info {
+			text-align: center;
+    		padding-top: 1.5em;
+		}
+
+		.bottom  .bottom-line {
+			margin-top: 0.5em;
+		}
+
+		.bottom ul {
+			padding-top: 1.5em;
+			margin-bottom: 0;
+		}
+
+		.bottom ul li {
+			margin-right: 1.5em;
+			text-align: center;
+		}
+
 
 		/* colors */
 
 		header {
 			background-color: #f3f4f4;
 			border-bottom: 1px solid #aaa;
+			height: 11em;
+		}
+
+		header nav a {
+			color:#0fa7c1;
 		}
 
 		header .logo{
-			height: 100px;
+			text-align: center;	
+			line-height: 11em;
 		}
 
 		aside {
@@ -106,6 +154,14 @@
 		.bottom {
 			border-top: 1px solid #067a97;
 			background-color: #0fa7c1;
+		}
+
+		.bottom .info {
+			color: #fff;
+		}
+
+		.bottom ul li a {
+			color: #fff;
 		}
 
 		/* icons */
@@ -141,26 +197,39 @@
 		aside .options .glyphicon-menu-down, aside .options .glyphicon-menu-up{
 			color: #bebebe;
 		}
+
+		/* components */
+
+		header nav .btn {
+		    padding-left: 1.5em;
+		    padding-right: 1.5em;
+		    border-color: #0fa7c1;
+		    border-radius: 1.5em;
+		    background-color: #f3f4f4;
+		    color:#0fa7c1;
+		}
 	</style>
 </head>
 <body>
-   <div class="container-fluid" style="min-width: 1024px">
+   <div class="container" style="min-width: 1024px">
 			<header>
 				<div class="row">
-		   			<div class="col-xs-2">
-		   				<a href="#" class="logo">
-		   					<img data-src="holder.js/200x100" alt="MM Logo">
-		   				</a>
+		   			<div class="col-xs-3">
+		   				<div class="logo">
+			   				<a href="#">
+			   					<img data-src="holder.js/200x50?theme=industrial" alt="MM Logo">
+			   				</a>
+		   				</div>
 		   			</div>
-		   			<div class="col-xs-10">
+		   			<div class="col-xs-9">
 		   				<nav>
 					   		<ul class="list-inline text-right">
-						   		<li><a href="#" title="">Welcome Back Michael!</a></li>
-								<li><a href="#" title="">Log Out</a></li>
-								<li><a href="#" title="">Help</a></li>
-								<li><a href="#" title="">Search</a></li>
-								<li><a href="#" title="">My Cases</a></li>
-								<li><a href="#" title="">New</a></li>
+						   		<li><span class="salute">Welcome Back Michael!</span></li>
+								<li><a href="#">Log Out</a></li>
+								<li><a href="#">Help</a></li>
+								<li><a href="#">Search</a></li>
+								<li><a href="#">My Cases</a></li>
+								<li><button class="btn btn-default">New</button></li>
 					   		</ul>
 				   		</nav>
 			   		</div>
@@ -171,23 +240,23 @@
 					<div class="col-xs-3">
 						<aside>
 								<ul class="options list-unstyled">
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet active check"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Case Info</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li class="selected">
-										<a href="#" title="">
+										<a href="#">
 											<span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>
 											<b class="lbl">Basics</b>
 											<i class="glyphicon glyphicon-menu-down pull-right"></i>
 										</a>
 										<ul class="sub list-unstyled">
-											<li class="current"><a href="#" title="">
+											<li class="current"><a href="#">
 												<span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>
 												<b class="lbl">Proposed Insurance</b>
 											</a></li>
-											<li><a href="#" title="">
+											<li><a href="#">
 												<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 												<b class="lbl">Purpose of Insurance</b>
 											</a></li>
@@ -198,32 +267,32 @@
 										<b class="lbl">Background</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Existing Policies</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Family History</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Personal History</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>		
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Beneficiaries</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Payments</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
-									<li><a href="#" title="">
+									<li><a href="#">
 										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
 										<b class="lbl">Producer</b>
 										<i class="glyphicon glyphicon-menu-down pull-right"></i>
@@ -234,7 +303,32 @@
 					<div class="col-xs-9">
 					   		content
 					</div>
-					<div class="bottom"></div>
+					<div class="bottom">
+						<div class="row">
+							<div class="col-xs-6 col-xs-offset-3">
+								<div class="info">
+									<div class="top-line">John Smithbergsonski / Vantage Term 10 / 500,000</div>
+									<div class="bottom-line">Status: Started | Date modified: January 31, 2015</div>
+								</div>
+							</div>
+							<div class="col-xs-3">
+								<ul class="list-inline text-right">
+									<li><a href="#">
+										<img data-src="holder.js/30x30?theme=industrial" alt="Notes">
+										<div>Notes</div>
+									</a></li>
+									<li><a href="#">
+										<img data-src="holder.js/30x30?theme=industrial" alt="Notes">
+										<div>Attachments</div>
+									</a></li>
+									<li><a href="#">
+										<img data-src="holder.js/30x30?theme=industrial" alt="Notes">
+										<div>View Forms</div>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</main>
 	</div>
