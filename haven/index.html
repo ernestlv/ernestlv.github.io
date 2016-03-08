@@ -36,8 +36,20 @@
 		
 		aside .options li{
 			padding: 1em;
-			padding-left: 7em;
+			padding-left: 5em;
 			border-bottom: 1px solid silver;
+		}
+
+		aside .suboptions li {
+			padding-left: 1em;
+		}
+
+		aside .suboptions {
+			display:none;
+		}
+
+		aside .suboptions.expand {
+			display: block;
 		}
 
 		aside .options .circle {
@@ -89,9 +101,13 @@
 						<aside>
 								<ul class="options list-unstyled">
 									<li class="active"><a href="#" title=""><i class="circle"></i>Case Info<i class="glyphicon glyphicon-menu-down pull-right"></i></a></li>
-									<li><a href="#" title="">
-									<i class="circle"></i>Basics<i class="glyphicon glyphicon-menu-down pull-right"></i>
-									</a></li>
+									<li id="basic">
+										<a href="#" title=""><i class="circle"></i>Basics<i class="glyphicon glyphicon-menu-down pull-right"></i></a>
+										<ul class="suboptions list-unstyled">
+											<li><a href="#" title=""><i class="circle"></i>Proposed Insurance</a></li>
+											<li><a href="#" title=""><i class="circle"></i>Purpose of Insurance</a></li>
+										</ul>
+									</li>
 									<li><a href="#" title="#"><i class="circle"></i>Background<i class="glyphicon glyphicon-menu-down pull-right"></i></a></li>
 									<li><a href="#" title=""><i class="circle"></i>Existing Policies<i class="glyphicon glyphicon-menu-down pull-right"></i></a></li>
 									<li><a href="#" title=""><i class="circle"></i>Family History<i class="glyphicon glyphicon-menu-down pull-right"></i></a></li>
@@ -108,8 +124,17 @@
 				</div>
 			</main>
 	</div>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/holder/2.8.1/holder.js" type="text/javascript"></script>
+	<script>
+		$(function(){
+			$('.options').on('click', 'li:not(.sub)', function(e){
+				e.preventDefault();
+				$(this).find('.glyphicon').toggleClass('glyphicon-menu-up');
+				$(this).find('.suboptions').toggleClass('expand');
+			} )
+		});
+	</script>
 </body>
 </html>
