@@ -14,80 +14,114 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
-		.no-padding {
-			padding: 0px !important;
+
+		/* fonts */
+
+		@font-face {
+		    font-family: havenFont;
+		    src: url(font/Gotham-Book.otf);
 		}
 
-		header {
-			border-bottom: 1px solid silver;
+		aside .lbl {
+			font-family: havenFont;
+			font-size: 0.9em;
+			font-weight: normal;
 		}
+		
 
-		header .logo{
-			height: 100px;
-		}
+		/* layout */
 
-		header ul {
+		header nav ul {
 			margin-bottom: 0;
 		}
 
-		header li {
+		header nav li {
 			line-height: 100px;
 		}
-		
-		aside .options > li{
-			background-color: #f9f9f9;	
-		}
 
-		aside .options > li.selected{
-			background-color: #fff;
-		}
-
-		aside .suboptions li:last-child {
-			--border: 0;
+		aside {
+			height: 1000px;
 		}
 
 		aside .options a {
 			display: block;
 			padding: 1em;
 			padding-left: 5em;
-			border-bottom: 1px solid silver;
 		}
 
-		aside .suboptions {
+		aside .sub {
 			display:none;
 		}
 
-		aside .suboptions.expand {
+		aside .sub.expand {
 			display: block;
 		}
 
-		aside .suboptions.expand a {
+		aside .sub.expand a {
 			padding-left: 7em;
 		}
 
-		aside .options .active .circle {
-			background-color: blue;
+		.bottom {
+			position:fixed; 
+			bottom:0; 
+			left:0; 
+			width:100%; 
+			height:7em;
+			box-sizing: border-box;
 		}
 
-		
-		aside {
-			border-right: 1px solid silver;
+
+		/* colors */
+
+		header {
+			background-color: #f3f4f4;
+			border-bottom: 1px solid #aaa;
 		}
+
+		header .logo{
+			height: 100px;
+		}
+
+		aside {
+			border-right: 1px solid #aeaeae;
+			background-color: #f9f9f9;
+		}
+
+		aside .options a {
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		aside .options .lbl {
+			color: #000;
+		}
+
+		aside .options .selected a {
+			background-color: #fff;
+		}
+
+		aside .options .current .lbl {
+			font-weight: bold;
+		}
+
+		.bottom {
+			border-top: 1px solid #067a97;
+			background-color: #0fa7c1;
+		}
+
+		/* icons */
 
 		aside .bullet {
 			display: inline-block;
-			width: 18px; 
-			height: 18px; 
+			width: 20px; 
+			height: 20px;
+			margin-right: 0.5em;
+			text-align: center;
+			box-sizing: border-box;
 			border: 1px solid #0fa7c1;
-    		text-align: center;
-    		font-size: 0.8em;
-    		border-radius: 9px;
-    		margin-right: 0.5em;
-    		box-sizing: border-box;
+    		border-radius: 10px;
     		background-color: #f9f9f9;
     		color: #f9f9f9;
 		}
-
 
 		aside .selected .bullet {
 			background-color: #fff;
@@ -95,12 +129,17 @@
 		}
 
 		aside .bullet.active {
-			color: #0fa7c1;
 			background-color: #0fa7c1;
+			color: #0fa7c1;
 		}
+
 		aside .bullet.check {
 			background-color: #0fa7c1;
 			color: #fff;
+		}
+
+		aside .options .glyphicon-menu-down, aside .options .glyphicon-menu-up{
+			color: #bebebe;
 		}
 	</style>
 </head>
@@ -132,38 +171,62 @@
 					<div class="col-xs-3">
 						<aside>
 								<ul class="options list-unstyled">
-									<li class="active"><a href="#" title="">
-										<span class="bullet active check"><i class="glyphicon glyphicon-ok"></i></span>Case Info<i class="glyphicon glyphicon-menu-down pull-right"></i>
+									<li><a href="#" title="">
+										<span class="bullet active check"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Case Info</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li class="selected">
 										<a href="#" title="">
-											<span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>Basics<i class="glyphicon glyphicon-menu-down pull-right"></i>
+											<span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>
+											<b class="lbl">Basics</b>
+											<i class="glyphicon glyphicon-menu-down pull-right"></i>
 										</a>
-										<ul class="suboptions list-unstyled">
-											<li><a href="#" title=""><span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>Proposed Insurance</a></li>
-											<li><a href="#" title=""><span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Purpose of Insurance</a></li>
+										<ul class="sub list-unstyled">
+											<li class="current"><a href="#" title="">
+												<span class="bullet active"><i class="glyphicon glyphicon-ok"></i></span>
+												<b class="lbl">Proposed Insurance</b>
+											</a></li>
+											<li><a href="#" title="">
+												<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+												<b class="lbl">Purpose of Insurance</b>
+											</a></li>
 										</ul>
 									</li>
 									<li><a href="#" title="#">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Background<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Background</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Existing Policies<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Existing Policies</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Family History<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Family History</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Personal History<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Personal History</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>		
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Beneficiaries<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Beneficiaries</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Payments<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Payments</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 									<li><a href="#" title="">
-										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>Producer<i class="glyphicon glyphicon-menu-down pull-right"></i>
+										<span class="bullet"><i class="glyphicon glyphicon-ok"></i></span>
+										<b class="lbl">Producer</b>
+										<i class="glyphicon glyphicon-menu-down pull-right"></i>
 									</a></li>
 								</ul>
 						</aside>
@@ -171,6 +234,7 @@
 					<div class="col-xs-9">
 					   		content
 					</div>
+					<div class="bottom"></div>
 				</div>
 			</main>
 	</div>
@@ -181,8 +245,8 @@
 		$(function(){
 			$('.options').on('click', 'li:not(.sub)', function(e){
 				e.preventDefault();
-				$(this).find('.glyphicon').toggleClass('glyphicon-menu-up');
-				$(this).find('.suboptions').toggleClass('expand');
+				$(this).find('.glyphicon-menu-down').toggleClass('glyphicon-menu-up');
+				$(this).find('.sub').toggleClass('expand');
 			} );
 		});
 	</script>
