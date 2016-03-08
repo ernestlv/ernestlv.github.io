@@ -35,13 +35,18 @@
 		}
 		
 		aside .options li{
+			
+		}
+
+		aside .suboptions li:last-child {
+			--border: 0;
+		}
+
+		aside .options a {
+			display: block;
 			padding: 1em;
 			padding-left: 5em;
 			border-bottom: 1px solid silver;
-		}
-
-		aside .suboptions li {
-			padding-left: 1em;
 		}
 
 		aside .suboptions {
@@ -50,6 +55,7 @@
 
 		aside .suboptions.expand {
 			display: block;
+			padding-left: 1em;
 		}
 
 		aside .options .circle {
