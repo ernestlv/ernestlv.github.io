@@ -1,0 +1,380 @@
+
+		/* fonts */
+
+		@font-face {
+		    font-family: gothamBook;
+		    src: url(../fonts/Gotham-Book.otf);
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
+		@font-face {
+			font-family: gothamMediumBook;
+		    src: url(../fonts/Gotham-Medium.otf);
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
+		@font-face {
+			font-family: gothamBold;
+			src: url(../fonts/Gotham-Bold.otf);
+		}
+
+		header .options li {
+			font-family: gothamMediumBook, verdana, sans-serif;
+		}
+
+		aside .options .lbl {
+			font-family: gothamBook, verdana, sans-serif;
+			font-size: 0.9em;
+			font-weight: normal;
+		}
+
+		aside .options a .lbl.current {
+			font-family: gothamBold, verdana, sans-serif;
+			font-weight: bold;
+		}
+
+		.content h1 {
+			font-family: gothamBook;
+			font-size: 1.2em;
+		}
+
+		.content form {
+			font-family: gothamBook;
+		}
+
+		.content form legend {
+			font-size: 1em;
+		}
+
+
+		.sticky-bar .top-line {
+			font-family: gothamMediumBook, verdana, sans-serif;
+		}
+
+		.sticky-bar .bottom-line{
+			font-family: gothamBook, verdana, sans-serif;
+			font-size: 0.9em;
+		}
+		
+
+		/* layout */
+
+		header {
+			height: 7em;
+			line-height: 7em;
+		}
+
+		header .logo{	
+			line-height: 7em;
+		}
+
+		header .options {
+			margin-bottom: 0;
+		}
+
+		header .options li {
+			margin-left: 3.3em;
+		}
+
+		header .options li:last-child{
+			padding-right: 0;
+		}
+
+		aside {
+			height: 800px;
+		}
+
+
+		aside .options a {
+			display: block;
+			padding: 1em;
+			padding-left: 0em;
+			margin-left: -10rem;
+    		padding-left: 10rem;
+		}
+
+		aside .sub {
+			display:none;
+		}
+
+		aside .sub.expand {
+			display: block;
+		}
+
+		aside .sub.expand a {
+			padding-left: 15rem;
+		}
+
+		.content {
+			margin-left: -3rem;
+			margin-right: -10rem;
+		}
+
+		.content h1 {
+			margin: 0;
+		    height: 5rem;
+		    line-height: 5rem;
+		    padding: 0 1.5rem 0 4.5rem;
+		}
+
+		.content form fieldset {
+			margin-top: 4em;
+			margin-left: 3rem;
+		}
+
+		.content form fieldset:last-child{
+			padding-bottom: 6em;
+		}
+
+		.content form legend {
+			margin: 0;
+			border: 0;
+			padding: 0 1.5rem;
+		}
+
+		.sticky-bar {
+			position:fixed; 
+			bottom:0; 
+			left:0; 
+			width:100%; 
+			height:5em;
+			box-sizing: border-box;
+		}
+
+		.sticky-bar .info {
+			text-align: center;
+    		padding-top: 1em;
+		}
+
+		.sticky-bar  .sticky-bar-line {
+			margin-top: 0.5em;
+		}
+
+		.sticky-bar .options {
+			padding-top: 0.7em;
+			margin-bottom: 0;
+		}
+
+		.sticky-bar .options li {
+			margin-right: 1.5em;
+			text-align: center;
+		}
+
+		.sticky-bar ul li .lbl {
+			margin-top: 0.3em;
+		}
+
+
+		/* colors */
+
+		body {
+			background-color: #f9f9f9;
+		}
+
+		header {
+			background-color: #f3f4f4;
+			border-bottom: 1px solid #aaa;
+		}
+
+		header .options a {
+			color:#0fa7c1;
+		}
+
+		aside {
+			border-right: 1px solid #aeaeae;
+			background-color: #f9f9f9;
+		}
+
+		aside .options a {
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		aside .options a .lbl {
+			color: #000;
+		}
+
+		aside .options .selected a {
+			background-color: #fff;
+		}
+
+		.content {
+			background-color: #fff
+		}
+
+		.content h1 {
+			border-bottom: 1px solid #b2b2b2;
+    		background-color: #efede7;
+		}
+
+		.sticky-bar {
+			border-top: 1px solid #067a97;
+			background-color: #0fa7c1;
+			z-index: 1000;
+		}
+
+		.sticky-bar .info {
+			color: #fff;
+		}
+
+		.sticky-bar .options a {
+			color: #fff;
+		}
+
+		/* icons */
+
+		aside .bullet {
+			display: inline-block;
+			width: 20px; 
+			height: 20px;
+			margin-right: 0.5em;
+			text-align: center;
+			box-sizing: border-box;
+			border: 1px solid #0fa7c1;
+    		border-radius: 10px;
+    		background-color: #f9f9f9;
+    		color: #f9f9f9;
+		}
+
+		aside .selected .bullet {
+			background-color: #fff;
+			color: #fff;
+		}
+
+		aside .bullet.active {
+			background-color: #0fa7c1;
+			color: #0fa7c1;
+		}
+
+		aside .bullet.check {
+			background-color: #0fa7c1;
+			color: #fff;
+		}
+
+		aside .options .glyphicon-menu-down, aside .options .glyphicon-menu-up{
+			color: #bebebe;
+		}
+
+		/* components */
+
+		.btn-snapp{
+		    padding-left: 1.5em;
+		    padding-right: 1.5em;
+		    border-color: #0fa7c1;
+		    border-radius: 1.5em;
+		    background-color: #f3f4f4;
+		    color:#0fa7c1;
+		}
+
+		/* form styles */
+
+		.form-item {
+			position: relative;
+			margin-top: 1.5em;
+			
+		}
+
+		.form-item:not(.optional):before {
+			content: "X";
+			font-size: 0.7em;
+			color: #fff;
+		}
+
+		.form-item.blank {
+			height: 6.5em;
+		}
+
+		.form-item input {
+			position: relative;
+			width: 100%;
+			height: 3em;
+			outline: none; 
+			padding: 0;
+			background-color: transparent;
+    		border: 0;
+    		border-bottom: 1px solid #333;   
+    		z-index: 2; 		
+		}
+
+		.form-item label {
+			position: absolute;
+			top: 3.5rem;
+    		left: 3rem;
+    		margin: 0;
+			color:#b3b3b3;
+			z-index: 1;
+			transition: all 0.5s;
+		}
+
+		.form-item.active input {
+			border-color: #0fa7c1;
+		}
+
+		.form-item.active label {
+			font-size: 0.8em;
+			top: 1.5rem;
+		}
+
+		/* optional fields */
+
+		.form-item.optional:before {
+			content:"Optional";
+			font-size:0.7em;
+			color: #ccc;
+			transition: all 0.5s;
+		}
+
+		.form-item.optional.active:before {
+			opacity: 0;
+		}
+
+		.form-item.optional input {
+			border-color: #ccc;
+		}
+
+		/* dropdown styles */
+
+		.form-item .dropdown input {
+			cursor: pointer;
+		}
+
+		.form-item .dropdown .glyphicon-menu-down {
+			position: absolute;
+		    right: 0;
+		    top: 1em;
+			color: #ccc;
+			cursor: pointer;
+		}
+
+		.form-item .dropdown ul {
+			display: none;
+		    margin: 0;
+		    padding: 0.2em 0;
+		   	width: 100%;
+		   	max-height: 11em;
+		    position: absolute;
+		    top: 1.3rem;
+		    z-index: 2;
+		    background-color: #fff;
+		    border: 1px solid #0fa7c1;
+		    border-radius: 2px;
+		    overflow-y: auto;
+		}
+
+		.form-item .dropdown li {
+			padding: 0.3em;
+		}
+
+		.form-item .dropdown li.selected {
+			background-color: #0fa7c1;
+		}
+
+		.form-item .dropdown li:hover {
+			background-color: #e0e0e0;
+			cursor: pointer;
+		}
+
+		.form-item.active .dropdown.open ul {
+			display: block;
+		}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="keywords" content="app taking">
+	<meta name="description" content="app taking prototype">
+	<meta name="author" content="Ernest Leyva">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
+	<title>App Taking Prototype</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/mm/css/proto.css" />
+</head>
+<body>
+			<main>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-9">
+							<div class="content">
+						   		<section>
+							   			<h1>Proposed Insurance</h1>
+							   			<form>
+								   				<fieldset>
+								   					<legend>Personal Information:</legend>
+								   					<div class="form-item col-xs-4">
+									   					<input type="text" name="firstname">
+									   					<label for="firstname">First Name</label>
+								   					</div>
+								   					<div class="form-item col-xs-4">
+									   					<input type="text" name="lastname">
+									   					<label for="lastname">Last Name</label>
+								   					</div>
+								   					<div class="form-item optional col-xs-1">
+									   					<input type="text" name="middlename">
+									   					<label for="lastname">M</label>
+								   					</div>
+								   					<div class="form-item optional col-xs-2">
+								   							<div class="dropdown">
+										   						<input type="text" name="suffix"><i class="glyphicon glyphicon-menu-down"></i>
+										   						<ul class="list-unstyled">
+										   							<li data-value="mr">Mr</li>
+										   							<li data-value="Jr">Jr</li>
+										   							<li data-value="sr">Sr</li>
+										   						</ul>
+										   					</div>
+										   					<label for="lastname">Suffix</label>
+								   					</div>
+								   					<div class="form-item col-xs-4">
+									   					<input type="text" name="dob">
+									   					<label for="dob">Date of Birth</label>
+								   					</div>
+								   					<div class="form-item col-xs-4">
+									   					<input type="text" name="ssn">
+									   					<label for="ssn">Social Security Number</label>
+								   					</div>
+								   					<div class="form-item col-xs-5">
+								   						<div class="dropdown">
+										   					<input type="text" name="b-country"><i class="glyphicon glyphicon-menu-down"></i>
+										   					<ul class="list-unstyled">
+										   							<li data-value="USA">United States</li>
+										   							<li data-value="Canada">Canada</li>
+										   							<li data-value="Mexico">Mexico</li>
+										   					</ul>
+									   					</div>
+									   					<label for="country">Birth Country</label>
+								   					</div>
+								   					<div class="form-item col-xs-5">
+								   						<div class="dropdown">
+										   					<input type="text" name="b-state"><i class="glyphicon glyphicon-menu-down"></i>
+										   					<ul class="list-unstyled">
+										   							<li data-value="MA">Massachusetts</li>
+										   							<li data-value="CT">Connecticut</li>
+										   							<li data-value="TX">Texas</li>
+										   							<li data-value="NY">New York</li>
+										   							<li data-value="NJ">New Jersey</li>
+										   							<li data-value="CA">California</li>
+										   							<li data-value="CO">Colorado</li>
+										   					</ul>
+									   					</div>
+									   					<input type="hidden" name="b-state" placeholder="Birth State or Provence">
+									   					<label for="state">Birth State or Provence</label>
+								   					</div>
+								   				</fieldset>
+								   				<fieldset>
+								   					<legend>Residential Address:</legend>
+								   					<div class="form-item col-xs-5">
+								   						<div class="dropdown">
+										   					<input type="text" name="country"><i class="glyphicon glyphicon-menu-down"></i>
+										   					<ul class="list-unstyled">
+										   							<li data-value="USA">United States</li>
+										   							<li data-value="Canada">Canada</li>
+										   							<li data-value="Mexico">Mexico</li>
+										   					</ul>
+									   					</div>
+									   					<label for="country">Country</i></label>
+								   					</div>
+								   					<div class="form-item blank col-xs-7 "></div>
+								   					<div class="form-item col-xs-5">
+									   					<input type="text" name="street-1">
+									   					<label for="street">Street Line 1</label>
+								   					</div>
+								   					<div class="form-item optional col-xs-5">
+									   					<input type="text" name="street-2">
+									   					<label for="street">Street Line 1</label>
+								   					</div>
+								   					<div class="form-item col-xs-5">
+									   					<input type="text" name="city">
+									   					<label for="city">City</label>
+								   					</div>
+								   					<div class="form-item col-xs-5">
+								   						<div class="dropdown">
+										   					<input type="text" name="state"><i class="glyphicon glyphicon-menu-down"></i>
+										   					<ul class="list-unstyled">
+										   							<li data-value="MA">MA - Massachusetts</li>
+										   							<li data-value="CT">CT - Connecticut</li>
+										   							<li data-value="TX">TX - Texas</li>
+										   							<li data-value="NY">NY - New York</li>
+										   							<li data-value="NJ">NJ - New Jersey</li>
+										   							<li data-value="CA">CA - California</li>
+										   							<li data-value="CO">CO - Colorado</li>
+										   					</ul>
+									   					</div>
+									   					<label for="state">State</label>
+								   					</div>
+								   					<div class="form-item blank col-xs-2"></div>
+								   					<div class="form-item col-xs-5">
+									   					<input type="text" name="zip">
+									   					<label for="zip">ZIP / Postal Code</label>
+								   					</div>
+								   				</fieldset>
+							   			</form>
+						   		</section>
+						   	</div>
+						</div>
+					</div>
+				</div>
+			</main>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"></script>
+	<script>
+		$(function(){
+			$('.options').on('click', 'li:not(.sub)', function(e){
+				e.preventDefault();
+				$(this).find('.glyphicon-menu-down').toggleClass('glyphicon-menu-up');
+				$(this).find('.sub').toggleClass('expand');
+			} );
+
+			//text field events
+			$('form').on('focus', '.form-item > input', function(){
+				console.log('active')
+				$(this).parents('.form-item').addClass('active');
+			});
+
+			$('form').on('blur', '.form-item > input', function(e){
+				! $(this).val() && $(this).parents('.form-item').removeClass('active');
+			});
+
+			//dropdown events
+			$('form').on('focus', '.form-item > .dropdown > input', function(){
+				console.log('active2')
+				$(this).parents('.dropdown').addClass('open');
+				$(this).parents('.form-item').addClass('active');
+			});
+
+			$('form').on('blur', '.form-item > .dropdown > input', function(e){
+				$(this).parents('.dropdown').removeClass('open');
+				! $(this).val() && $(this).parents('.form-item').removeClass('active');
+			});
+
+			$('form').on('mousedown', '.dropdown', function(e){
+				$(this).toggleClass('open');
+			});
+
+			$('form').on('mousedown', '.dropdown.open', function(e){
+				$(this).find('input').val($(e.target).attr('data-value'));
+				$(this).find('li.selected').removeClass('selected');
+				$(e.target).addClass('selected');
+			});
+
+			
+		});
+	</script>
+</body>
+</html>
