@@ -1,0 +1,79 @@
+/* content fonts */
+
+.content h1 {
+	font-family: gothamBook;
+	font-size: 1.2em;
+}
+
+.content form {
+	font-family: gothamBook;
+}
+
+.content form legend {
+	font-size: 1em;
+}
+
+/* content layout */
+
+.content {
+	margin-left: -3rem;
+	margin-right: -1.5rem;
+	height: 100%;
+}
+
+.content h1 {
+	margin: 0;
+    height: 5rem;
+    line-height: 5rem;
+    padding: 0 1.5rem 0 4.5rem;
+}
+
+.content form fieldset {
+	margin-top: 5.6rem;
+	margin-left: 3rem;
+	max-width: 88rem;
+}
+
+
+.content form legend {
+	margin: 0;
+	border: 0;
+	padding: 0 1.5rem;
+}
+
+.content section {
+	display: none;
+	min-height: 800px;
+}
+
+.content section.current {
+	display: block;
+}
+
+.content .section-nav {
+	margin-top: 4em;
+	margin-left: 3rem;
+	margin-bottom: 7em;
+}
+
+.content .section-nav ul {
+	margin: 0;
+	text-align: center;
+}
+
+.content .section-nav a.round {
+	padding: 0.5em 6em;
+	width: 100%;
+}
+
+/* content colors */
+
+.content {
+	border-left: 1px solid #aeaeae;
+	background-color: #fff
+}
+
+.content h1 {
+	border-bottom: 1px solid #b2b2b2;
+	background-color: #efede7;
+}

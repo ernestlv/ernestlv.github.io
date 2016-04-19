@@ -1,0 +1,63 @@
+.rule div {
+			border-right: 1px solid silver;
+			opacity: 0.5;
+		}
+
+.rule div:first-child {
+	border-left: 1px solid silver;
+}
+
+.rule .col {
+	background-color: red;
+	color: #fff;
+	text-align: center;
+}
+
+section {
+	clear:both; 
+	padding:1em;
+}
+
+main .content {
+	height: 12em;
+}
+
+main .row:not(.rule) {
+	height: 100%;
+}
+
+.shade {
+	height: 100%;
+	background-color: #eee;
+	color: #666;
+}	
+
+.form-item {
+	background-color: #fff;
+	border: 1px solid #666;
+}
+
+.form-item input {
+	border-bottom: 0;
+}
+
+.form-item label {
+	color: #000;
+}
+
+.selector ul {
+	margin: 1em auto;
+}
+
+
+.selector.round li {
+	margin:0;
+}
+
+.check-list ul {
+	margin-top: 10px;
+}
+
+.wrapper {
+	padding: 1em 0;
+}

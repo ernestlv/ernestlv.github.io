@@ -304,7 +304,7 @@
     		margin: 0;
 			color:#b3b3b3;
 			z-index: 1;
-			transition: all 0.5s;
+			transition: all 0.7s;
 		}
 
 		.form-item.active input {
@@ -370,11 +370,30 @@
 			background-color: #0fa7c1;
 		}
 
-		.form-item .dropdown li:hover {
+		.form-item .dropdown li:hover,  .form-item .dropdown li.hover{
 			background-color: #e0e0e0;
 			cursor: pointer;
 		}
 
 		.form-item.active .dropdown.open ul {
 			display: block;
+		}
+
+		/* radio button */
+
+		.form-item .radio li {
+			padding: 0.5em;
+			float: left;
+			border: 1px solid silver;
+			border-radius: 2px;
+			cursor: pointer;
+		}
+
+		.form-item .radio li + li {
+			border-left: 1px solid #fff;
+		}
+
+		.form-item .radio li.checked {
+			background-color: silver;
+			border: 1px solid #fff;
 		}

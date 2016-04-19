@@ -1,0 +1,75 @@
+/* aside - fonts */
+
+aside .options .lbl:hover {
+	font-family: gothamBold, verdana, sans-serif;
+    font-weight: bold;
+}
+
+aside .options .lbl {
+	font-family: gothamBook, verdana, sans-serif;
+	font-weight: normal;
+	font-size: 0.9em;
+}
+
+aside .options .current > a > .lbl {
+	font-family: gothamBold, verdana, sans-serif;
+	font-weight: bold;
+}
+
+/* aside - layout */
+
+aside {
+	margin-left: -1em;
+}
+
+
+aside .options a {
+	display: block;
+	padding: 1em;
+	padding-left: 7.1rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+aside .options a .glyphicon-menu-up {
+	display: none;
+}
+
+aside .options .sub {
+	display:none;
+}
+
+aside .options .sub a {
+	padding-left: 9.3rem;
+}
+
+aside .options .expand .sub {
+	display: block;
+}
+
+aside .options .expand .glyphicon-menu-down {
+	display: none;
+}
+
+aside .options .expand .glyphicon-menu-up {
+	display: block;
+}
+
+/* aside - colors */
+
+aside {
+	background-color: #f9f9f9;
+}
+
+aside .options a {
+	border-bottom: 1px solid #e0e0e0;
+}
+
+aside .options .lbl {
+	color: #000;
+}
+
+aside .options .expand a {
+	background-color: #fff;
+}

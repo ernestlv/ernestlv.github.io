@@ -24,7 +24,7 @@
 									   					<input type="text" name="firstname">
 									   					<label for="firstname">First Name</label>
 								   					</div>
-								   					<div class="form-item col-xs-4">
+								   					<div class="form-item col-xs-3">
 									   					<input type="text" name="lastname">
 									   					<label for="lastname">Last Name</label>
 								   					</div>
@@ -50,6 +50,15 @@
 								   					<div class="form-item col-xs-4">
 									   					<input type="text" name="ssn">
 									   					<label for="ssn">Social Security Number</label>
+								   					</div>
+								   					<div class="form-item col-xs-4">
+								   						<div class="radio">
+									   						<input type="hidden" name="gender">
+										   					<ul class="list-inline">
+										   						<li data-value="male">Male</li>
+										   						<li data-value="female">Female</li>
+										   					</ul>
+									   					</div>
 								   					</div>
 								   					<div class="form-item col-xs-5">
 								   						<div class="dropdown">
@@ -155,10 +164,12 @@
 			});
 
 			//dropdown events
+			var $current_dd_options;
 			$('form').on('focus', '.form-item > .dropdown > input', function(){
 				console.log('active2')
 				$(this).parents('.dropdown').addClass('open');
 				$(this).parents('.form-item').addClass('active');
+				$current_dd_options = $(this).find('+ i + ul li');
 			});
 
 			$('form').on('blur', '.form-item > .dropdown > input', function(e){
@@ -176,6 +187,35 @@
 				$(e.target).addClass('selected');
 			});
 
+			var current = 0;
+
+			$('form').on('keydown', '.form-item > .dropdown > input', function(e){
+				var key = e.which;
+				var max = $current_dd_options.length;
+				var org_current = current;
+
+				if (key === 38){
+					if (current > 0){
+						current--;
+					}
+				}
+
+				if (key === 40){
+					if (current < max){
+						current++;
+					}
+				}
+
+				$($current_dd_options[org_current]).removeClass('hover');
+				$($current_dd_options[current]).addClass('hover');
+			});
+
+			// radio
+
+			$('form').on('click', '.form-item >  .radio', function(e){
+				$(this).find('.checked').removeClass('checked');
+				$(e.target).addClass('checked');
+			});
 			
 		});
 	</script>

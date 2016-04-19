@@ -1,0 +1,27 @@
+/* aside icons */
+aside .options .bullet {
+	display: inline-block;
+	width: 20px; 
+	height: 20px;
+	margin-right: 0.5em;
+	text-align: center;
+	box-sizing: border-box;
+	border: 1px solid #0fa7c1;
+	border-radius: 10px;
+	background-color: transparent;
+	color: transparent;
+}
+
+aside .options .current > a > .bullet, aside .options .expand > a > .bullet {
+	background-color: #0fa7c1;
+	color: #0fa7c1;
+}
+
+aside .options .completed a .bullet {
+	background-color: #0fa7c1;
+	color: #fff;
+}
+
+aside .options .glyphicon-menu-down, aside .options .glyphicon-menu-up{
+	color: #bebebe;
+}

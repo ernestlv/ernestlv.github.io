@@ -1,0 +1,39 @@
+/* radio */
+.radio {
+  margin: 0; }
+
+.radio ul {
+  margin: 0;
+  margin-top: 0.6rem; }
+
+.radio li {
+  padding: 0.5em;
+  text-align: center;
+  float: left;
+  border: 1px solid silver;
+  border-radius: 2px;
+  cursor: pointer; }
+
+.radio li + li {
+  border-left: 1px solid transparent; }
+
+.radio li.selected {
+  background-color: #0fa7c1;
+  border-color: #fff;
+  color: #fff; }
+
+.radio li.selected + li {
+  border-left: 1px solid silver; }
+
+/* round variation */
+.radio.round ul {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid silver;
+  border-radius: 20px; }
+
+.radio.round li {
+  border: 0; }
+
+.radio.round li:not(:last-child) {
+  border-right: 1px solid silver; }

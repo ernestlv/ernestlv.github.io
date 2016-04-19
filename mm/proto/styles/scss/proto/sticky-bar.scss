@@ -1,0 +1,175 @@
+/* sticky-bar fonts */
+
+.sticky-bar .top-line {
+	font-family: gothamMediumBook, verdana, sans-serif;
+}
+
+.sticky-bar .bottom-line{
+	font-family: gothamBook, verdana, sans-serif;
+	font-size: 0.9em;
+}
+
+.sticky-bar .close-lnk {
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+.sticky-bar header h1 {
+	font-size: 1.5em;
+}
+
+.sticky-bar form legend {
+	font-size: 1.2em;
+}
+
+/* sticky-bar layout */
+.sticky-bar {
+	position:fixed; 
+	bottom:0; 
+	left:0; 
+	width:100%; 
+	height:5em;
+	box-sizing: border-box;
+	z-index: 1000;
+	transition: height 0.5s;
+}
+
+.sticky-bar .info {
+	padding-top: 1em;
+	margin-left: -1em; 
+}
+
+.sticky-bar .options {
+	margin-bottom: 0;
+	padding-top: 0.7em;
+	padding-right: 1em;
+}
+
+.sticky-bar .options li {
+	margin-right: 1.5em;
+	text-align: center;
+}
+
+.sticky-bar .options li {
+	margin: 0;
+}
+
+.sticky-bar .options li .lbl {
+	margin-top: 0.3em;
+}
+
+.sticky-bar .open-lnk {
+	margin-left: 2em;
+}
+
+.sticky-bar .close-lnk {
+	display: block;
+	margin-top: 1.5rem;
+	text-align: right;
+}
+
+.sticky-bar.open {
+	height: 100%;
+	overflow-y:scroll;
+}
+
+.sticky-bar.open .container.collapsed {
+	display: none;
+}
+
+.sticky-bar.new .row.notNew {
+	visibility: hidden;
+}
+
+.sticky-bar header {
+	line-height: 1em;
+}
+
+.sticky-bar form fieldset {
+	margin-top: 2em;
+}
+
+.sticky-bar form legend {
+	margin: 0;
+	border: 0;
+}
+
+.sticky-bar .nav {
+	margin: 2.5em;
+}
+
+/* sticky-bar colors */
+
+.sticky-bar {
+	border-top: 1px solid #067a97;
+	background-color: #0fa7c1;
+	color: #fff;
+
+}
+
+.sticky-bar .options a {
+	color: #fff;
+}
+
+.sticky-bar .open-lnk {
+	color: #fff;
+}
+
+.sticky-bar .close-lnk {
+	color: #fff;
+}
+
+.sticky-bar header {
+	background-color: #0fa7c1;
+	border-bottom: 1px solid #fff;
+}
+
+.sticky-bar header li:not(:last-child) {
+	border-right: 1px solid #fff;
+}
+
+.sticky-bar form legend {
+	color: #fff;
+}
+
+/* buttons */
+
+.sticky-bar .btn.snapp {
+	margin: 0 auto;
+	width: 75%;
+	box-shadow: 3px 3px 3px #000;
+}
+
+.sticky-bar .btn.snapp:hover {
+	background-color: gold;
+	color: #000;
+}
+
+
+/* components */
+
+.sticky-bar .form-item {
+	margin: 0;
+}
+
+.sticky-bar .form-item:not(.optional):before {
+	color: #0fa7c1;
+}
+
+.sticky-bar .form-item input, 
+.sticky-bar .form-item.completed input,
+.sticky-bar .form-item.optional input {
+	border-color: #fff;
+}
+
+.sticky-bar .dropdown ul {
+	box-shadow: 3px 3px 5px #333;
+}
+
+.sticky-bar .dropdown li {
+	color: #333;
+}
+
+.sticky-bar .dropdown li.selected {
+	background-color: #b3b3b3;
+}

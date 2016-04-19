@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="keywords" content="haven life mass mutual app taking">
+	<meta name="description" content="app taking prototype scroll version">
+	<meta name="author" content="Ernest Leyva">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+	<title>App Taking Prototype - Scrolling</title>
+	<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css?ver=0"/>
+	<link rel="stylesheet" type="text/css" href="/styles/css/proto.css" />
+	<style type="text/css">
+
+	.content section {
+		display: block;
+	}
+
+	.content section:not(:first-child) h1{
+		border-top: 1px solid #b2b2b2;
+	}
+
+	.content .section-nav {
+		display: none
+	}
+
+	.content fieldset:last-child {
+		margin-bottom: 10em;
+	}
+
+	#supp_general_sec .section-nav {
+		display: block;
+	}
+
+	#supp_general_sec .section-nav li:first-child{
+		display: none;
+	}
+
+	aside ul {
+		position: relative;
+	}
+	
+	</style>
+</head>
+<body class="scroll">
+	<!--#include virtual="/snapp/inc/proto/header.html" -->
+	<!--#include virtual="/snapp/inc/proto/content.html" -->	
+	<!--#include virtual="/snapp/inc/proto/sticky-bar.html" -->
+	<script src="/bower_components/jquery/dist/jquery.min.js?ver=0"></script>
+	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js?ver=0"></script>
+	<script src="/bower_components/holderjs/holder.js"></script>
+	<script src="/js/proto/input.js"></script>
+	<script src="/js/proto/dropdown.js"></script>
+	<script src="/js/proto/check-list.js"></script>
+	<script src="/js/proto/selector.js"></script>
+	<script src="/js/proto/sticky-bar.js"></script>
+	<script type="text/javascript">
+
+		var snapp = {
+			setCurrentSection: function(id, scroll){
+				console.log('fired', id)
+				var $target = $(id);
+				var $current = $('aside .current');
+				var $expand = $('aside .expand');
+				if ($expand[0] === $target[0]){
+					return;
+				}
+				$current.removeClass('current');
+				$expand.removeClass('expand');
+				var $parent = $target.parents('.sub');
+				$expand = $parent[0] ? $parent.parent() : $target;
+				$expand.addClass('expand');
+				$target.addClass('current');
+				var $section = $(id+'_sec');
+				if ($section[0]){
+					$('section.current').removeClass('current');
+					$section.addClass('current');
+					var top = $section.offset().top;
+					top = top > 98 ? top : 0;
+					!scroll && $(window).scrollTop(top);
+				}
+			}
+		};
+
+		$(function(){
+
+			var $s1 = $('#case_setup_sec');
+			var $s2 = $('#proposed_insured_sec');
+			var $s3 = $('#personal_history_sec');
+			var $s4 = $('#product_whole_life_sec');
+			var $s5 = $('#purpose_insurance_sec');
+			var $s6 = $('#life_beneficiaries_sec');
+			var $s7 = $('#other_coverage_sec');
+			var $s8 = $('#life_payment_info_sec');
+			var $s9 = $('#cert_general_sec');
+			var $s0 = $('#HIV_consent_sec');
+			var $sA = $('#producer_statement_sec');
+			var $sB = $('#supp_general_sec');
+
+			var setS1 = setS2 = setS3 = setS4 = setS5 = setS6 = setS7 = setS8 = setS9 = setS0 = setSA = setSB = true;
+
+			var $el = $('aside .options');
+			$(window).scroll(function(e){
+				var top = $(window).scrollTop()
+				if (top > 98){
+					$el.css({position:'fixed', top:0, width:'25%', paddingRight:'1em'});
+				}else{
+					$el.css({position:'relative', top:0, width:'auto', paddingRight:0});
+				}
+				top += window.innerHeight / 2 | 0;
+				if ( top < $s2.offset().top ){
+					setS1 && snapp.setCurrentSection('#case_setup', true);
+					setS1 = false;
+					setS2 = true;
+				} else if ( top < $s3.offset().top ){
+					setS2 && snapp.setCurrentSection('#proposed_insured', true);
+					setS2 = false;
+					setS3 = setS1 = true;
+				} else if ( top < $s4.offset().top ){
+					setS3 && snapp.setCurrentSection('#personal_history', true);
+					setS3 = false;
+					setS4 = setS2 = true;
+				} else if ( top < $s5.offset().top ){
+					setS4 && snapp.setCurrentSection('#product_whole_life', true);
+					setS4 = false;
+					setS5 = setS3 = true;
+				} else if ( top < $s6.offset().top ){
+					setS5 && snapp.setCurrentSection('#purpose_insurance', true);
+					setS5 = false;
+					setS6 = setS4 = true;
+				} else if ( top < $s7.offset().top ){
+					setS6 && snapp.setCurrentSection('#life_beneficiaries', true);
+					setS6 = false;
+					setS7 = setS5 = true;
+				} else if ( top < $s8.offset().top ){
+					setS7 && snapp.setCurrentSection('#other_coverage', true);
+					setS7 = false;
+					setS8 = setS6 = true;
+				} else if ( top < $s9.offset().top ){
+					setS8 && snapp.setCurrentSection('#life_payment_info', true);
+					setS8 = false;
+					setS9 = setS7 = true;
+				} else if ( top < $s0.offset().top ){
+					setS9 && snapp.setCurrentSection('#cert_general', true);
+					setS9 = false;
+					setS0 = setS8 = true;
+				} else if ( top < $sA.offset().top ){
+					setS0 && snapp.setCurrentSection('#HIV_consent', true);
+					setS0 = false;
+					setSA = setS9 = true;
+				} else if ( top < $sB.offset().top ){
+					setSA && snapp.setCurrentSection('#producer_statement', true);
+					setSA = false;
+					setSB = setS0 = true;
+				} else {
+					setSB && snapp.setCurrentSection('#supp_general', true);
+					setSB = false;
+					setSA = true;
+				}
+
+			});
+
+			$('body').on('click', 'aside .options a', function(e){
+				e.preventDefault()
+				var id = $(this).attr('href');
+
+				snapp.setCurrentSection(id);
+			});
+		})
+	</script>
+</body>
+</html>

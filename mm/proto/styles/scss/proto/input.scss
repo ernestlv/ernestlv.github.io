@@ -1,0 +1,63 @@
+/* input */
+.form-item {
+	position: relative;
+	margin-top: 1.5em;
+	
+}
+
+.form-item:not(.optional):before {
+	content: "X";
+	font-size: 0.7em;
+	color: #fff;
+}
+
+.form-item input {
+	position: relative;
+	width: 100%;
+	height: 2em;
+	outline: none; 
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	border-bottom: 1px solid #333;   
+	z-index: 2; 		
+}
+
+.form-item label {
+	position: absolute;
+	top: 2.5rem;
+	left: 2rem;
+	margin: 0;
+	white-space: nowrap;
+    overflow: hidden;
+	color:#b3b3b3;
+	z-index: 1;
+	transition: all 0.5s;
+}
+
+.form-item.completed input {
+	border-color: #0fa7c1;
+}
+
+.form-item.completed label {
+	font-size: 0.8em;
+	top: 1rem;
+	left: 1.5rem;
+}
+
+/* optional fields */
+
+.form-item.optional:before {
+	content:"Optional";
+	font-size:0.7em;
+	color: #ccc;
+	transition: all 0.5s;
+}
+
+.form-item.optional.completed:before {
+	opacity: 0;
+}
+
+.form-item.optional input {
+	border-color: #ccc;
+}

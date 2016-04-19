@@ -1,0 +1,22 @@
+/* combos */
+
+.form-combo {
+	position: relative;
+}
+
+.form-combo .form-item:first-child {
+	padding-right: 0;
+}
+
+.form-combo .form-item:last-child {
+	padding-left: 0;
+}
+
+.form-combo input {
+	border-color: silver;
+}
+
+.form-combo-blank .blank {
+	padding: 0;
+	height: 8.3rem;
+}
