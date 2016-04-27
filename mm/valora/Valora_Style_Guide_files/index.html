@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://koosh.ci.dev.havenlife.com/bindsterTestFramework/index.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://bindster.com" xmlns:fb="http://ogp.me/ns/fb#" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Bindster Test Framework</title>
+
+    <!-- First include your library files -->
+    <script src="./q(1).js"></script>
+    <script src="./underscore-min(1).js"></script>
+
+    <!-- Bootstrap -->
+    <!--[if lt IE 9]>
+        <script src="/bower_components/html5shiv/dist/html5shiv.js"></script>
+        <script src="/bower_components/respond/respond.min.js"></script>
+    <![endif]-->
+    <script src="./jquery.min(1).js"></script>
+    <script src="./jquery.scrollTo.min(1).js"></script>
+    <script src="./bootstrap.min(1).js"></script>
+    <script src="./carousel-swipe.js"></script>
+    <link rel="stylesheet" href="./bootstrap.min.css">
+    <!--link rel="stylesheet" href="/bindsterTestFramework/css/home.css?ver=0"-->
+
+    <!-- Then include the amorphic files -->
+    <script src="./index(4).js"></script>
+    <script src="./index(5).js"></script>
+    <script src="./client(1).js"></script>
+    <script src="./index(6).js"></script>
+    <script src="./router(1).js"></script>
+
+    <!-- Dynamically generated script that will contain the controller and related objects -->
+    <script src="./bindsterTestFramework.js"></script><script src="./baseController.js"></script><script src="./controller(1).js"></script>
+
+</head>
+
+<body style="visibility: visible; background: rgb(237, 238, 238);">
+
+<textarea style="display: none" id="package_content">    &lt;html&gt;
+    &lt;head&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class="form-group"&gt;
+            &lt;form id="form_id" action="__url__" method="post" enctype="multipart/form-data"&gt;
+                &lt;div style="float: left; width: 75%"&gt;
+                    &lt;input type="file" name="file" id="file"&gt;
+                &lt;/div&gt;
+                &lt;div style="float: left; width: 25%"&gt;
+                    &lt;input type="submit" name="submit" value="Upload"&gt;
+                &lt;/div&gt;
+            &lt;/form&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+</textarea>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 col-sm-6">
+             <iframe id="package" style="height: 34px;margin-left: -10px;margin-top: 8px;width: 100%" frameborder="0" src="./saved_resource.html"></iframe>
+        </div>
+        <div class="col-xs-6 col-sm-6" style="padding-top: 12px">
+            <button type="button" b:class="btn btn-primary btn-sm {isPlaying() ? &#39;active&#39; : &#39;&#39;}" b:onclick="play()" b:disabled="{isPlayable() ? &#39;&#39; : &#39;disabled&#39;}" class="btn btn-primary btn-sm " disabled="">Play</button>
+            <button b:showif="!isRecording()" type="button" class="btn btn-danger btn-sm" b:onclick="record()" b:disabled="{isRecordable() ? &#39;&#39; : &#39;disabled&#39;}">Record</button>
+            <button b:showif="isRecording() || isPlaying()" type="button" class="btn btn-danger btn-sm" b:onclick="stop()" style_display="" style="display: none;">Stop</button>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 8px;">
+        <div class="col-xs-6 col-sm-6">
+            <span b:showif="hasFile" style_display="" style="display: none;"><a b:href="/amorphic/xhr?path=bindsterTestFramework&amp;file=test" target="_blank">Download Script</a></span>
+        </div>
+        <div class="col-xs-3 col-sm-3">
+            Step <span b:bind="currentIx">0</span> of <span b:bind="maxIx">0</span>
+        </div>
+        <div class="col-xs-3 col-sm-3">
+            <span b:bind="errors">0</span> errors
+        </div>
+    </div>
+</div>
+
+<script src="./bindster-amorphic.js"></script>
+<script>
+    amorphic.prepareFileUpload('package');
+    amorphic.uploadFunction = function(file) {
+        controller.upload(file)
+    }
+     //Disable Zombie Check
+    amorphic._zombieCheck = function () { };
+    //Disable Mousemove, Mouseclick, Window Focus -> WindowActivity
+    amorphic._windowActivity = function () { };
+</script>
+
+
+</body></html>
