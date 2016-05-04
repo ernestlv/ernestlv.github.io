@@ -33,7 +33,7 @@
 		}
 
 		.container h2 {
-			margin-top: 4em;
+			margin: 2.5em 0;
 		}
 		.container p b {
 			color: #000;
@@ -58,7 +58,7 @@
 		}
 
 		.container figure {
-			margin: 2em auto 3em auto;
+			margin: 2.5em auto;
 			width: 100%;
 			float: none;
 		}
@@ -68,27 +68,122 @@
 		    font-size: 1rem;
 		    font-weight: 100;
 			text-align: left;
-			padding: none;
 		}
 
 		.container figure figcaption b {
 			font-weight: 400;
 		}
 
-		.container p.leading span, .container p.line-height span {
+		.container .leading span, .container .line-height span {
 			padding-left: 3em;
 			font-weight: 400;
 		}
 
-		.container p.leading .up {
+		.container .leading .up {
 			vertical-align: 4px;
     		font-size: .8em;
     		font-weight: 400;
 		}
 
-		.container p.leading .dn {
+		.container .leading .dn {
     		font-size: 0.8em;
     		font-weight: 400;
+		}
+
+		.container figure.small img {
+		    width: 70%;
+		}
+
+		header .content {
+			height: 10rem; 
+			width: 20rem; 
+			background: hsla(0, 70%, 50%, 1.3); 
+			border-bottom-right-radius: 0.5rem; 
+			text-align: center;
+		}
+
+		header .title {
+			font-weight: 900; 
+			font-size: 4em;
+		}
+
+		header .title b:nth-child(1) {
+			margin-right: -0.9rem;
+    		font-size: 1.5em;
+		}
+
+		header .title b:nth-child(2){
+			vertical-align: -1.4rem;
+		}
+
+		header .title span {
+			font-weight: 100; 
+			font-size: 0.5rem; 
+			float: right;
+    		margin-right: 1rem;
+		}
+
+		footer .content {
+			font-size:.9em; 
+			background:hsla(200, 10%, 85%, 0.3); 
+			padding: 0 2em; 
+			font-weight: 100;
+    		line-height: 2.5em;
+    		height: 2.5em;
+		}
+
+		footer .left {
+			float:left;
+		}
+
+		footer .right {
+			float:right;
+		}
+
+		@media (max-width: 46em){
+			.container header figure {
+			    display: none;
+			}
+
+			.container h2 {
+			    margin: 1.5em 0;
+			}
+
+			.container ul, .container ol {
+			    font-family: sans-serif;
+			    font-size: 1em;
+			    line-height: 2.2em;
+			}
+
+			.container figure figcaption {
+				font-family: sans-serif;
+			    font-size: 0.8em;
+			}
+
+			.container figure.small img {
+			    width: 100%;
+			}
+			header .content{
+				border-radius: 0;
+				width: auto;
+			}
+		}
+
+		@media (max-width: 30em){
+
+			.container {
+				width: 90%;
+			}
+
+			.container p {
+			    margin: 1em 0em;
+			    text-align: justify;
+			}
+
+			.container figure figcaption {
+			    text-align: justify;
+			}
+
 		}
 
 	</style>
@@ -96,12 +191,9 @@
 <body>
    <article>
    		<header>
-   			<div style="position:relative">
-   				<div style="height: 10rem; width: 20rem; background: hsla(0, 70%, 50%, 1.3); border-bottom-right-radius: 0.5rem; text-align: center;">
-   					<div class="title" style="font-weight: 900; font-size: 4em;"><span style="margin-right: -0.9rem;
-    font-size: 1.5em">T</span>he B<span style="vertical-align: -1.4rem">LOG</span> <span style="font-weight: 100; font-size: 0.5rem; float: right;
-    margin-right: 1rem;
-}" >by ernest</span></div>
+   			<div>
+   				<div class="content">
+   					<div class="title"><b>T</b>he B<b>LOG</b> <a href="mailto:ernestolv@hotmail.com" re="author"><span>by ernest</span></a></div>
      			</div>
    			</div>
    		</header>
@@ -154,55 +246,68 @@
 			</section>
 			<section>
 				<h2 id="line-height">THE LINE-HEIGHT</h2>
-				<p class="line-height">The <em>line-height</em> is just an absolute number defined in pixels, ems, rems or percentage or it can be a relative number multiplied by the current font-size:
+				<p class="line-height">The <em>line-height</em> is just an absolute number defined in pixels, ems, rems or %:
 				<br>
 				<span>line-height: 2px</span>
 				<br>
-				<span>line-height: 2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// i.e. current font * 2</span>
+				or it can also be a relative number multiplied by the current font-size. i.e.:
 				<br>
-				The <em>line-height</em> represents the height for each individual <em>inline</em> element ( just as <em>height + padding + border + margin</em> is the height for inline-block element ). The browser uses the <em>line-height</em> to calculate the <em>leading</em>. In typography the leading is the space above and below a glyph and represent the total height of an inline element. The browser uses the half-leading technique to determine this space.</p>
+				<span>line-height: 2 </span>
+				<br>
+				The <em>line-height</em> represents the height for each individual <em>inline</em> element ( just as <em>height + padding + border + margin</em> represents the height for inline-block element ). The browser uses the <em>line-height</em> to calculate the <em>leading</em>. In typography the leading is the space above and below a glyph and represent the total height of an inline element. The browser uses the <a href="#leading">half-leading</a> technique to determine this space.</p>
+				
 				<h3>HALF-LEADING</h3>
-				<p class="leading">
-					The browser calculates the height of each inline element, using the <em>leading</em> like this:
-					<br>
-					- First the browser calculates the size of each inline element:<br>
-					<span>AD = A+D</span>
-					<br>
-					where:
-					<br>
-					<span>A: is the height above the baseline.</span>
-					<br>
-					<span>D: is the depth beneath the baseline.</span>
-					<br>
-					- Second calculates the Leading:
-					<br>
-					<span>L = line-height - AD</span>
-					<br>
-					- Third calculates the half-leading:
-					<br>
-					<span>A' = A + <b class="up">L</b>/<b class="dn">2</b></span>
-					<br>
-					<span>D' = D + <b class="up">L</b>/<b class="dn">2</b></span>
-					<br>
-					- Fourth calculates the inline element total height:
-					<br>
-					<span>L' = A' + D'</span>
-					<br>
-					The browser needs to caulculate the height of each inline element to determine the line box height.
-				</p>
+
+				<p>A browser calculates the height for each inline element like this:</p>
+
+				<ol class="leading">
+					<li>
+						First calculates the font metrics:<br>
+						<span>AD = A+D</span>
+						<br>
+						where:
+						<br>
+						<span>A: is the height above the baseline.</span>
+						<br>
+						<span>D: is the depth beneath the baseline.</span>
+					</li>
+					<li>
+						Second calculates the leading:<br>
+						<span>L = line-height - AD</span>
+					</li>
+					<li>
+						Third calculates the half-leading:<br>
+						<span>A' = A + <b class="up">L</b>/<b class="dn">2</b></span>
+						<br>
+						<span>D' = D + <b class="up">L</b>/<b class="dn">2</b></span>
+					</li>
+					<li>
+						Fourth calculates the inline element total height:<br>
+						<span>L' = A' + D'</span>
+						<br>
+						where:
+						<br>
+						<span>L': is line-height but including font metrics</span>
+					</li>
+				</ol>
+
+				<p>The browser needs to caulculate the height of each inline element to determine the line box height.</p>
 
 				<h3>LINE BOX HEIGHT</h3>
-				<p>To calculate the height of the line box, where inline elements are placed, the browser follows these steps:<br>
-					- First calculate the height of each inline element, using the <a href="#leading">half-leading technique</a>.<br>
-					- Second position each inline element using its <a href="#vertical-align">vertical-align</a>.<br>
-					- Third calculate the line box height as the distance between the upper most top and lower most bottom among all inline elements.
-				</p>
+
+				<p>To calculate the height of the line box, where inline elements are placed, the browser follows these steps:</p>
+
+				<ol>
+					<li>First calculate the height of each inline element, using the <a href="#leading">half-leading technique</a>.</li>
+					<li>Second position each inline element using its <a href="#vertical-align">vertical-align</a>.</li>
+					<li>Third calculate the line box height as the distance between the uppermost top and lowermost bottom among all inline elements.</li>
+				</ol>
 
 				<p class="note">source: <a href="//www.w3.org/TR/CSS2/visudet.html#line-height">W3C Level 2 line-height calculations</a></p>
 
 				<figure>
 			   		<img src="/blog/img/lh-5.png" alt="half-leading">
-			   		<figcaption><b>Figure 5</b>: A simplify way to picture, the half-leading process, is just split the line-height in two. The upper half would be above the midline, the lower half would be below. inline elements hang close to the midline.</figcaption>
+			   		<figcaption><b>Figure 5</b>: A simplify picture, of the half-leading process, is just to split the line-height in two. The first half would be above the midline, the second half would be below. inline elements would cluster close to the midline.</figcaption>
 			   	</figure>
 
 				<p class="note">see also: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-non-replaced">W3C Level 2 inline element height</a></p>
@@ -214,78 +319,79 @@
 
 				<ul>
 					<li><b>Top</b> : upper edge of the line box.</li>
-					<li><b>top-line</b> : upper edge of a letter x.</li>
-					<li><b>mid-line</b> : midpoint of a letter x.</li>
-					<li><b>baseline</b> : bottom edge of a letter x.</li>
+					<li><b>topline</b> : upper edge of the x-height.</li>
+					<li><b>midline</b> : midpoint of the x-height.</li>
+					<li><b>baseline</b> : bottom edge of the x-height.</li>
 					<li><b>Bottom</b> : bottom edge of the line box.</li>
 				</ul>
 
 				<p class="note">note: The above might not be accurate but is a good approximation that helped me to understand the vertical-align property.</p>
 
-				<figure>
-			   		<img src="/blog/img/lh-6.png" alt="line box axes" style="width:70%">
+				<figure class="small">
+			   		<img src="/blog/img/lh-6.png" alt="line box axes">
 			   		<figcaption><b>Figure 6</b>: Shows the line box edges and the top, mid and baselines.</figcaption>
 			   	</figure>
 
 				<p>vertical-align is all about shiftting the baseline of inline elements relative to the lines mentioned above.</p>
 
-				<p>Imaging two inline elements  a letter 'x' and a lower 'a', vertical-align will position them like this:</p>
+				<p>Imaging an inline element ( e.g. letter 'a' )  and the x-height, vertical-align will position the inline element like this:</p>
 
 				<ul>
-					<li><b>baseline</b>: Shifts the baseline of 'a' zero pixels.
-						<figure>
-					   		<img src="/blog/img/lh-61.png" style="width:70%" alt="vertical-align super">
-					   		<figcaption><b>Figure 6b</b>: vertical-align: baseline. 'a' baseline is shifted zero px relative to x-height baseline.</figcaption>
+					<li><b>baseline</b>: Shifts the baseline of '<b>a</b>', relative to the baseline of x-height, zero pixels.
+						<figure class="small">
+					   		<img src="/blog/img/lh-61.png" alt="vertical-align super">
+					   		<figcaption><b>Figure 6b</b>: vertical-align: baseline. '<b>a</b>' baseline is not shifted.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>super</b>: Shifts the baseline of 'a' above the mid-line of the x-height. This would expand the line box height if 'a' becomes the uppermost top.
-						<figure>
-					   		<img src="/blog/img/lh-7.png" style="width:70%" alt="vertical-align super">
-					   		<figcaption><b>Figure 7</b>: vertical-align: super. 'a' baseline is shifted above midline of x-height, line box height is expanded accordingly.</figcaption>
+					<li><b>super</b>: Shifts the baseline of '<b>a</b>' above the mid-line of the x-height. This would expand the line box height, if '<b>a</b>' becomes the uppermost top.
+						<figure class="small">
+					   		<img src="/blog/img/lh-7.png" alt="vertical-align super">
+					   		<figcaption><b>Figure 7</b>: vertical-align: super. '<b>a</b>' baseline is shifted above midline of x-height, line box height is expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>sub</b>: Shifts the baseline of 'a' to the Bottom of the baseline depth. This will expand the line box height if 'a' becomes the lowermost bottom.
-						<figure>
-					   		<img src="/blog/img/lh-8.png" style="width:70%" alt="vertical-align sub">
-					   		<figcaption><b>Figure 8</b>: vertical-align: sub. 'a' baseline is shifted to sit on  bottom of x-height baseline depth. Line box height is also expanded accordingly.</figcaption>
+					<li><b>sub</b>: Shifts the baseline of '<b>a</b>' to the Bottom of the baseline depth. This will expand the line box height, if '<b>a</b>' becomes the lowermost bottom.
+						<figure class="small">
+					   		<img src="/blog/img/lh-8.png" alt="vertical-align sub">
+					   		<figcaption><b>Figure 8</b>: vertical-align: sub. '<b>a</b>' baseline is shifted to sit on  bottom of x-height baseline depth. Line box height is also expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>middle</b>: Shifts the baseline of 'a' in such a way that is always aligned with the midline of the x-height. This will expand the line box height if 'a' becomes the uppermost / lowermost top / bottom.
-						<figure>
-					   		<img src="/blog/img/lh-8a.png" style="width:70%" alt="vertical-align middle">
-					   		<figcaption><b>Figure 8</b>: vertical-align: middle. 'a' baseline is shifted so is aligned with midline of x-height. Line box height was expanded to the line-height of the largest 'a'.</figcaption>
+					<li><b>middle</b>: Shifts the baseline of '<b>a</b>' in such a way that is always aligned with the midline of the x-height. This will expand the line box height, if '<b>a</b>' becomes the uppermost / lowermost top / bottom.
+						<figure class="small">
+					   		<img src="/blog/img/lh-8a.png" alt="vertical-align middle">
+					   		<figcaption><b>Figure 8</b>: vertical-align: middle. '<b>a</b>' baseline is shifted, so '<b>a</b>' is always close to the midline of x-height. Line box height was expanded to the line-height of the largest '<b>a</b>'.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>length</b>: Shifts the baseline of 'a' the specified amount of units ( px, em, % ). Line box height will be expanded accordingly to the uppermost / lowermost top / bottom.</li>
-					<li><b>top</b>: Shifts the top of the x to the Top of the line box.</li>
-					<li><b>bottom</b>: Shifts the bottom of the x to the Bottom of the line box.</li>
-					<li><b>text-top</b>: Shifts the top of the X to the top of the content area.</li>
-					<li><b>text-bottom</b>: Shifts the top of the X to the bottom of the content area.</li>
+					<li><b>length</b>: Shifts the baseline of '<b>a</b>' the specified amount of units ( px, em, % ). Line box height will be expanded accordingly to the uppermost / lowermost top / bottom.</li>
+					<li><b>top</b>: Shifts the top of '<b>a</b>' to the Top of the line box.</li>
+					<li><b>bottom</b>: Shifts the bottom of '<b>a</b>' to the Bottom of the line box.</li>
+					<li><b>text-top</b>: Shifts the top of '<b>a</b>' to the top of the content area.</li>
+					<li><b>text-bottom</b>: Shifts the top of '<b>a</b>' to the bottom of the content area.</li>
 				</ul>
 			</section>
 			<section>
 				<h2>FLOATS</h2>
-				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the original line box then creates a new line box for the floated element, i.e. floats do not share baselines. The original line box wdith is then adjusted so its content does not overlap the float. if new line boxes are stacked in the content area, floats do not stay fux they are pushed to the next line box then floated again.</p>
+				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the original line box, then <em>creates a new line box for the float, i.e. floats do not share baselines</em>. Additionally the original line box width is adjusted, so its content does not overlap the float.</p>
 				<figure>
 			   		<img src="/blog/img/lh-10.png" alt="floats">
 			   		<figcaption><b>Figure 10</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
+			   	<p>Note that If a line box is broken into more line boxes, floats belonging to the line box will be pushed down accordingly.</p>
 			</section>
 			<section>
 				<h2>THE INLINE-BLOCK PECULIARITY</h2>
-				<p>Note that an inline-block element has two heights! One is the <u>content area height</u>, defined by the CSS property <b>height</b>. The other the <u>line-box height</u>, defined by the CSS property <b>line-height</b>. The browser will use the content height to paint the box and apply margins, padding and borders but will use the line-height to calulate the baseline and position inline content. e.g. text.</p>
-
-				<p class="note">Source: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-box-height">W3C Level 2 inline-box-height</a></p>
+				<p>An inline-block element has two heights! One is the <u>content area height</u>, defined by the CSS property <b>height</b>. The other the <u>line-box height</u>, defined by the CSS property <b>line-height</b>. The browser will use the content height to paint the box and apply margins, padding and borders but will use the line-height to calulate the baseline and position inline content thru vertical-align. e.g. text.</p>
 
 				<figure>
 			   		<img src="/blog/img/lh-3.png" alt="content area half">
-			   		<figcaption><b>Figure 3</b>: The contented area, here painted in light blue, can be smaller than the line box.</figcaption>
+			   		<figcaption><b>Figure 3</b>: The contented area height, here painted in light blue, can be smaller than the line box.</figcaption>
 			   	</figure>
 
 			   	<figure>
 			   		<img src="/blog/img/lh-4.png" alt="content area bleeding">
-			   		<figcaption><b>Figure 4</b>: The content area can also be larger than the line box and it "bleeds" out.</figcaption>
+			   		<figcaption><b>Figure 4</b>: The content area height can also be larger than the line box and it "bleeds" out.</figcaption>
 			   	</figure>
+
+			   	<p class="note">Source: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-box-height">W3C Level 2 inline-box-height</a></p>
 
 			</section>
 			<section>
@@ -300,12 +406,10 @@
 	   </div>
    </article>
    <footer>
-			 <div>
-			 	<p style="font-size:.9em; background:hsla(200, 10%, 85%, 0.3); padding: 0 2em; font-weight: 100;
-    line-height: 2.5em;">
-			 		<span style="float:left">may / 2016</span><b>&nbsp;</b><span style="float:right">ernest's blog <a href="mailto:ernestolv@hotmail.com">contact me</a></span>
-			 	</p>
-			 </div>
+		<div class="content">
+		 		<div class="left">may / 2016</div>
+		 		<div class="right">ernest's blog <a href="mailto:ernestolv@hotmail.com" re="me">contact me</a></div>
+		</div>
 	</footer>
 </body>
 </html>
