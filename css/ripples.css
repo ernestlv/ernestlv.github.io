@@ -4,28 +4,31 @@ body {
 
 .container {
 	text-align: center;
+    width: 75%;
+    margin: 0 auto;
 }
 
 .container p {
-	margin: 1em 10em;
-	line-height: 2.4em;
+	line-height: 2.5em;
 	font-size:1.2rem;
 	font-weight: 100;
+    text-align: left;
 }
 
-.container p::first-letter {
+.container p b {
 	font-size: 2.5em;
     font-weight: 900;
     color: #AA0000;
-    vertical-align: text-top;
-    letter-spacing: 0.25em;
+    letter-spacing: 5px;
+    position: relative;
+    top: 1rem;
 }
 
 
 .container figure {
-	margin: 0.7em 1em;
+	margin: 1em 2em 0 0;
 	float:left;
-	width: 25%;
+	width: 35%;
 }
 
 .container figure img {
@@ -45,7 +48,7 @@ body {
     }
 
 	.container p {
-		margin: 1em 3em;
+		margin: 1em 0;
         text-align: left;
 		
 	}
