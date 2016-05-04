@@ -291,6 +291,13 @@
 
 				<p>The browser needs to caulculate the height of each inline element to determine the line box height.</p>
 
+				<p class="note">source: <a href="//www.w3.org/TR/CSS2/visudet.html#line-height">W3C Level 2 line-height calculations</a></p>
+
+				<figure>
+			   		<img src="/blog/img/lh-5.png" alt="half-leading">
+			   		<figcaption><b>Figure 3</b>: A simplify picture, of the half-leading process, is just to split the line-height in two. The first half would be above the midline, the second half would be below. inline elements would cluster close to the midline.</figcaption>
+			   	</figure>
+
 				<h3>LINE BOX HEIGHT</h3>
 
 				<p>To calculate the height of the line box, where inline elements are placed, the browser follows these steps:</p>
@@ -301,14 +308,6 @@
 					<li>Third calculate the line box height as the distance between the uppermost top and lowermost bottom among all inline elements.</li>
 				</ol>
 
-				<p class="note">source: <a href="//www.w3.org/TR/CSS2/visudet.html#line-height">W3C Level 2 line-height calculations</a></p>
-
-				<figure>
-			   		<img src="/blog/img/lh-5.png" alt="half-leading">
-			   		<figcaption><b>Figure 5</b>: A simplify picture, of the half-leading process, is just to split the line-height in two. The first half would be above the midline, the second half would be below. inline elements would cluster close to the midline.</figcaption>
-			   	</figure>
-
-				<p class="note">see also: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-non-replaced">W3C Level 2 inline element height</a></p>
 			</section>
 			<section>
 				<h2 id="vertical-align">VERTICAL-ALIGMENT</h2>
@@ -327,7 +326,7 @@
 
 				<figure class="small">
 			   		<img src="/blog/img/lh-6.png" alt="line box axes">
-			   		<figcaption><b>Figure 6</b>: Shows the line box edges and the top, mid and baselines.</figcaption>
+			   		<figcaption><b>Figure 4</b>: Shows the line box edges and the top, mid and baselines.</figcaption>
 			   	</figure>
 
 				<p>vertical-align is all about shiftting the baseline of inline elements relative to the lines mentioned above.</p>
@@ -338,19 +337,19 @@
 					<li><b>baseline</b>: Shifts the baseline of '<b>a</b>', relative to the baseline of x-height, zero pixels.
 						<figure class="small">
 					   		<img src="/blog/img/lh-61.png" alt="vertical-align super">
-					   		<figcaption><b>Figure 6b</b>: vertical-align: baseline. '<b>a</b>' baseline is not shifted.</figcaption>
+					   		<figcaption><b>Figure 5</b>: vertical-align: baseline. '<b>a</b>' baseline is not shifted.</figcaption>
 					   	</figure>
 					</li>
 					<li><b>super</b>: Shifts the baseline of '<b>a</b>' above the mid-line of the x-height. This would expand the line box height, if '<b>a</b>' becomes the uppermost top.
 						<figure class="small">
 					   		<img src="/blog/img/lh-7.png" alt="vertical-align super">
-					   		<figcaption><b>Figure 7</b>: vertical-align: super. '<b>a</b>' baseline is shifted above midline of x-height, line box height is expanded accordingly.</figcaption>
+					   		<figcaption><b>Figure 6</b>: vertical-align: super. '<b>a</b>' baseline is shifted above midline of x-height, line box height is expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
 					<li><b>sub</b>: Shifts the baseline of '<b>a</b>' to the Bottom of the baseline depth. This will expand the line box height, if '<b>a</b>' becomes the lowermost bottom.
 						<figure class="small">
 					   		<img src="/blog/img/lh-8.png" alt="vertical-align sub">
-					   		<figcaption><b>Figure 8</b>: vertical-align: sub. '<b>a</b>' baseline is shifted to sit on  bottom of x-height baseline depth. Line box height is also expanded accordingly.</figcaption>
+					   		<figcaption><b>Figure 7</b>: vertical-align: sub. '<b>a</b>' baseline is shifted to sit on  bottom of x-height baseline depth. Line box height is also expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
 					<li><b>middle</b>: Shifts the baseline of '<b>a</b>' in such a way that is always aligned with the midline of the x-height. This will expand the line box height, if '<b>a</b>' becomes the uppermost / lowermost top / bottom.
@@ -371,7 +370,7 @@
 				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the original line box, then <em>creates a new line box for the float, i.e. floats do not share baselines</em>. Additionally the original line box width is adjusted, so its content does not overlap the float.</p>
 				<figure>
 			   		<img src="/blog/img/lh-10.png" alt="floats">
-			   		<figcaption><b>Figure 10</b>: Two floats 'left | right' running on the same line box.</figcaption>
+			   		<figcaption><b>Figure 9</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
 			   	<p>Note that If a line box is broken into more line boxes, floats belonging to the line box will be pushed down accordingly.</p>
 			</section>
@@ -381,15 +380,17 @@
 
 				<figure>
 			   		<img src="/blog/img/lh-3.png" alt="content area half">
-			   		<figcaption><b>Figure 3</b>: The contented area height, here painted in light blue, can be smaller than the line box.</figcaption>
+			   		<figcaption><b>Figure 10</b>: The contented area height, here painted in light blue, can be smaller than the line box.</figcaption>
 			   	</figure>
 
 			   	<figure>
 			   		<img src="/blog/img/lh-4.png" alt="content area bleeding">
-			   		<figcaption><b>Figure 4</b>: The content area height can also be larger than the line box and it "bleeds" out.</figcaption>
+			   		<figcaption><b>Figure 11</b>: The content area height can also be larger than the line box and it "bleeds" out.</figcaption>
 			   	</figure>
 
 			   	<p class="note">Source: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-box-height">W3C Level 2 inline-box-height</a></p>
+
+			   	<p class="note">See also: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-non-replaced">W3C Level 2 inline element height</a></p>
 
 			</section>
 			<section>
