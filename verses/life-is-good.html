@@ -12,20 +12,87 @@
 	<!--[if lte IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ripplesold.css">
 	<![endif]-->
+	<style>
+		.container {
+			width:50%;
+		}
+
+		header .content {
+			height: 10rem; 
+			width: 20rem; 
+			background: hsla(0, 70%, 50%, 1.3); 
+			border-bottom-right-radius: 0.5rem; 
+			text-align: center;
+		}
+
+		header .title {
+			font-weight: 900; 
+			font-size: 4em;
+		}
+
+		header .title b:nth-child(1) {
+			margin-right: -0.9rem;
+    		font-size: 1.5em;
+		}
+
+		header .title b:nth-child(2){
+			vertical-align: -1.4rem;
+		}
+
+		header .title span {
+			font-weight: 100; 
+			font-size: 0.9rem; 
+			float: right;
+    		margin-right: 1rem;
+		}
+
+		footer .content {
+			margin-top: 2em;
+			font-size:.9em; 
+			background:hsla(200, 10%, 85%, 0.3); 
+			padding: 0 2em; 
+			font-weight: 100;
+    		line-height: 2.5em;
+    		height: 2.5em;
+		}
+
+		footer .left {
+			float:left;
+		}
+
+		footer .right {
+			float:right;
+		}
+
+		@media (max-width: 46em){
+			header .content{
+				border-radius: 0;
+				width: auto;
+			}
+			.container {
+				margin: 0 4em;
+				width: auto;
+			}
+		}
+
+		@media (max-width: 30em){
+			.container {
+				margin: 0 1em;
+			}
+			.container p {
+				margin: 1em 0;
+			}
+		}
+	</style>
 </head>
 <body>
    <article>
    		<header>
-   			<div style="position:relative">
-   				<div style="height: 10rem; width: 20rem; background: hsla(0, 70%, 50%, 1.3); border-bottom-right-radius: 0.5rem; text-align: center;">
-   					<div class="title" style="font-weight: 900; font-size: 4em;"><span style="margin-right: -0.9rem;
-    font-size: 1.5em">T</span>he B<span style="vertical-align: -1.4rem">LOG</span> <span style="font-weight: 100; font-size: 0.5rem; float: right;
-    margin-right: 1rem;
-}" >by ernest</span></div>
+   				<div class="content">
+   					<div class="title"><b>T</b>he B<b>LOG</b> <a href="mailto:ernestolv@hotmail.com" re="author"><span>by ernest</span></a></div>
      			</div>
-   			</div>
    		</header>
-	   <div class="container" style="width:60%">
+	   <div class="container">
 		   	<h1>Life is Good</h1>
 			<p>
 				<b style="margin-right: -1rem">L</b>ife is good, who says that? sometimes seems to run in mute. Life is mud, life is good, May be it all depends on your mood.
@@ -33,12 +100,10 @@
 	   </div>
    </article>
    <footer>
-			 <div>
-			 	<p style="font-size:.9em; background:hsla(200, 10%, 85%, 0.3); padding: 0 2em; font-weight: 100;
-    line-height: 2.5em">
-			 		<span style="float:left">may / 2016</span><b>&nbsp;</b><span style="float:right">ernest's blog <a href="mailto:ernestolv@hotmail.com">contact me</a></span>
-			 	</p>
-			 </div>
+		<div class="content">
+		 		<div class="left">may / 2016</div>
+		 		<div class="right"><a href="mailto:ernestolv@hotmail.com" re="me">send comments</a></div>
+		</div>
 	</footer>
 </body>
 </html>
