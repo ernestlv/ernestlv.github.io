@@ -247,10 +247,10 @@
 				<p>Four CSS properties are important for line boxes:</p>
 
 				<ul>
-					<li><a href="#">font-size</a>: Defines the size of an inline element font.</li>
+					<li><a href="#">font-size</a>: Defines the size of an inline element.</li>
 					<li><a href="//developer.mozilla.org/en-US/docs/Web/CSS/line-height">line-height</a>: Defines the height of an inline element.</li>
-					<li><a href="//developer.mozilla.org/en-US/docs/Web/CSS/vertical-align">vertical-align</a>: Controls how to vertically position an inline element based on its baseline.</li>
-					<li><a href="//developer.mozilla.org/en-US/docs/Web/CSS/text-align">text-align</a>: Controls how to horizontally position inline elements within the line box.</li>
+					<li><a href="//developer.mozilla.org/en-US/docs/Web/CSS/vertical-align">vertical-align</a>: Vertically position an inline element using its baseline.</li>
+					<li><a href="//developer.mozilla.org/en-US/docs/Web/CSS/text-align">text-align</a>: Horizontally position inline elements within the line box.</li>
 				</ul>
 				<p>The first three: <em>font-size</em>, <em>line-height</em> & <em>vertical-align</em> are used to calculate the line box height.</p>
 			</section>
@@ -264,7 +264,7 @@
 				<br>
 				<span>line-height: 2 </span>
 				<br>
-				The <em>line-height</em> represents the height for each individual <em>inline</em> element ( just as <em>height + padding + border + margin</em> represents the height for inline-block element ). The browser uses the <em>line-height</em> to calculate the <em>leading</em>. In typography the leading is the space above and below a glyph and represent the total height of an inline element. The browser uses the <a href="#leading">half-leading</a> technique to determine this space.</p>
+				The <em>line-height</em> represents the height for each individual <em>inline</em> element ( just as <em>height + padding + border + margin</em> represents the height for inline-block elements ). The browser uses the <em>line-height</em> to calculate the <em>leading</em>. In typography the leading is the space above and below a glyph and represent the total height of an inline element. The browser uses the <a href="#leading">half-leading</a> technique to determine this space.</p>
 				
 				<h3>HALF-LEADING</h3>
 
@@ -301,14 +301,14 @@
 					</li>
 				</ol>
 
-				<p>The browser needs to caulculate the height of each inline element to determine the line box height.</p>
-
 				<p class="note">source: <a href="//www.w3.org/TR/CSS2/visudet.html#line-height">W3C Level 2 line-height calculations</a></p>
 
 				<figure>
 			   		<img src="/blog/img/lh-5.png" alt="half-leading">
 			   		<figcaption><b>Figure 3</b>: A simplify picture, of the half-leading process, is just to split the line-height in two. The first half would be above the midline, the second half would be below. inline elements would cluster close to the midline.</figcaption>
 			   	</figure>
+
+			   	<p>The browser needs to caulculate the height of each inline element to determine the line box height.</p>
 
 				<h3>LINE BOX HEIGHT</h3>
 
@@ -341,9 +341,9 @@
 			   		<figcaption><b>Figure 4</b>: Shows the line box edges and the top, mid and baselines.</figcaption>
 			   	</figure>
 
-				<p>vertical-align is all about shiftting the baseline of inline elements relative to the lines mentioned above.</p>
+				<p>vertical-align is all about shiftting the baseline of inline elements relative to the lines in the line box.</p>
 
-				<p>Imaging an inline element ( e.g. letter 'a' )  and the x-height, vertical-align will position the inline element like this:</p>
+				<p>Imaging an inline element ( e.g. letter '<b>a</b>' )  and the x-height, vertical-align will position the inline element like this:</p>
 
 				<ul>
 					<li><b>baseline</b>: Shifts the baseline of '<b>a</b>', relative to the baseline of x-height, zero pixels.
@@ -358,33 +358,33 @@
 					   		<figcaption><b>Figure 6</b>: vertical-align: super. '<b>a</b>' baseline is shifted above midline of x-height, line box height is expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>sub</b>: Shifts the baseline of '<b>a</b>' to the Bottom of the baseline depth. This will expand the line box height, if '<b>a</b>' becomes the lowermost bottom.
+					<li><b>sub</b>: Shifts the baseline of '<b>a</b>' to the bottom of the x-height baseline depth. This will expand the line box height, if '<b>a</b>' becomes the lowermost bottom.
 						<figure class="small">
 					   		<img src="/blog/img/lh-8.png" alt="vertical-align sub">
 					   		<figcaption><b>Figure 7</b>: vertical-align: sub. '<b>a</b>' baseline is shifted to sit on  bottom of x-height baseline depth. Line box height is also expanded accordingly.</figcaption>
 					   	</figure>
 					</li>
-					<li><b>middle</b>: Shifts the baseline of '<b>a</b>' in such a way that is always aligned with the midline of the x-height. This will expand the line box height, if '<b>a</b>' becomes the uppermost / lowermost top / bottom.
+					<li><b>middle</b>: Shifts the baseline of '<b>a</b>' in such a way that is always close to the midline of the x-height. This will expand the line box height, if '<b>a</b>' becomes the uppermost / lowermost top / bottom.
 						<figure class="small">
 					   		<img src="/blog/img/lh-8a.png" alt="vertical-align middle">
 					   		<figcaption><b>Figure 8</b>: vertical-align: middle. '<b>a</b>' baseline is shifted, so '<b>a</b>' is always close to the midline of x-height. Line box height was expanded to the line-height of the largest '<b>a</b>'.</figcaption>
 					   	</figure>
 					</li>
 					<li><b>length</b>: Shifts the baseline of '<b>a</b>' the specified amount of units ( px, em, % ). Line box height will be expanded accordingly to the uppermost / lowermost top / bottom.</li>
-					<li><b>top</b>: Shifts the top of '<b>a</b>' to the Top of the line box.</li>
-					<li><b>bottom</b>: Shifts the bottom of '<b>a</b>' to the Bottom of the line box.</li>
+					<li><b>top</b>: Shifts the top of '<b>a</b>' to the top of the line box.</li>
+					<li><b>bottom</b>: Shifts the bottom of '<b>a</b>' to the bottom of the line box.</li>
 					<li><b>text-top</b>: Shifts the top of '<b>a</b>' to the top of the content area.</li>
-					<li><b>text-bottom</b>: Shifts the top of '<b>a</b>' to the bottom of the content area.</li>
+					<li><b>text-bottom</b>: Shifts the bottom of '<b>a</b>' to the bottom of the content area.</li>
 				</ul>
 			</section>
 			<section>
 				<h2>FLOATS</h2>
-				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the  line box, then <em>creates a new line box for the float inline elements, i.e. floats do not share baselines</em>. Additionally the surrounding line boxes width is adjusted, so their content does not overlap the float.</p>
+				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the  line box, then <em>creates a new line box, to align the  inline elements in the float, i.e. floats do not share baselines</em>. Additionally the surrounding line boxes width is adjusted, so their content does not overlap the float.</p>
 				<figure>
 			   		<img src="/blog/img/lh-10.png" alt="floats">
 			   		<figcaption><b>Figure 9</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
-			   	<p>Note that If the line box, containg a float, is stacked into additional line boxes, floats belonging to the splitted line box will be pushed down to the next line box in the stack.</p>
+			   	<p>Note that If the line box, containg a float, is splitted into a stack of line boxes, floats belonging to the splitted line box will be pushed down to the next line box in the stack.</p>
 			   	<p class="example">EX: Figure 9, line box, above, would be splitted like:<br>
 				   	
 				   	<span>[left]</span> x a b c d f<br>
@@ -392,10 +392,12 @@
 				   	z k d p g r w o <span>[right]</span><br>
 				   	
 			   	</p>
+
+			   	<p>We can split a line box in two ways. manually with a <b>&lt;br&gt;</b> or automatically collapsing the content area of its container block</p>
 			</section>
 			<section>
 				<h2>THE INLINE-BLOCK PECULIARITY</h2>
-				<p>An inline-block element has two heights! One is the <u>content area height</u>, defined by the CSS property <b>height</b>. The other the <u>line-box height</u>, defined by the CSS property <b>line-height</b>. The browser will use the content height to paint the box and apply margins, padding and borders but will use the line-height to calulate the baseline and position inline content thru vertical-align. e.g. text.</p>
+				<p>An inline-block element has two heights! One is the <u>content area height</u>, defined by the CSS property <b>height</b>. The other the <u>line box height</u>, defined by the CSS property <b>line-height</b>. The browser will use the content height to paint the content area box, absolute position elements, apply padding, borders and margins but will use the line-height to calculate the baseline and position inline content ( e.g. text/img ) thru vertical-align and text-align.</p>
 
 				<figure>
 			   		<img src="/blog/img/lh-3.png" alt="content area half">
@@ -410,6 +412,19 @@
 			   	<p class="note">Source: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-box-height">W3C Level 2 inline-box-height</a></p>
 
 			   	<p class="note">See also: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-non-replaced">W3C Level 2 inline element height</a></p>
+
+			   	<h3>FLOATS & BLOCKS PECULIARITY</h3>
+			   	<p>If a block element contains a single float, as the floated content is removed from its single line box and shifted left or right, the line box contains no more inline elements, therefore its line-height and content area height are collapsed to <em>zero</em> and all block elements beneath will be shifted up. The width of the line boxes, belonging to the shifted blocks, will be adjusted so content does not overlaps the float.</p>
+
+			   	<figure>
+			   		<img src="/blog/img/lh-11.png" alt="blocks with float stacked up">
+			   		<figcaption><b>Figure 12</b>: Two block elements, stacked together, the upper block contains a float and its content area was manually stretched, using css height for this example.</figcaption>
+			   	</figure>
+
+			   	<figure>
+			   		<img src="/blog/img/lh-12.png" alt="blocks with float collapsed">
+			   		<figcaption><b>Figure 13</b>: Two block elements, collaped together. Since we did not manually tamper with the upper block CSS height, its content area and line box were collapsed when its only content was floated right. The lower block was shifted up and its line box splitted in two, so inline content does not overlap floated content.</figcaption>
+			   	</figure>
 
 			</section>
 			<section>
@@ -426,7 +441,7 @@
    <footer>
 		<div class="content">
 		 		<div class="left">may / 2016</div>
-		 		<div class="right"><a href="mailto:ernestolv@hotmail.com" re="me">send comments</a></div>
+		 		<div class="right"><a href="mailto:ernestolv@hotmail.com" re="me">come on! comment</a></div>
 		</div>
 	</footer>
 	<script>
