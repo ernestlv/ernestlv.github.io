@@ -21,10 +21,18 @@
 			color: hsla(350, 50%, 50%, 1);
 		}
 
+		header .back {
+			position: absolute;
+		    height: 9rem;
+		    background: hsla(0, 0%, 70%, 0.3);
+		    width: 99%;
+		    z-index: -1;
+		}
+
 		header .content {
 			height: 10rem; 
 			width: 20rem; 
-			background: hsla(200, 50%, 50%, .5);
+			background: hsla(200, 50%, 70%, 1);
 			color: hsla(200, 30%, 50%, 1);
 			border-bottom-right-radius: 0.5rem; 
 			text-align: center;
@@ -99,6 +107,7 @@
 <body>
    <article>
    		<header>
+   				<div class="back"></div>
    				<div class="content">
    					<div class="title"><b>T</b>he B<b>LOG</b> <a href="mailto:ernestolv@hotmail.com" re="author"><span>by ernest</span></a></div>
      			</div>
