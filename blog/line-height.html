@@ -368,12 +368,12 @@
 			</section>
 			<section>
 				<h2>FLOATS</h2>
-				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the original line box, then <em>creates a new line box for the float, i.e. floats do not share baselines</em>. Additionally the original line box width is adjusted, so its content does not overlap the float.</p>
+				<p>A float removes an inline element from its line box and shifts the element left or right, relative to the  line box, then <em>creates a new line box for the float inline elements, i.e. floats do not share baselines</em>. Additionally the surrounding line boxes width is adjusted, so their content does not overlap the float.</p>
 				<figure>
 			   		<img src="/blog/img/lh-10.png" alt="floats">
 			   		<figcaption><b>Figure 9</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
-			   	<p>Note that If a line box is broken into more line boxes, floats belonging to the line box will be pushed down accordingly.</p>
+			   	<p>Note that If the line box, containg a float, is stacked into additional line boxes, floats belonging to the splitted line box will be pushed down to the next line box in the stack.</p>
 			</section>
 			<section>
 				<h2>THE INLINE-BLOCK PECULIARITY</h2>
