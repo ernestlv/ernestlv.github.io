@@ -95,6 +95,17 @@
 		    width: 70%;
 		}
 
+		.container .example {
+			font-weight: 400;
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.container .example span {
+			color: hsl(0, 50%, 50%);
+		}
+
 		header .content {
 			height: 10rem; 
 			width: 20rem; 
@@ -374,6 +385,13 @@
 			   		<figcaption><b>Figure 9</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
 			   	<p>Note that If the line box, containg a float, is stacked into additional line boxes, floats belonging to the splitted line box will be pushed down to the next line box in the stack.</p>
+			   	<p class="example">EX: Figure 9, line box, above, would be splitted like:<br>
+				   	
+				   	<span>[left]</span> x a b c d f<br>
+				   	
+				   	z k d p g r w o <span>[right]</span><br>
+				   	
+			   	</p>
 			</section>
 			<section>
 				<h2>THE INLINE-BLOCK PECULIARITY</h2>
