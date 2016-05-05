@@ -106,10 +106,19 @@
 			color: hsl(0, 50%, 50%);
 		}
 
+		header .back {
+			position: absolute;
+		    height: 9rem;
+		    background: hsla(0, 0%, 70%, 0.3);
+		    width: 99%;
+		    z-index: -1;
+		}
+
 		header .content {
 			height: 10rem; 
 			width: 20rem; 
-			background: hsla(0, 70%, 50%, 1.3); 
+			background: hsla(200, 50%, 70%, 1);
+			color: hsla(200, 30%, 50%, 1);
 			border-bottom-right-radius: 0.5rem; 
 			text-align: center;
 		}
@@ -133,6 +142,7 @@
 			font-size: 0.9rem; 
 			float: right;
     		margin-right: 1rem;
+    		color: hsla(0, 50%, 0%, 0.5)
 		}
 
 		footer .content {
@@ -152,7 +162,18 @@
 			float:right;
 		}
 
+		footer .right a {
+			color: hsla(0, 50%, 0%, 0.5);
+    		text-decoration: none;
+		}
+
+
+
 		@media (max-width: 46em){
+			header .back {
+				display: none;
+			}
+
 			.container header figure {
 			    display: none;
 			}
@@ -203,9 +224,11 @@
 <body>
    <article>
    		<header>
+   				<div class="back"></div>
    				<div class="content">
    					<div class="title"><b>T</b>he B<b>LOG</b> <a href="mailto:ernestolv@hotmail.com" re="author"><span>by ernest</span></a></div>
      			</div>
+
    		</header>
 	   <div class="container">
 	   		<header>
@@ -385,15 +408,12 @@
 			   		<figcaption><b>Figure 9</b>: Two floats 'left | right' running on the same line box.</figcaption>
 			   	</figure>
 			   	<p>Note that If the line box, containg a float, is splitted into a stack of line boxes, floats belonging to the splitted line box will be pushed down to the next line box in the stack.</p>
-			   	<p class="example">EX: Figure 9, line box, above, would be splitted like:<br>
-				   	
-				   	<span>[left]</span> x a b c d f<br>
-				   	
-				   	z k d p g r w o <span>[right]</span><br>
-				   	
-			   	</p>
+			   	<figure>
+			   		<img src="/blog/img/lh-13.png" alt="blocks with float collapsed">
+			   		<figcaption><b>Figure 10</b>: We splitted the line box in two, inserting a &lt;br&gt;, the right floater is pushed into the lower line box.</figcaption>
+			   	</figure>
 
-			   	<p>We can split a line box in two ways. manually with a <b>&lt;br&gt;</b> or automatically collapsing the content area of its container block</p>
+			   	<p>We can split a line box in two ways. manually with a &lt;br&gt; or automatically collapsing the content area of its container block</p>
 			</section>
 			<section>
 				<h2>THE INLINE-BLOCK PECULIARITY</h2>
@@ -401,12 +421,12 @@
 
 				<figure>
 			   		<img src="/blog/img/lh-3.png" alt="content area half">
-			   		<figcaption><b>Figure 10</b>: The contented area height, here painted in light blue, can be smaller than the line box.</figcaption>
+			   		<figcaption><b>Figure 11</b>: The contented area height, here painted in light blue, can be smaller than the line box.</figcaption>
 			   	</figure>
 
 			   	<figure>
 			   		<img src="/blog/img/lh-4.png" alt="content area bleeding">
-			   		<figcaption><b>Figure 11</b>: The content area height can also be larger than the line box and it "bleeds" out.</figcaption>
+			   		<figcaption><b>Figure 12</b>: The content area height can also be larger than the line box and it "bleeds" out.</figcaption>
 			   	</figure>
 
 			   	<p class="note">Source: <a href="//www.w3.org/TR/CSS2/visudet.html#inline-box-height">W3C Level 2 inline-box-height</a></p>
@@ -418,12 +438,12 @@
 
 			   	<figure>
 			   		<img src="/blog/img/lh-11.png" alt="blocks with float stacked up">
-			   		<figcaption><b>Figure 12</b>: Two block elements, stacked together, the upper block contains a float and its content area was manually stretched, using css height for this example.</figcaption>
+			   		<figcaption><b>Figure 13</b>: Two block elements, stacked together, the upper block contains a float and its content area was manually stretched, using css height for this example.</figcaption>
 			   	</figure>
 
 			   	<figure>
 			   		<img src="/blog/img/lh-12.png" alt="blocks with float collapsed">
-			   		<figcaption><b>Figure 13</b>: Two block elements, collaped together. Since we did not manually tamper with the upper block CSS height, its content area and line box were collapsed when its only content was floated right. The lower block was shifted up and its line box splitted in two, so inline content does not overlap floated content.</figcaption>
+			   		<figcaption><b>Figure 14</b>: Two block elements, collapsed together. Since this time we did not manually tamper with the upper block CSS height, its content area and line box were collapsed, when its only content was floated right. The lower block was shifted up and its line box splitted in two, so inline content does not overlap floated content.</figcaption>
 			   	</figure>
 
 			</section>
