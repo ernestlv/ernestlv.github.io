@@ -1,0 +1,184 @@
+header .wrapper {
+	height: 7em;
+	margin: 0.5em 0;
+	padding: 0 1em;
+}
+
+header .info {
+	float: left;
+	height: 7em;
+}
+
+header .actions {
+	float: right;
+	height: 7em;
+}
+
+header .sort {
+	text-align: right;
+	margin-top: 0.3em;
+}
+
+header .sort a {
+	color: #000;
+}
+
+header .sort b {
+	float: right;
+	width: 0.7em;
+    height: 2em;
+    word-wrap: break-word;
+    line-height: 1em;
+}
+
+header .sort i {
+	float: right;
+	font-size: 2em;
+}
+
+header .search input {
+	border-radius: 0.3em 0 0 0.3em;
+}
+
+header .search-btn {
+	height: 1.8em;
+    background-color: #f0f0f0;
+    border-radius: 0 0.3em 0.3em 0;
+}
+
+.tabs {
+	height: 3em;
+}
+
+.tabs li {
+	float: left;
+	width: 50%;
+	height: 3em;
+	line-height: 3em;
+	background-color: silver;
+	font-weight: bold;
+	text-align: center;
+}
+
+.tabs a {
+	color: #fff;
+}
+
+.tabs .current {
+	background-color: #20B2AA;
+}
+
+.content .channel-content {
+	display: none;
+}
+
+.content .current {
+	display: block;
+}
+
+.content li {
+	cursor: pointer;
+}
+
+.content .show-info {
+	height: 5em;
+	border-top: 1px solid #f0f0f0;
+	border-bottom: 1px solid #f0f0f0;
+	overflow: hidden;
+	padding: 0 1em 0 0em;
+}
+
+.content .show-logo  {
+	float: left;
+	height: 100%;
+	margin-right: 0.5em;
+}
+
+.content .show-desc {
+	background-color: #f0f0f0;
+	padding: 0.7em 0.5em;
+	display: none;
+}
+
+.content .show-name {
+	font-weight: bold;
+	color: #00CED1;
+}
+
+.content li  .glyphicon-chevron-up {
+	display: none;
+}
+
+.content li.expand .glyphicon-chevron-up {
+	display: block;
+}
+
+.content li.expand .glyphicon-chevron-down {
+	display: none;
+}
+
+.content .expand .show-desc {
+	display: block;
+}
+
+.content .expand-icon {
+	float:right;
+	color: #c0c0c0;
+	line-height: 5em;
+}
+
+.content .isOnNow {
+	font-weight: bold;
+	color: #FF1493;
+}
+
+.content .upNext {
+	font-weight: bold;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+	header h1 {
+		font-size: 2em;
+	}
+	header .info {
+		width: 80%;
+	}
+
+	header .search {
+		display: none;
+	}
+}
+
+/* Tablets (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+	.content .show-info time {
+		float: left;
+		text-align: center;
+		padding: 0 1em;
+		 width: 6em;
+
+	}
+}
+
+/* Desktops and laptops ----------- */
+@media only screen  and (min-width : 1224px) {
+/* Styles */
+	.content .expand-icon {
+		display: none;
+	}
+
+	.content .show-desc {
+		display: block;
+	}
+
+	.content .show-info time {
+		float: left;
+		text-align: center;
+		padding: 0 1em;
+		 width: 6em;
+
+	}
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="keywords" content="nickelodeon, TV, schedule">
+	<meta name="description" content="nickelodeon's TV schedule">
+	<meta name="author" content="Ernest Leyva">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
+	<title>Nickelodeon's TV schedule</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/icons.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<header>
+		<div class="wrapper">
+			<div class="info"></div>
+			<div class="actions">
+				<div class="search"><input type="text"/><button class="search-btn glyphicon glyphicon-search"></button></div>
+				<div class="sort"><a href="#"><b>ZA</b><i class="glyphicon glyphicon-arrow-down"></i></a></div>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="tabs"></div>
+		<div class="content"></div>
+	</main>
+	<script src="//code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js" type="text/javascript"></script>
+	<script id="header-tmpl" type="text/x-handlebars-template">
+		<h1>{{title}}</h1>
+		<p>{{description}}</p>
+	</script>
+	<script id="tabs-tmpl" type="text/x-handlebars-template">
+		<ul class="list-inline">
+			{{#each channels}}
+				<li id="tab-{{@index}}"><a href="#content-{{@index}}" data-index={{@index}}>{{title}}</a></li>
+			{{/each}}
+		</ul>
+	</script>
+	<script id="content-tmpl" type="text/x-handlebars-template">
+			{{#each channels}}
+				<div id="content-{{@index}}" data-key="{{key}}" class="channel-content">
+					{{> shows}}
+				</div>
+			{{/each}}
+	</script>
+	<script id="shows-tmpl" type="text/x-handlebars-template">
+		<div class="schedule">
+			<ul class="list-unstyled">
+				{{#each schedule}}
+					<li>
+						<div class="show-info">
+							<i class="expand-icon glyphicon glyphicon-chevron-down"></i>
+							<i class="expand-icon glyphicon glyphicon-chevron-up"></i>
+							{{#if isOnNow}} 
+								<time class="show-time isOnNow" datetime="{{airTime}}">On Now {{formattedTime}} {{meridiem}}</time>
+							{{else}}
+								{{#if isNext}} 
+									<time class="show-time upNext" datetime="{{airTime}}">Up Next {{formattedTime}} {{meridiem}}</time>
+								{{else}}
+									<time class="show-time" datetime="{{airTime}}">{{formattedTime}} {{meridiem}}</time>
+								{{/if}}
+							{{/if}}
+							
+							{{#if icon16x9}}
+								<img src="{{icon16x9}}" class="show-logo" />
+							{{else}}
+								<img src="img/dummy.png" class="show-logo" />
+							{{/if}}
+							<p class="show-name">{{seriesTitle}}</p>
+							<p class="episode">{{episodeTitle}}</p>
+						</div>
+						<div class="show-desc">
+							<h5>{{episodeTitle}}</h5>
+							<p>{{description}}</p>
+						</div>
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</script>
+	<script src="js/nick.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(function(){
+			// render content
+			Nick.renderHeader(schedule);
+			Nick.renderTabs(schedule);
+			var clonedSchedule = Nick.cloneSchedule(schedule);
+			clonedSchedule.channels.map(Nick.sortTime);
+			Nick.isOnNow(clonedSchedule);
+			Nick.renderContent(clonedSchedule);
+			
+			//bind events
+			Nick.initSort();
+			Nick.initSearch();
+			Nick.initSwitchChannel();
+			Nick.initExpand();
+
+		});
+	</script>
+	<script src="data/schedule.js" type="text/javascript"></script>
+</body>
+</html>
