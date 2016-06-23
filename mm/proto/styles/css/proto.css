@@ -3,19 +3,19 @@
 /* fonts */
 @font-face {
   font-family: gothamBook;
-  src: url(/fonts/Gotham-Book.otf);
+  src: url(/mm/fonts/Gotham-Book.otf);
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: gothamMediumBook;
-  src: url(/fonts/Gotham-Medium.otf);
+  src: url(/mm/fonts/Gotham-Medium.otf);
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: gothamBold;
-  src: url(/fonts/Gotham-Bold.otf); }
+  src: url(/mm/fonts/Gotham-Bold.otf); }
 
 /* layout */
 .no-scroll {
