@@ -8,6 +8,7 @@
 	<meta name="p:domain_verify" content="fdefe289722ab1afdebfc185109f7e01"/><!-- pinterest -->
 	<title>How to create an Angular Library By Ernest</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,900' rel='stylesheet' type='text/css'>
+	<link href="/blog/styles/prism.css" rel="stylesheet" /><!-- see https://clt.champlain.edu/knowledgebase/code-snippets, https://prismjs.com/#basic-usage -->
 	<link rel="stylesheet" type="text/css" href="/css/ripples.css">
 	<!--[if lte IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ripplesold.css">
@@ -33,15 +34,23 @@
 		   	</header>
 			<section>
 				<h2>1 Create a workspace</h2>
-				
+				<pre><code class="language-css">p { color: red }</code></pre>
 			</section>
 			<section>
 				<h2>2 Generate Library</h2>
-
+				<pre><code class="language-javascript">
+					() => {
+						alert("hello world")
+					}
+				</code></pre>
 			</section>
 			<section>
 				<h2>3 Build Library</h2>
-
+				<pre><code class="language-typescript">
+					() => {
+						alert("hello world")
+					}
+				</code></pre>
 			</section>
 			<section>
 				<h2>4 Install Library (local development)</h2>
@@ -83,6 +92,7 @@
 		 		<div class="right"><a href="mailto:ernestolv@hotmail.com" re="me">comment</a></div>
 		</div>
 	</footer>
+	<script src="/blog/js/prism.js"></script>
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
