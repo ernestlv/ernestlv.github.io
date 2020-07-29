@@ -30,43 +30,96 @@
 	   	</header>
 			<section>
 				<h2>1 Create a workspace</h2>
-				<pre><code class="language-css">p { color: red }</code></pre>
+				<pre><code class="language-javascript">
+					ng new my-workspace --create-application=false
+					cd my-workspace
+				</code></pre>
 			</section>
 			<section>
 				<h2>2 Generate Library</h2>
 				<pre><code class="language-javascript">
-					() => {
-						alert("hello world")
-					}
+					ng generate library my-lib
 				</code></pre>
 			</section>
 			<section>
 				<h2>3 Build Library</h2>
-				<pre><code class="language-ts">
-					() => {
-						alert("hello world")
-					}
+				<pre><code class="language-javascript">
+					ng build my-lib
+
+					ng build my-lib --watch
 				</code></pre>
 			</section>
 			<section>
 				<h2>4 Install Library (local development)</h2>
-
+				<pre><code class="language-javascript">
+					ng install ../path-to-library/dist/my-lib
+				</code></pre>
 			</section>
 			<section>
 				<h2>5 Import Library</h2>
+				<pre><code class="language-javascript">
+					import { BrowserModule } from '@angular/platform-browser';
+					import { NgModule } from '@angular/core';
+					import { AppComponent } from './app.component';
+					import { MyLibModule } from 'my-lib';
 
+					@NgModule({
+						declarations: [
+							AppComponent
+						],
+						imports: [
+							BrowserModule,
+							MyLibModule
+						],
+						providers: [],
+						bootstrap: [AppComponent]
+					})
+					export class AppModule { }
+				</code></pre>
 			</section>
 			<section>
 				<h2>6 Start Project</h2>
-
+				<pre><code class="language-javascript">
+					npm start
+				</code></pre>
 			</section>
 			<section>
 				<h2>Fix Project Compiler (local development)</h2>
-
+				<pre><code class="language-javascript">
+					{
+						"compileOnSave": false,
+						"compilerOptions": {
+							"baseUrl": "./",
+							"outDir": "./dist/out-tsc",
+							"sourceMap": true,
+							"declaration": false,
+							"module": "esnext",
+							"moduleResolution": "node",
+							"emitDecoratorMetadata": true,
+							"experimentalDecorators": true,
+							"importHelpers": true,
+							"target": "es5",
+							"typeRoots": [
+								"node_modules/@types"
+							],
+							"lib": [
+								"es2018",
+								"dom"
+							],
+							"paths": {
+								"@angular/*":[
+									"./node_modules/@angular/*"
+								]
+							}
+						}
+					}
+				</code></pre>
 			</section>
 			<section>
 				<h2>Pack Library</h2>
-
+				<pre><code class="language-javascript">
+					npm pack ../path-to-library/dist/my-lib
+				</code></pre>
 			</section>
 			<section>
 				<h2>REFERENCE</h2>
