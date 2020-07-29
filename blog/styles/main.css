@@ -10,6 +10,10 @@
   width: 70%;
 }
 
+.container.wide {
+  width: 90%;
+}
+
 .container h1 {
   padding-top: 2em;
   text-align: center
