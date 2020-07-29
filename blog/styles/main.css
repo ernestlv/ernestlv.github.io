@@ -49,6 +49,10 @@
   font-size: 0.8em;
 }
 
+.container .note-lg {
+  font-size: 1em;
+}
+
 .container figure {
   margin: 2.5em auto;
   width: 100%;
