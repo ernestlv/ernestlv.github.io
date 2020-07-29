@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta name="keywords" content="ernesto, ernest, ernee, ernie, leyva, ernestolv, ernestlv, eleyva, vazquez, atomictumato, tumato, html, css, javascript, responsive, design, cranford, mexico, angular, library, blog">
+	<meta name="keywords" content="ernesto, ernest, leyva, vazquez, ernestolv, ernestlv, eleyva, atomictumato, tumato, angular, library, blog, critical dependecy, request, dependecy, expression">
 	<meta name="description" content="ernest's blog angular library">
 	<meta name="author" content="Ernest Leyva">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
@@ -40,9 +40,9 @@
 				<pre><code class="language-javascript">
 					ng generate library my-lib
 				</code></pre>
-				<p class="note-lg">You can do this in a new or existing project.</p>
-				<p class="note-lg">This will create a folder called <code>projects/my-lib</code> where <code>my-lib</code> is the name of your library given to the <code>ng</code> command.</p>
-				<p class="note-lg">Inside <code>my-lib</code> there is a <code>src</code> folder with a <code>public-api.ts</code> file that exports the modules, services and components that compose the library.</p>
+				<p class="note-lg">- You can do this in a new or existing project.</p>
+				<p class="note-lg">- This will create a folder called <code>projects/my-lib</code> where <code>my-lib</code> is the name of your library given to the <code>ng</code> command.</p>
+				<p class="note-lg">- Inside <code>my-lib</code> there is a <code>src</code> folder with a <code>public-api.ts</code> file that exports the modules, services and components that compose the library.</p>
 			</section>
 			<section>
 				<h2>3 Build Library</h2>
@@ -51,16 +51,16 @@
 
 					ng build my-lib --watch
 				</code></pre>
-				<p class="note-lg">Run from workspace folder.</p>
-				<p class="note-lg">Library bundle will be saved in <code>dist</code> folder. You will have three <code>package.json</code> files: 1) workspace <code>package.json</code>, 2) source library <code>package.json</code>, 3) dist library <code>package.json</code></p>
+				<p class="note-lg">- Run from workspace folder.</p>
+				<p class="note-lg">- Library bundle will be saved in <code>dist</code> folder. You will have three <code>package.json</code> files: 1) workspace <code>package.json</code>, 2) source library <code>package.json</code>, 3) dist library <code>package.json</code></p>
 			</section>
 			<section>
 				<h2>4 Install Library (local development)</h2>
 				<pre><code class="language-javascript">
 					ng install ../path-to-library/dist/my-lib
 				</code></pre>
-				<p class="note-lg">Run from your project folder.</p>
-				<p class="note-lg">If you built the library with <code>watch</code> changes to the library wil be automatically picked up by the angular development server running the application project.</p>
+				<p class="note-lg">- Run from your project folder.</p>
+				<p class="note-lg">- If you built the library with <code>watch</code> changes to the library wil be automatically picked up by the angular development server running the application project.</p>
 			</section>
 			<section>
 				<h2>5 Import Library</h2>
@@ -83,7 +83,7 @@
 					})
 					export class AppModule { }
 				</code></pre>
-				<p class="note-lg">Library is imported as a standard node module.</p>
+				<p class="note-lg">- Library is imported as a standard node module.</p>
 			</section>
 			<section>
 				<h2>6 Start Project</h2>
@@ -122,14 +122,19 @@
 						}
 					}
 				</code></pre>
-				<p class="note-lg">Add this configuration to your project <code>tsconfig.json</code> (project that installed the library).</p>
-				<p class="note-lg">The last fragment, to define the <code>paths</code> tells the typescript to search the angular modules imported from the library in the local project.</p>
+				<p class="note-lg">- Add this configuration to your project <code>tsconfig.json</code> (project that installed the library).</p>
+				<p class="note-lg">- The last fragment, to define the <code>paths</code> tells the typescript to search the angular modules imported from the library in the local project.</p>
+				<p class="note-lg">- If you do not add this you will get this warning in compilation:</p>
+				<code>WARNING in ../lib-test/node_modules/@angular/core/fesm5/core.js 18371:15-102</code>
+				<code>Critical dependecy:the request of a dependecy is an expression</code>
 			</section>
 			<section>
 				<h2>Pack Library</h2>
 				<pre><code class="language-javascript">
 					npm pack ../path-to-library/dist/my-lib
 				</code></pre>
+				<p class="note-lg">- This creates a tar file.</p>
+				<p class="note-lg">- You can optionally install the tar file in step 4. However, changes to the library need to be manually built and packaged.</p>
 			</section>
 			<section>
 				<h2>REFERENCE</h2>
