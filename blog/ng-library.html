@@ -27,6 +27,7 @@
 	   <div class="container wide">
    		<header>
 	   		<h1>HOW TO CREATE AN ANGULAR LIBRARY</h1>
+				<p>When you need to share code, either components or services, among different Angular projects it might be best to bundle the components or services in an Angular library. Then you can publish your library as an npm module and teams can install in their respective projects.</p>
 	   	</header>
 			<section>
 				<h2>1 Create a workspace</h2>
@@ -34,24 +35,26 @@
 					ng new my-workspace --create-application=false
 					cd my-workspace
 				</code></pre>
+				<p class="note-lg">- You will need to previously install Angular_CLI.</p>
 			</section>
 			<section>
 				<h2>2 Generate Library</h2>
 				<pre><code class="language-javascript">
 					ng generate library my-lib
 				</code></pre>
-				<p class="note-lg">- You can do this in a new or existing project.</p>
+				<p class="note-lg">- You can do this in a new project or an existing application.</p>
 				<p class="note-lg">- This will create a folder called <code>projects/my-lib</code> where <code>my-lib</code> is the name of your library given to the <code>ng</code> command.</p>
 				<p class="note-lg">- Inside <code>my-lib</code> there is a <code>src</code> folder with a <code>public-api.ts</code> file that exports the modules, services and components that compose the library.</p>
 			</section>
 			<section>
 				<h2>3 Build Library</h2>
 				<pre><code class="language-javascript">
-					ng build my-lib
+					ng build my-lib --prod
 
 					ng build my-lib --watch
 				</code></pre>
 				<p class="note-lg">- Run from workspace folder.</p>
+				<p class="note-lg">- In Angular 7 and before running <code>build</code> using the <code>prod</code> flag will use Angular original compiler not the new Ivy Compiler.</p>
 				<p class="note-lg">- Library bundle will be saved in <code>dist</code> folder. You will have three <code>package.json</code> files: 1) workspace <code>package.json</code>, 2) source library <code>package.json</code>, 3) dist library <code>package.json</code></p>
 			</section>
 			<section>
@@ -59,8 +62,8 @@
 				<pre><code class="language-javascript">
 					ng install ../path-to-library/dist/my-lib
 				</code></pre>
-				<p class="note-lg">- Run from your project folder.</p>
-				<p class="note-lg">- If you built the library with <code>watch</code> changes to the library wil be automatically picked up by the angular development server running the application project.</p>
+				<p class="note-lg">- Run from your application folder.</p>
+				<p class="note-lg">- If you built the library with <code>watch</code> changes to the library wil be automatically picked up by the angular development server running the application.</p>
 			</section>
 			<section>
 				<h2>5 Import Library</h2>
