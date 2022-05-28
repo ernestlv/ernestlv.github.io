@@ -1,0 +1,12 @@
+#module-main {
+  padding: 0.5rem 0 0.5rem 0.5rem;
+}
+
+#module-main h2 {
+  color: silver;
+  margin-top: 0;
+}
+
+#module-main #nested-context {
+  padding-left:1rem;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="systemjs, knockout, javascript">
+	<meta name="description" content="eSystemJS Knockout Web Application Example">
+	<meta name="author" content="Ernest Leyva">
+  <title>SystemJS-knockout-App</title>
+  <link rel="stylesheet" href="/app/styles.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/system.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/extras/named-register.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/6.12.1/extras/amd.min.js"></script>
+  <script type="systemjs-importmap">
+    {
+      "imports":{
+        "jquery":"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js",
+        "knockout":"https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js",
+        "loader":"/app/app_modules/loader.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="page-main" class="page-content">
+    <div id="app-header"></div>
+    <div id="app-body"></div>
+    <div id="app-footer"></div>
+  </div>
+  <script>
+    define([
+      "loader",
+      "/app_modules/header/header-loader.js",
+      "/app_modules/footer/footer-loader.js",
+      "/app_modules/main/main-loader.js"
+    ],function(loader, header, footer, menu, main){
+      header = loader.request_render(header, "#app-header");
+      footer = loader.request_render(footer, "#app-footer");
+      main = loader.request_render(main, "#app-body");
+      loader.ready([header, footer, main], function(){
+        console.log("Page Modules Rendered.");
+        $(document.body).addClass("modules-rendered");
+      });
+    });
+  </script>
+</body>
+</html>
