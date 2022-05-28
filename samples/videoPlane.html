@@ -4,136 +4,24 @@
 	<meta name="description" content="creates video clips">
 	<meta name="author" content="Ernest Leyva">
 	<title>Clipper Player</title>
+	<link rel="stylesheet" type="text/css" href="/css/video.css">
 	<style>
-		/* fonts */
-		body {
-			font-family: sans-serif;
+		/* The animation code */
+		@keyframes psychedelic  {
+		    0% {background-color: #ff00ff;}
+		    50% {background-color: #4ddbff;}
+		    100% {background-color: #0000ff;}
 		}
 
-		header cite {
-			font-size: 0.25em;
-			font-style: italic;
-			font-weight: 100;
+		div.circle {
+			background-color: #ff00ff;
 		}
 
-		div.edit {
-			font-size: 0.75em;
-		}
-
-		/* layout */
-		header h1 {
-			text-align: center;
-		}
-
-		header cite {
-			margin-left: 1em;
-		}
-
-		main.content {
-			margin: auto;
-			width: 37.5em;
-		}
-
-		div.player {
-			margin: 0.5em auto;
-			padding: 1em;
-		}
-
-		div.edit label {
-			margin-left: 1em;
-			margin-right: 1em;
-		}
-
-		div.edit label:first-child {
-			margin-left: 0;
-		}
-
-		ol.clips li {
-			margin: 0.5em 0;
-			padding: 0.5em 0;
-		}
-
-		ol.clips span {
-			margin: 0 0.5em;
-		}
-
-		ol.clips button {
-			margin: 0 0.5em;
-		}
-
-		button {
-			padding: 0.75em 1em;
-    		line-height: 1.5em;
-		}
-
-		button.save {
-			margin-left: 1em;
-		}
-
-		video {
-			width: 600px;
-			max-width: 100%; 
-		}
-
-		/* colors */
-		header cite {
-			color: #c0c0c0;
-		}
-
-		div.player {
-			background-color: #000;
-			border: 1px solid #e0e0e0;
-			border-radius: 1em;
-		}
-
-		ol.clips {
-			border-top: 1px solid #e0e0e0;
-			border-bottom: 1px solid #e0e0e0;
-		}
-
-		ol.clips li:nth-child(even) {
-			background-color:  #e0e0e0;
-		}
-
-		ol.clips li:last-child{
-			border: 0;
-		}
-
-		button {
-			border: 0;
-			border-radius: 0.5em;
-		}
-
-		button.play {
-			background-color: #009900;
-		}
-
-		button.play:before {
-			content:'play';
-		}
-
-		button.edit {
-			background-color: #ffcc00;
-		}
-
-		button.edit:before {
-			content:'edit';
-		}
-
-		button.remove {
-			background-color: #cc3300;
-		}
-
-		button.remove:before {
-			content:'remove';
-		}
-
-		button.save {
-			background-color: #0099cc;
-		}
-
-		button.save:before {
-			content:'save'
+		div.circle.psychedelic {
+		    animation-name: psychedelic;
+		    animation-duration: 5s;
+		    animation-iteration-count: infinite;
+		    animation-direction: alternate;
 		}
 	</style>
 </head>
@@ -157,9 +45,10 @@
 	  	<h3>Video Clip List</h3>
 	  	<ol class="clips"></ol>
 	</main>
+	<div class="circle"></div>
 	<script type="text/javascript">
 		(function(){
-		    
+
 		    function getID() {
 			 	return Math.random() * (1000000 - 0) + 0 | 0;
 			}
@@ -247,7 +136,7 @@
 					createClip(frmValue, toValue);
 				}
 			}
-		    
+
 		    //events
 		    document.body.addEventListener('click', function(e) {
 		        	var t = e.target;
@@ -262,6 +151,28 @@
 		    createClip(0, 5);
 		    createClip(5, 10);
 		})();
+	</script>
+	<script type="text/javascript">
+
+	(function(){
+		var circle = document.querySelector('.circle');
+
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			circle.classList.add('psychedelic');
+		}else{
+			var video = document.querySelector('video');
+			video.addEventListener('play', function(){
+				circle.classList.add('psychedelic');
+			});
+			//video.addEventListener('pause', function(){
+			//	circle.classList.remove('psychedelic');
+			//});
+			video.addEventListener('ended', function(){
+				circle.classList.remove('psychedelic');
+			});
+		}
+	})();
+
 	</script>
 </body>
 </html>
