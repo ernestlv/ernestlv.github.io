@@ -26,25 +26,27 @@
 	</style>
 </head>
 <body>
-	<header>
-		<h1>Video CLIP Player<cite>by ernest</cite></h1>
-	</header>
-	<main class="content">
-		<div class="player">
-			<video controls="">
-			    <source data-original="http://www.w3schools.com/html/mov_bbb.mp4" type='video/mp4'>
-			    	Your browser does not support HTML5 video.
-		  	</video>
-	  	</div>
-	  	<div class="edit">
-	  		<p>To add a new CLIP enter a range in Seconds. e.g. From 3 To 5</p>
-	  		<label>From</label> <input type="text" id="from" value="">
-	  		<label>To</label> <input type="text" id="to" value="">
-	  		<button class="save"></button>
-	  	</div>
-	  	<h3>Video Clip List</h3>
-	  	<ol class="clips"></ol>
-	</main>
+	<div class="wrapper">
+		<header>
+			<h1>Video CLIP Player<cite>by ernest</cite></h1>
+		</header>
+		<main class="content">
+			<div class="player">
+				<video controls="">
+				    <source data-original="http://www.w3schools.com/html/mov_bbb.mp4" type='video/mp4'>
+				    	Your browser does not support HTML5 video.
+			  	</video>
+		  	</div>
+		  	<div class="edit">
+		  		<p>To add a new CLIP enter a range in Seconds. e.g. From 3 To 5</p>
+		  		<label>From</label> <input type="text" id="from" value="">
+		  		<label>To</label> <input type="text" id="to" value="">
+		  		<button class="save"></button>
+		  	</div>
+		  	<h3>Video Clip List</h3>
+		  	<ol class="clips"></ol>
+		</main>
+	</div>
 	<div class="circle"></div>
 	<script type="text/javascript">
 		(function(){
