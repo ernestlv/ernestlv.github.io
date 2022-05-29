@@ -15,9 +15,6 @@
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="/blog/styles/main.css">
 	<style>
-		nav {
-			margin: 3em 0 0;
-		}
 		pre + div {
 			background-color: silver;
 			line-height: 1;
@@ -32,6 +29,10 @@
 			color:blue;
 		}
 
+		nav {
+			margin: 3em 0 0;
+		}
+
 		nav ul {
 			margin: 0;
 			padding: 0;
@@ -41,11 +42,11 @@
 		nav li {
 			display: inline;
 			padding: 0.5em;
-			background-color: #009933;
+			background-color: transparent;
 		}
 
 		nav li a {
-			color: #FFF;
+			color: silver;
 			text-decoration: none;
 			font-weight: bold;
 		}
@@ -61,7 +62,7 @@
 		.tab-content {
 			display: none;
 			padding-right: 2.5em;
-			border: 1px solid #009933;
+			border: 1px solid silver;
 			overflow-y: scroll;
 		}
 
@@ -70,6 +71,56 @@
 		}
 		.tab-content ul {
 			list-style-type: none;
+		}
+		@media (max-width: 30em) { /* mobile portrait */
+			.tab-content {
+				border: 1px solid red;
+			}
+			nav ul {
+				list-style-type: none;
+			}
+			nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+			.tab-content {
+				border: 1px solid blue;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+			.tab-content {
+				border: 1px solid green;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 60em) and (max-width: 80em) { /* tablet landscape */
+			.tab-content {
+				border: 1px solid pink;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
 		}
 	</style>
 </head>
