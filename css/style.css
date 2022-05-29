@@ -53,11 +53,11 @@ header .description {
 }
 
 .projects .circle {
-    display:inline-block; 
+    display:inline-block;
     margin: 0.5em;
-    padding:0.4em; 
-    width:6.4em; 
-    line-height:5.4em; 
+    padding:0.4em;
+    width:6.4em;
+    line-height:5.4em;
     text-align:center;
     border-radius: 4em;
 }
@@ -169,6 +169,10 @@ footer nav a:hover {
     color: #007fff;
 }
 
+footer nav .glyphicon {
+  margin-right: 0.1rem;
+}
+
 
 @media (max-width: 30em) { /* mobile portrait */
     header h1 {
@@ -213,7 +217,7 @@ footer nav a:hover {
     footer nav li {
         transition: none; /* reset materialize style */
         float: none; /* reset materialize style */
-    }   
+    }
 
     footer nav a {
         font-size: 1.5em;
@@ -230,7 +234,7 @@ footer nav a:hover {
     header blockquote {
         font-size: 0.9em;
         font-family: inherit;
-        
+
     }
 
     .projects  .circle:hover {
@@ -239,7 +243,7 @@ footer nav a:hover {
 
     footer nav li:first-child{
         display: none;
-    } 
+    }
 }
 
 @media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
