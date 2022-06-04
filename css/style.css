@@ -91,7 +91,7 @@ header h1 a {
 }
 
 .projects .title {
-    color: silver;
+    color: #000;
     font-size: 2.5em;
 }
 
@@ -166,8 +166,12 @@ a {
     color: #0099FF;
 }
 
+footer nav a {
+  color: #000;
+}
+
 footer nav a:hover {
-    color: #007fff;
+    color: #ff00ff;
 }
 
 footer nav .glyphicon {
