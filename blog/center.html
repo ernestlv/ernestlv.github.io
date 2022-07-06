@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="keywords" content="ernesto, ernest, leyva, vazquez, ernestolv, ernestlv, eleyva, atomictumato, tumato, angular, library, blog, critical dependecy, request, dependecy, expression">
+	<meta name="description" content="ernest's blog angular library">
+	<meta name="author" content="Ernest Leyva">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!-- prevent zoom, keep portrait & landscape consistante, trigger media queries -->
+	<meta name="p:domain_verify" content="fdefe289722ab1afdebfc185109f7e01"/><!-- pinterest -->
+	<title>Vertical and Horizontal Center Cheatsheet</title>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,900' rel='stylesheet' type='text/css'>
+	<link href="/blog/styles/prism.css" rel="stylesheet" /><!-- see https://clt.champlain.edu/knowledgebase/code-snippets, https://prismjs.com/#basic-usage -->
+	<link rel="stylesheet" type="text/css" href="/css/ripples.css">
+	<!--[if lte IE 8]>
+		<link rel="stylesheet" type="text/css" href="css/ripplesold.css">
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="/blog/styles/main.css">
+	<style>
+		pre + div {
+			background-color: silver;
+			line-height: 1;
+
+		}
+
+		pre b {
+			color:red;
+		}
+
+		pre b.blue {
+			color:blue;
+		}
+
+		nav {
+			margin: 3em 0 0;
+		}
+
+		nav ul {
+			margin: 0;
+			padding: 0;
+			line-height: 2.5em;
+		}
+
+		nav li {
+			display: inline;
+			padding: 0.5em;
+			background-color: transparent;
+		}
+
+		nav li a {
+			color: silver;
+			text-decoration: none;
+			font-weight: bold;
+		}
+
+		nav li.active {
+			background-color: inherit;
+		}
+
+		nav li.active a {
+			color: inherit;
+		}
+
+		.tab-content {
+			display: none;
+			padding-right: 2.5em;
+			border: 1px solid silver;
+			overflow-y: scroll;
+		}
+
+		.tab-content.active {
+			display: block;
+		}
+		.tab-content ul {
+			list-style-type: none;
+		}
+		@media (max-width: 30em) { /* mobile portrait */
+			.tab-content {
+				border: 1px solid red;
+			}
+			nav ul {
+				list-style-type: none;
+			}
+			nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 30em) and (max-width: 48em) { /* mobile landscape */
+			.tab-content {
+				border: 1px solid blue;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 48em) and (max-width: 60em) { /* tablet portrait */
+			.tab-content {
+				border: 1px solid green;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
+		}
+		@media (min-width: 60em) and (max-width: 80em) { /* tablet landscape */
+			.tab-content {
+				border: 1px solid pink;
+			}
+			.container nav ul {
+				list-style-type: none;
+				display: flex;
+				line-height: 1.2;
+			}
+			.container nav li {
+				display: list-item;
+			}
+		}
+	</style>
+</head>
+<body>
+   <article>
+   		<header>
+   			<div id="top" class="back">
+   				<div class="content">
+   					<div class="title"><b>T</b>he B<b>LOG</b> <a href="mailto:ernestolv@hotmail.com" re="author"><span>by ernest</span></a></div>
+     			</div>
+     		</div>
+   		</header>
+	   <div class="container wide">
+   		<header>
+	   		<h1>Vertical and Horizontal Center Cheatsheet</h1>
+	   	</header>
+			<section>
+				<nav>
+					<ul>
+						<li class="active"><a href="#center">Center</a></li>
+						<li><a href="#vcenter">Vertical Center</a></li>
+						<li><a href="#vfloater">Vertical Center Floater</a></li>
+						<li><a href="#multi-line">Vertical Center Multiple Lines</a></li>
+						<li><a href="#positioning">Center using Absolute Positioning</a></li>
+					</ul>
+				</nav>
+
+				<div id="center" class="tab-content active">
+						<ul>
+							<li>
+								<h2>Center a Text (inline element)</h2>
+								<pre>
+&lt;div style=&quot;<b>text-align:center</b>&quot;&gt;
+	&lt;span&gt;hello world&lt;/span&gt; &lt;!-- inline centered --&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="text-align:center">
+									<span>hello world</span> <!-- inline centered -->
+								</div>
+							</li>
+							<li>
+								<h2>Center a Block</h2>
+								<pre>
+&lt;div style=&quot;<b>width:5.5em</b>; <b>margin: auto</b>&quot;&gt; &lt;!-- block centered --&gt;
+	&lt;span&gt;hello world&lt;/span&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="width:5.5em; margin: auto"> <!-- block centered -->
+									<span>hello world</span>
+								</div>
+							</li>
+						</ul>
+				</div>
+
+				<div id="vcenter" class="tab-content">
+						<ul>
+							<li>
+								<h2>Vertical Center a single line text</h2>
+								<pre>
+&lt;div style=&quot;<b>line-height:6.25em</b>&quot;&gt;&lt;!-- single line vertical center - text by default align in the middle--&gt;
+	&lt;span&gt;hello world&lt;/span&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="line-height:6.25em"><!-- single line vertical center - text by default align in the middle-->
+									<span>hello world</span>
+								</div>
+							</li>
+							<li>
+								<h2>Vertical Center an image</h2>
+								<pre>
+&lt;div style=&quot;<b>line-height:6.25em</b>&quot;&gt;&lt;!-- algin vertical image --&gt;
+	&lt;img src=&quot;//dummyimage.com/50x50/f060f0/000000.png&quot; style=&quot;<b>vertical-align:middle</b>&quot;&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="line-height:6.25em"><!-- algin vertical image -->
+									<img src="//dummyimage.com/50x50/f060f0/000000.png" style="vertical-align:middle">
+								</div>
+							</li>
+						</ul>
+				</div>
+
+				<div id="vfloater" class="tab-content">
+						<ul>
+							<li>
+								<h2>Vertical Center using floater</h2>
+								<pre>
+&lt;div&gt;
+	&lt;div style=&quot;<b>float:left</b>; <b>width:100%</b>; <b>height:50%</b>; <b>margin-bottom:-0.5em</b>&quot;&gt;&lt;/div&gt;&quot;&gt;&lt;!-- darker area--&gt;
+	&lt;div style=&quot;<b>clear:both</b>; <b>height:1em</b>&quot;&gt;&lt;!-- fixed height, floater bottom margin moves up--&gt;
+		Hello World
+	&lt;/div&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="height:6.25em">
+									<div style="background-color:gray; float:left; width:100%; height:50%; margin-bottom:-0.5em"></div>
+									<div style="clear:both; height:1em"><!-- fixed height, floater bottom margin moves up-->
+										Hello World
+									</div>
+								</div>
+							</li>
+						</ul>
+				</div>
+
+				<div id="multi-line" class="tab-content">
+						<ul>
+							<li>
+								<h2>Vertical Center multiple lines - using top and bottom padding</h2>
+								<pre>
+&lt;div&gt;
+	&lt;div style=&quot;<b>padding:3em 0</b>;&quot;&gt;
+		Hello World&lt;br&gt;Centered in multiple lines&lt;br&gt;line number three&lt;br&gt;line number four
+	&lt;/div&gt;
+&lt;/div&gt;
+								</pre>
+								<div>
+									<div style="padding:3em 0;">
+										Hello World<br>Centered in multiple lines<br>line number three<br>line number four
+									</div>
+								</div>
+							</li>
+							<li>
+								<h2>Vetical Center multiple lines - using table</h2>
+								<pre>
+&lt;div style=&quot;<b>display:table</b>&quot;&gt;
+	&lt;div style=&quot;<b>display:table-cell</b>; <b>vertical-align:middle</b>&quot;&gt;
+		Hello World&lt;br&gt;Centered in multiple lines
+	&lt;/div&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="display:table; height:6.25em">
+									<div style="display:table-cell; vertical-align:middle">
+										Hello World<br>Centered in multiple lines<br>line number three<br>line number four
+									</div>
+								</div>
+							</li>
+						</ul>
+				</div>
+
+				<div id="positioning" class="tab-content">
+						<ul>
+							<li>
+								<h2>Center BOTH Absolute positioning and negative margins</h2>
+								<pre>
+&lt;!-- margin moves up and left half the width & height --&gt;
+&lt;div style=&quot;<b>position:relative</b>&quot;&gt;
+	&lt;div style=&quot;<b>position:absolute</b>; <b>top:50%</b>; <b>left:50%</b>; <b class="blue">width:5em</b>; <b class="blue">height:1em</b>; <b class="blue">margin: -0.5em 0 0 -2.5em</b>&quot;
+		&lt;span&gt;Hello World&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="position:relative; height:6.25em">
+									<div style="background-color:gray; position:absolute; top:50%; left:50%; width:5.5em; height:1em; margin: -0.5em 0 0 -2.75em"><!-- you need to size this guy -->
+										<span>Hello World</span>
+									</div>
+								</div>
+							</li>
+							<li>
+								<h2>Center BOTH Absolute positioning and streaching</h2>
+								<pre>
+&lt;div style=&quot;<b>position:relative;</b>&quot;&gt;
+	&lt;div style=&quot;<b>position:absolute</b>; <b class="blue">top:0</b>; <b class="blue">bottom:0</b>; <b class="blue">left:0</b>; <b class="blue">right:0</b>; <b>margin:auto</b>; <b>width:5em</b>; <b>height:1em</b>&quot;&gt;
+		Hello World
+	&lt;/div&gt;
+&lt;/div&gt;
+								</pre>
+								<div style="position:relative; height:6.25em">
+									<div style="background-color:gray;position:absolute; top:0; bottom:0; left:0; right:0; margin:auto; width:5.5em; height:1em">
+										Hello World
+									</div>
+								</div>
+							</li>
+						</ul>
+				</div>
+
+				<h4>Reference</h4>
+				<a href="http://vanseodesign.com/css/vertical-centering/">http://vanseodesign.com/css/vertical-centering/</a>
+				<script src="//code.jquery.com/jquery-1.12.0.min.js" type="text/javascript"></script>
+				<script type="text/javascript">
+				$(function(){
+					var active = '#center'
+					$('nav a').on('click', function(e){
+						e.preventDefault();
+						$(this).parents('nav').find('.active').removeClass('active')
+						$(active).removeClass('active');
+						active = $(this).attr('href');
+						$(active).addClass('active');
+						$(this).parent().addClass('active');
+					})
+				});
+				</script>
+			</section>
+	   </div>
+   </article>
+   <div class="top"><a href="#top" alt="go back top">^</a></div>
+   <footer>
+		<div class="content">
+		 		<div class="left">july / 2020</div>
+		 		<div class="right"><a href="mailto:ernestolv@hotmail.com" re="me">comment</a></div>
+		</div>
+	</footer>
+	<script src="/blog/js/prism.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-77251791-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+</body>
+</html>
