@@ -113,8 +113,8 @@ header .back {
 header .content {
   height: 10rem;
   width: 20rem;
-  background: hsla(200, 50%, 70%, 1);
-  color: hsla(200, 30%, 50%, 1);
+  background: #93D500;
+  color: black;
   border-bottom-right-radius: 0.5rem;
   text-align: center;
 }
