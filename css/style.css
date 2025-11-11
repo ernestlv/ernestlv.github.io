@@ -168,11 +168,13 @@ footer nav a:hover {
 /* effects */
 
 .projects .circle {
-    transition: width, 1s;
+    transition: width 1s ease, height 1s ease;
 }
 
 .projects  .circle:hover {
     width: 12.8em;
+    height: 12.8em;
+    line-height: 12.8em
 }
 
 footer nav .glyphicon {
