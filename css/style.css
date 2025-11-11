@@ -145,6 +145,7 @@ footer nav a:hover {
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: contain;
+    background-color: #FFF;
 }
 
 .icon.blog {
