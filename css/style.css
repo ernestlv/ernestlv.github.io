@@ -124,6 +124,18 @@ a {
     color: #808080;
 }
 
+.projects  .circle a[rel=me]:hover {
+    color: #0099FF;
+}
+
+footer nav a {
+  color: #FFF;
+}
+
+footer nav a:hover {
+    color: #ff00ff;
+}
+
 /* icons */
 
 .icon {
@@ -160,18 +172,6 @@ a {
 
 .projects  .circle:hover {
     width: 12.8em;
-}
-
-.projects  .circle a[rel=me]:hover {
-    color: #0099FF;
-}
-
-footer nav a {
-  color: #000;
-}
-
-footer nav a:hover {
-    color: #ff00ff;
 }
 
 footer nav .glyphicon {
