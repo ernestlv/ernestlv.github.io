@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ernest's personal website - Designer and developer focusing on accessible, content-first web experiences">
+    <title>Ernest's Personal Website - AI Augmented - 2025</title>
+    
+    <!-- Base styles that work without CSS -->
+    <style>
+        /* 
+        MOBILE-FIRST, CONTENT-FIRST, PROGRESSIVE ENHANCEMENT APPROACH
+        1. Semantic HTML works without CSS/JS
+        2. Base styles for mobile (smallest screens)
+        3. Progressive enhancement for larger screens
+        4. Graceful degradation for older browsers
+        */
+        
+        /* ========================================
+           RESET & BASE STYLES (Mobile First)
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Skip to main content link for screen readers */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Base typography - readable without CSS */
+        body {
+            font-family: Arial, Helvetica, sans-serif; /* Fallback fonts */
+            font-size: 100%; /* 16px default */
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Improved font stack with fallbacks */
+        @supports (font-family: system-ui) {
+            body {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            }
+        }
+
+        /* Ensure text remains readable */
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 2em; /* Mobile-first: smaller */
+            margin-bottom: 0.5em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.25em;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        /* Links: keyboard and screen reader accessible */
+        a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        a:hover,
+        a:focus {
+            color: #004499;
+            outline: 2px solid #004499;
+            outline-offset: 2px;
+        }
+
+        /* Remove outline for mouse users, keep for keyboard */
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        a:focus-visible {
+            outline: 2px solid #004499;
+            outline-offset: 2px;
+        }
+
+        /* ========================================
+           LAYOUT - Mobile First
+        ======================================== */
+        
+        /* Container: works without CSS */
+        .container {
+            width: 100%;
+            padding: 1rem;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: #4A90E2; /* Solid color fallback */
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        /* Progressive enhancement: gradient for modern browsers */
+        @supports (background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%)) {
+            .site-header {
+                background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%);
+            }
+        }
+
+        .site-header h1 {
+            color: white;
+            margin-bottom: 0.75rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .author {
+            font-style: italic;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        /* Main content */
+        main {
+            padding: 1rem;
+        }
+
+        .content-section {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd; /* Works in old browsers */
+        }
+
+        /* Progressive enhancement: rounded corners and shadows */
+        @supports (border-radius: 8px) {
+            .content-section {
+                border-radius: 8px;
+                border: none;
+            }
+        }
+
+        @supports (box-shadow: 0 2px 8px rgba(0,0,0,0.1)) {
+            .content-section {
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+        }
+
+        .section-title {
+            font-size: 1.75em;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        /* ========================================
+           COMPANIES SECTION - Mobile First
+        ======================================== */
+        
+        .companies-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .company-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+        }
+
+        @supports (border-radius: 8px) {
+            .company-item {
+                border-radius: 8px;
+                border: none;
+            }
+        }
+
+        .company-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Progressive enhancement: smooth transitions */
+        @supports (transform: scale(1)) {
+            .company-icon {
+                transition: transform 0.3s ease, opacity 0.2s ease;
+            }
+        }
+
+        @supports (border-radius: 50%) {
+            .company-icon {
+                border-radius: 50%;
+            }
+        }
+
+        /* Color classes with fallbacks */
+        .yellow { background-color: #f1c40f; }
+        .red { background-color: #e74c3c; }
+        .blue { background-color: #3498db; }
+        .green { background-color: #2ecc71; }
+
+        .company-name {
+            font-size: 1.125em;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+
+        .company-role {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Accessible links in company cards */
+        .company-item a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* Touch feedback for mobile */
+        .company-item a:active .company-icon {
+            opacity: 0.8;
+        }
+
+        @supports (transform: scale(0.95)) {
+            .company-item a:active .company-icon {
+                transform: scale(0.95);
+            }
+        }
+
+        /* ========================================
+           ABOUT SECTION - Mobile First
+        ======================================== */
+        
+        .about-content {
+            margin-top: 1rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            background-color: #4A90E2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: white;
+            font-weight: bold;
+        }
+
+        @supports (border-radius: 50%) {
+            .profile-image {
+                border-radius: 50%;
+            }
+        }
+
+        @supports (background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%)) {
+            .profile-image {
+                background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%);
+            }
+        }
+
+        .about-text {
+            margin-top: 1rem;
+        }
+
+        .about-text p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           CTA SECTION
+        ======================================== */
+        
+        .cta-section {
+            background-color: #4A90E2;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            margin-top: 1.5rem;
+            border: 1px solid #4A90E2;
+        }
+
+        @supports (border-radius: 8px) {
+            .cta-section {
+                border-radius: 8px;
+                border: none;
+            }
+        }
+
+        @supports (background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%)) {
+            .cta-section {
+                background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%);
+            }
+        }
+
+        .cta-section h3 {
+            color: white;
+            font-size: 1.5em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Accessible, touch-friendly buttons (min 44x44px) */
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: white;
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1rem;
+            border: 2px solid white;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        @supports (border-radius: 50px) {
+            .cta-button {
+                border-radius: 50px;
+            }
+        }
+
+        .cta-button:hover,
+        .cta-button:focus {
+            background: #f0f0f0;
+            color: #4A90E2;
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* ========================================
+           FOOTER - Mobile First
+        ======================================== */
+        
+        .site-footer {
+            background-color: #e8eaf0;
+            color: #2c3e50;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+        }
+
+        @supports (background: linear-gradient(135deg, #e8eaf0 0%, #dde1e8 100%)) {
+            .site-footer {
+                background: linear-gradient(135deg, #e8eaf0 0%, #dde1e8 100%);
+            }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-nav a {
+            color: #4A90E2;
+            text-decoration: underline;
+            display: inline-block;
+            padding: 0.5rem 0;
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        .footer-nav a:hover,
+        .footer-nav a:focus {
+            color: #2c3e50;
+            background-color: rgba(74, 144, 226, 0.1);
+            outline: 2px solid #4A90E2;
+        }
+
+        /* Visually hidden but accessible to screen readers */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ========================================
+           TABLET STYLES (min-width: 640px)
+        ======================================== */
+        
+        @media (min-width: 640px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .container {
+                padding: 2rem;
+            }
+
+            .site-header {
+                padding: 3rem 2rem;
+            }
+
+            .tagline {
+                font-size: 1.125rem;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .company-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5em;
+            }
+
+            .profile-image {
+                width: 180px;
+                height: 180px;
+                font-size: 3.5em;
+            }
+        }
+
+        /* ========================================
+           DESKTOP STYLES (min-width: 768px)
+        ======================================== */
+        
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            .container {
+                max-width: 1200px;
+            }
+
+            .site-header {
+                padding: 4rem 2rem;
+            }
+
+            /* Grid layout for companies - gracefully degrades to stacked */
+            @supports (display: grid) {
+                .companies-list {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 1.5rem;
+                }
+            }
+
+            /* Flexbox fallback */
+            @supports not (display: grid) {
+                .companies-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                
+                .company-item {
+                    width: calc(50% - 0.75rem);
+                    margin-right: 1.5rem;
+                }
+            }
+
+            /* About section two-column layout */
+            @supports (display: grid) {
+                .about-content {
+                    display: grid;
+                    grid-template-columns: 200px 1fr;
+                    gap: 2rem;
+                    align-items: start;
+                }
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                font-size: 4em;
+                margin: 0;
+            }
+
+            .about-text {
+                margin-top: 0;
+            }
+
+            /* Footer grid layout */
+            @supports (display: grid) {
+                .footer-content {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 2rem;
+                }
+            }
+
+            .footer-section {
+                margin-bottom: 0;
+            }
+        }
+
+        /* ========================================
+           LARGE DESKTOP (min-width: 1024px)
+        ======================================== */
+        
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3.5em;
+            }
+
+            .tagline {
+                font-size: 1.25rem;
+                max-width: 700px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            @supports (display: grid) {
+                .companies-list {
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 2rem;
+                }
+            }
+
+            .content-section {
+                padding: 3rem;
+            }
+
+            /* Enhanced hover effects for desktop */
+            @media (hover: hover) {
+                /* Lift, rotate, and scale on hover - desktop only */
+                .company-item a:hover .company-icon,
+                .company-item a:focus .company-icon {
+                    transform: translateY(-8px) rotate(5deg) scale(1.05);
+                }
+                
+                /* Card elevation on hover */
+                @supports (box-shadow: 0 8px 20px rgba(0,0,0,0.15)) {
+                    .company-item:hover {
+                        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+                    }
+                    
+                    .company-item {
+                        transition: box-shadow 0.3s ease;
+                    }
+                }
+            }
+        }
+
+        /* ========================================
+           PRINT STYLES
+        ======================================== */
+        
+        @media print {
+            .cta-section,
+            .site-footer {
+                display: none;
+            }
+
+            .site-header {
+                background: white;
+                color: black;
+                border-bottom: 2px solid black;
+            }
+
+            a {
+                color: black;
+                text-decoration: underline;
+            }
+
+            .content-section {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* ========================================
+           HIGH CONTRAST MODE
+        ======================================== */
+        
+        @media (prefers-contrast: high) {
+            .site-header,
+            .cta-section {
+                border: 2px solid white;
+            }
+
+            .company-item {
+                border: 2px solid #000;
+            }
+        }
+
+        /* ========================================
+           REDUCED MOTION
+        ======================================== */
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for keyboard navigation -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header with semantic markup -->
+    <header class="site-header" role="banner">
+        <h1>Ernest's Personal Website</h1>
+        <p class="tagline">This website enforces adaptive design. It focuses on content first then adds semantics thru HTML and enriches UX thru CSS.</p>
+        <p class="author">— ernest</p>
+    </header>
+
+    <!-- Main content area -->
+    <main id="main-content" role="main">
+        <div class="container">
+            <!-- Companies Section -->
+            <section class="content-section" aria-labelledby="companies-heading">
+                <h2 id="companies-heading" class="section-title">Companies I've Worked With</h2>
+                
+                <!-- Semantic list that works without CSS -->
+                <ul class="companies-list">
+                    <li class="company-item">
+                        <a href="#company-xm" aria-label="Company XM - Senior Developer">
+                            <div class="company-icon yellow" aria-hidden="true">xm</div>
+                            <h3 class="company-name">Company XM</h3>
+                            <p class="company-role">Senior Developer</p>
+                        </a>
+                    </li>
+                    <li class="company-item">
+                        <a href="#company-fn" aria-label="Company FN - UX Designer">
+                            <div class="company-icon red" aria-hidden="true">fn</div>
+                            <h3 class="company-name">Company FN</h3>
+                            <p class="company-role">UX Designer</p>
+                        </a>
+                    </li>
+                    <li class="company-item">
+                        <a href="#company-jb" aria-label="Company JB - Lead Engineer">
+                            <div class="company-icon blue" aria-hidden="true">jb</div>
+                            <h3 class="company-name">Company JB</h3>
+                            <p class="company-role">Lead Engineer</p>
+                        </a>
+                    </li>
+                    <li class="company-item">
+                        <a href="#company-ci" aria-label="Company CI - Tech Consultant">
+                            <div class="company-icon green" aria-hidden="true">ci</div>
+                            <h3 class="company-name">Company CI</h3>
+                            <p class="company-role">Tech Consultant</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Call to Action -->
+                <div class="cta-section">
+                    <h3>Interested in working together?</h3>
+                    <p>Let's create something amazing</p>
+                    <a href="#contact" class="cta-button" role="button">Get In Touch</a>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="content-section" aria-labelledby="about-heading">
+                <h2 id="about-heading" class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="profile-image" aria-label="Ernest's profile" role="img">E</div>
+                    <div class="about-text">
+                        <p>I'm a designer and developer passionate about creating beautiful, functional web experiences. With a focus on content-first design and semantic HTML, I build websites that are both visually appealing and technically sound.</p>
+                        <p>My approach emphasizes accessibility, progressive enhancement, and user experience. I believe great design isn't just about how things look, but how they work for everyone.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer with semantic navigation -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <nav aria-label="Social media links">
+                    <ul class="footer-nav">
+                        <li><a href="mailto:ernest@example.com">Email</a></li>
+                        <li><a href="https://linkedin.com/in/ernest" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://github.com/ernest" rel="noopener noreferrer">GitHub</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <nav aria-label="Resource links">
+                    <ul class="footer-nav">
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="https://twitter.com/ernest" rel="noopener noreferrer">Twitter</a></li>
+                        <li><a href="/samples">Samples</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="footer-section">
+                <h3>Philosophy</h3>
+                <p style="color: #555; line-height: 1.8;">Content first, semantics through HTML, experience through CSS. Building with purpose and accessibility in mind.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- No JavaScript required - site is fully functional -->
+</body>
+</html>
