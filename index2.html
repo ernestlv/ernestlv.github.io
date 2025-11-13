@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ernest's personal website - Designer and developer focusing on accessible, content-first web experiences">
-    <title>Ernest's Personal Website - AI Augmented - 2025</title>
+    <title>Ernest's Personal Website</title>
     
     <!-- Base styles that work without CSS -->
     <style>
@@ -26,6 +26,7 @@
         }
 
         /* Skip to main content link for screen readers */
+        /* ACCESSIBILITY: Hidden until focused, allows keyboard users to skip navigation */
         .skip-link {
             position: absolute;
             top: -40px;
@@ -42,6 +43,8 @@
         }
 
         /* Base typography - readable without CSS */
+        /* CONTENT-FIRST: Readable even if CSS fails to load */
+        /* MOBILE-FIRST: Base font size 100% (16px) suitable for mobile screens */
         body {
             font-family: Arial, Helvetica, sans-serif; /* Fallback fonts */
             font-size: 100%; /* 16px default */
@@ -51,6 +54,7 @@
         }
 
         /* Improved font stack with fallbacks */
+        /* GRACEFUL DEGRADATION: Falls back to Arial if system fonts unavailable */
         @supports (font-family: system-ui) {
             body {
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -82,6 +86,7 @@
         }
 
         /* Links: keyboard and screen reader accessible */
+        /* ACCESSIBILITY: Clear focus indicators, sufficient color contrast */
         a {
             color: #0066cc;
             text-decoration: underline;
@@ -95,6 +100,7 @@
         }
 
         /* Remove outline for mouse users, keep for keyboard */
+        /* ACCESSIBILITY: Focus visible only for keyboard navigation */
         a:focus:not(:focus-visible) {
             outline: none;
         }
@@ -109,6 +115,8 @@
         ======================================== */
         
         /* Container: works without CSS */
+        /* MOBILE-FIRST: 100% width with padding, max-width added for larger screens */
+        /* CONTENT-FIRST: Maintains readability at any size */
         .container {
             width: 100%;
             padding: 1rem;
@@ -116,6 +124,7 @@
         }
 
         /* Header */
+        /* GRACEFUL DEGRADATION: Solid color fallback for older browsers */
         .site-header {
             background-color: #4A90E2; /* Solid color fallback */
             color: white;
@@ -124,6 +133,7 @@
         }
 
         /* Progressive enhancement: gradient for modern browsers */
+        /* GRACEFUL DEGRADATION: Only applies gradient if supported */
         @supports (background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%)) {
             .site-header {
                 background: linear-gradient(135deg, #4A90E2 0%, #5BA3E8 100%);
@@ -148,6 +158,7 @@
         }
 
         /* Main content */
+        /* MOBILE-FIRST: Base padding for mobile, increased for larger screens */
         main {
             padding: 1rem;
         }
@@ -160,6 +171,7 @@
         }
 
         /* Progressive enhancement: rounded corners and shadows */
+        /* GRACEFUL DEGRADATION: Border fallback for browsers without border-radius */
         @supports (border-radius: 8px) {
             .content-section {
                 border-radius: 8px;
@@ -168,6 +180,7 @@
         }
 
         @supports (box-shadow: 0 2px 8px rgba(0,0,0,0.1)) {
+            /* GRACEFUL DEGRADATION: Only adds shadow if supported */
             .content-section {
                 box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
@@ -183,11 +196,13 @@
            COMPANIES SECTION - Mobile First
         ======================================== */
         
+        /* CONTENT-FIRST: Semantic list structure, readable without CSS */
         .companies-list {
             list-style: none;
             padding: 0;
         }
 
+        /* MOBILE-FIRST: Stacks vertically by default */
         .company-item {
             margin-bottom: 1.5rem;
             padding: 1rem;
@@ -216,6 +231,7 @@
         }
 
         /* Progressive enhancement: smooth transitions */
+        /* GRACEFUL DEGRADATION: Works without transforms, enhanced with them */
         @supports (transform: scale(1)) {
             .company-icon {
                 transition: transform 0.3s ease, opacity 0.2s ease;
@@ -255,6 +271,7 @@
         }
 
         /* Touch feedback for mobile */
+        /* MOBILE-FIRST: Touch interaction feedback */
         .company-item a:active .company-icon {
             opacity: 0.8;
         }
@@ -340,6 +357,8 @@
         }
 
         /* Accessible, touch-friendly buttons (min 44x44px) */
+        /* ACCESSIBILITY: WCAG requires minimum 44x44px touch targets */
+        /* MOBILE-FIRST: Touch-optimized button sizing */
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -423,6 +442,7 @@
         }
 
         /* Visually hidden but accessible to screen readers */
+        /* ACCESSIBILITY: Content available to screen readers but visually hidden */
         .sr-only {
             position: absolute;
             width: 1px;
@@ -439,6 +459,7 @@
            TABLET STYLES (min-width: 640px)
         ======================================== */
         
+        /* MOBILE-FIRST: Progressive enhancement for tablets and up */
         @media (min-width: 640px) {
             h1 {
                 font-size: 2.5em;
@@ -477,6 +498,7 @@
            DESKTOP STYLES (min-width: 768px)
         ======================================== */
         
+        /* MOBILE-FIRST: Enhanced layouts for desktop screens */
         @media (min-width: 768px) {
             h1 {
                 font-size: 3em;
@@ -491,6 +513,7 @@
             }
 
             /* Grid layout for companies - gracefully degrades to stacked */
+            /* GRACEFUL DEGRADATION: Flexbox fallback below for older browsers */
             @supports (display: grid) {
                 .companies-list {
                     display: grid;
@@ -500,6 +523,7 @@
             }
 
             /* Flexbox fallback */
+            /* GRACEFUL DEGRADATION: Flexbox for browsers that don't support grid */
             @supports not (display: grid) {
                 .companies-list {
                     display: flex;
@@ -575,8 +599,11 @@
             }
 
             /* Enhanced hover effects for desktop */
+            /* ACCESSIBILITY: Hover and focus states provide same visual feedback */
+            /* GRACEFUL DEGRADATION: Only applies to hover-capable devices */
             @media (hover: hover) {
                 /* Lift, rotate, and scale on hover - desktop only */
+                /* ACCESSIBILITY: Focus state gets same treatment for keyboard users */
                 .company-item a:hover .company-icon,
                 .company-item a:focus .company-icon {
                     transform: translateY(-8px) rotate(5deg) scale(1.05);
@@ -599,6 +626,7 @@
            PRINT STYLES
         ======================================== */
         
+        /* ACCESSIBILITY: Optimized for printing/saving as PDF */
         @media print {
             .cta-section,
             .site-footer {
@@ -625,6 +653,7 @@
            HIGH CONTRAST MODE
         ======================================== */
         
+        /* ACCESSIBILITY: Enhanced borders for high contrast mode users */
         @media (prefers-contrast: high) {
             .site-header,
             .cta-section {
@@ -640,6 +669,8 @@
            REDUCED MOTION
         ======================================== */
         
+        /* ACCESSIBILITY: Respects user preference for reduced motion */
+        /* Critical for users with vestibular disorders */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation: none !important;
@@ -650,9 +681,11 @@
 </head>
 <body>
     <!-- Skip link for keyboard navigation -->
+    <!-- ACCESSIBILITY: Allows keyboard users to skip directly to main content -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <!-- Header with semantic markup -->
+    <!-- CONTENT-FIRST: Semantic HTML5 elements work without CSS -->
     <header class="site-header" role="banner">
         <h1>Ernest's Personal Website</h1>
         <p class="tagline">This website enforces adaptive design. It focuses on content first then adds semantics thru HTML and enriches UX thru CSS.</p>
@@ -660,15 +693,23 @@
     </header>
 
     <!-- Main content area -->
+    <!-- ACCESSIBILITY: role="main" landmark for screen readers -->
+    <!-- CONTENT-FIRST: All content readable without CSS/JS -->
     <main id="main-content" role="main">
         <div class="container">
             <!-- Companies Section -->
+            <!-- CONTENT-FIRST: Semantic list structure works without styling -->
+            <!-- ACCESSIBILITY: Proper heading hierarchy and ARIA labels -->
             <section class="content-section" aria-labelledby="companies-heading">
                 <h2 id="companies-heading" class="section-title">Companies I've Worked With</h2>
                 
                 <!-- Semantic list that works without CSS -->
+                <!-- CONTENT-FIRST: UL/LI structure readable as plain text -->
+                <!-- MOBILE-FIRST: Stacks vertically by default, enhanced for larger screens -->
                 <ul class="companies-list">
                     <li class="company-item">
+                        <!-- ACCESSIBILITY: Descriptive aria-label for screen readers -->
+                        <!-- ACCESSIBILITY: aria-hidden on decorative icon -->
                         <a href="#company-xm" aria-label="Company XM - Senior Developer">
                             <div class="company-icon yellow" aria-hidden="true">xm</div>
                             <h3 class="company-name">Company XM</h3>
@@ -699,6 +740,8 @@
                 </ul>
 
                 <!-- Call to Action -->
+                <!-- ACCESSIBILITY: role="button" for semantic meaning -->
+                <!-- MOBILE-FIRST: Touch-friendly button size (min 44x44px) -->
                 <div class="cta-section">
                     <h3>Interested in working together?</h3>
                     <p>Let's create something amazing</p>
@@ -707,9 +750,12 @@
             </section>
 
             <!-- About Section -->
+            <!-- CONTENT-FIRST: Readable text content without CSS -->
+            <!-- MOBILE-FIRST: Single column layout, enhanced to grid on larger screens -->
             <section class="content-section" aria-labelledby="about-heading">
                 <h2 id="about-heading" class="section-title">About Me</h2>
                 <div class="about-content">
+                    <!-- ACCESSIBILITY: role="img" with aria-label for decorative image -->
                     <div class="profile-image" aria-label="Ernest's profile" role="img">E</div>
                     <div class="about-text">
                         <p>I'm a designer and developer passionate about creating beautiful, functional web experiences. With a focus on content-first design and semantic HTML, I build websites that are both visually appealing and technically sound.</p>
@@ -721,10 +767,14 @@
     </main>
 
     <!-- Footer with semantic navigation -->
+    <!-- ACCESSIBILITY: role="contentinfo" landmark, proper nav structure -->
+    <!-- CONTENT-FIRST: Plain HTML lists work without styling -->
     <footer class="site-footer" role="contentinfo">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Connect</h3>
+                <!-- ACCESSIBILITY: Descriptive aria-label for navigation context -->
+                <!-- ACCESSIBILITY: rel="noopener noreferrer" for security on external links -->
                 <nav aria-label="Social media links">
                     <ul class="footer-nav">
                         <li><a href="mailto:ernest@example.com">Email</a></li>
@@ -751,5 +801,7 @@
     </footer>
 
     <!-- No JavaScript required - site is fully functional -->
+    <!-- CONTENT-FIRST: All functionality works without JavaScript -->
+    <!-- GRACEFUL DEGRADATION: Progressive enhancement approach means no JS dependency -->
 </body>
 </html>
