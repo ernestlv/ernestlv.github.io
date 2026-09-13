@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Machine Learning Backpropagation Math Simplified</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #667085;
+      --border: #d9dee8;
+      --accent: #3157d5;
+      --accent-soft: #eef2ff;
+      --good: #0f766e;
+      --good-soft: #ecfdf5;
+      --warn-soft: #fff7ed;
+      --shadow: 0 8px 28px rgba(20, 30, 55, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 40px auto 60px;
+    }
+
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { margin-bottom: 8px; font-size: clamp(2rem, 4vw, 3rem); }
+    h2 { margin-top: 0; }
+    p { margin: 8px 0 14px; }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 14px;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .84rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 18px 0 8px;
+    }
+
+    .node {
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      font-weight: 600;
+    }
+
+    .arrow { color: var(--muted); font-weight: 700; }
+
+    .equation {
+      margin: 12px 0;
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 10px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    .result {
+      margin-top: 12px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: var(--good-soft);
+      border: 1px solid #b7eadf;
+      color: #0b5d56;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 12px;
+      padding: 13px 15px;
+      border-radius: 10px;
+      background: var(--warn-soft);
+      border: 1px solid #fed7aa;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      font-size: .96rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fafbff;
+      font-weight: 700;
+    }
+
+    .mono {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    .big {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .step-number {
+      width: 34px;
+      height: 34px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .summary-box {
+      background: #111827;
+      color: #f9fafb;
+      border-radius: 16px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    .summary-box pre {
+      margin: 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: .95rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      margin-top: 28px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 18px, 1100px); margin-top: 20px; }
+      .card { padding: 18px; border-radius: 14px; }
+      th, td { font-size: .9rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Machine Learning Backpropagation Math Simplified</h1>
+    <div class="subtitle">
+      A complete numerical example using a two-layer network, shwoing every intermediate derivative step.
+    </div>
+
+    <section class="card">
+      <div class="pill">Starting point</div>
+      <h2>Forward pass</h2>
+
+
+
+      <div class="grid">
+        <div class="note"><strong>x = 5</strong><br>Input value to the neural network.</div>
+        <div class="note"><strong>w₁ = 0.5</strong><br>Initial random trainable weight in neural-network Layer 1.</div>
+        <div class="note"><strong>w₂ = 0.8</strong><br>Initial random trainable weight in neural-network Layer 2.</div>
+        <div class="note"><strong>L = 49</strong><br>Loss: the scalar value measuring how far the network output is from the target in this example.</div>
+      </div>
+
+      <div class="equation">x = 5                 ← input
+w₁ = 0.5              ← initial random weight, NN Layer 1
+w₂ = 0.8              ← initial random weight, NN Layer 2
+
+z₁ = x × w₁ = 5 × 0.5 = 2.5
+a₁ = ReLU(z₁) = ReLU(2.5) = 2.5
+
+z₂ = a₁ × w₂ = 2.5 × 0.8 = 2.0
+a₂ = ReLU(z₂) = ReLU(2.0) = 2.0
+
+L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
+
+      <div class="note">
+        <strong>Training context:</strong> w₁ and w₂ start as initialized weights (randomly initialized in this simplified example).
+        Backpropagation calculates a gradient for each trainable weight, and the optimizer then updates those weights.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">Backpropagation</div>
+      <h2>1. Start at the loss</h2>
+      <p>We first calculate the gradient of the loss with respect to the final activation <span class="mono">a₂</span>.</p>
+
+      <div class="equation">∂L/∂a₂ = ∂[(a₂ - target)²]/∂a₂
+       = 2(a₂ - target)
+       = 2(2 - 9)
+       = -14</div>
+
+      <div class="result">Gradient at a₂: ∂L/∂a₂ = -14</div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step-number">2</span>Backpropagate through ReLU at z₂</h2>
+      <p>Since <span class="mono">a₂ = ReLU(z₂)</span> and <span class="mono">z₂ = 2 &gt; 0</span>, the ReLU derivative is 1.</p>
+
+      <div class="equation">∂a₂/∂z₂ = ReLU'(z₂)
+           = ReLU'(2)
+           = 1</div>
+
+      <p>Apply the chain rule:</p>
+
+      <div class="equation">∂L/∂z₂
+= ∂L/∂a₂ × ∂a₂/∂z₂
+= (-14) × 1
+= -14</div>
+
+      <div class="result">Gradient at z₂: ∂L/∂z₂ = -14</div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step-number">3</span>Calculate the gradient for w₂</h2>
+      <p>Because <span class="mono">z₂ = a₁ × w₂</span>, the path to <span class="mono">w₂</span> is:</p>
+
+      <div class="flow">
+        <div class="node">L</div>
+        <div class="arrow">→</div>
+        <div class="node">a₂</div>
+        <div class="arrow">→</div>
+        <div class="node">z₂</div>
+        <div class="arrow">→</div>
+        <div class="node">w₂</div>
+      </div>
+
+      <div class="equation">∂L/∂w₂
+= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂w₂</div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Derivative</th>
+            <th>How it is calculated</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mono">∂L/∂a₂</td>
+            <td>2(a₂ - target) = 2(2 - 9)</td>
+            <td class="mono">-14</td>
+          </tr>
+          <tr>
+            <td class="mono">∂a₂/∂z₂</td>
+            <td>ReLU'(2), and 2 &gt; 0</td>
+            <td class="mono">1</td>
+          </tr>
+          <tr>
+            <td class="mono">∂z₂/∂w₂</td>
+            <td>z₂ = a₁w₂, so derivative is a₁ = 2.5</td>
+            <td class="mono">2.5</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="equation">∂L/∂w₂
+= (-14) × (1) × (2.5)
+= -35</div>
+
+      <div class="result">Gradient for w₂: ∂L/∂w₂ = -35</div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step-number">4</span>Backpropagate toward the first layer</h2>
+      <p>Now propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
+
+      <div class="equation">∂z₂/∂a₁ = w₂
+           = 0.8</div>
+
+      <div class="equation">∂L/∂a₁
+= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂a₁
+= (-14) × (1) × (0.8)
+= -11.2</div>
+
+      <div class="result">Gradient at a₁: ∂L/∂a₁ = -11.2</div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step-number">5</span>Backpropagate through ReLU at z₁</h2>
+
+      <div class="equation">∂a₁/∂z₁ = ReLU'(z₁)
+           = ReLU'(2.5)
+           = 1</div>
+
+      <div class="equation">∂L/∂z₁
+= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂a₁ × ∂a₁/∂z₁
+= (-14) × (1) × (0.8) × (1)
+= -11.2</div>
+
+      <div class="result">Gradient at z₁: ∂L/∂z₁ = -11.2</div>
+    </section>
+
+    <section class="card">
+      <h2><span class="step-number">6</span>Calculate the gradient for w₁</h2>
+      <p>Because <span class="mono">z₁ = x × w₁</span>, the final local derivative is:</p>
+
+      <div class="equation">∂z₁/∂w₁ = x
+           = 5</div>
+
+      <p>The complete chain from the loss to <span class="mono">w₁</span> is:</p>
+
+      <div class="equation">∂L/∂w₁
+= ∂L/∂a₂
+  × ∂a₂/∂z₂
+  × ∂z₂/∂a₁
+  × ∂a₁/∂z₁
+  × ∂z₁/∂w₁
+
+= (-14) × (1) × (0.8) × (1) × (5)
+= -56</div>
+
+      <div class="result">Gradient for w₁: ∂L/∂w₁ = -56</div>
+    </section>
+
+    <section class="card">
+      <div class="pill">Optimizer</div>
+      <h2>7. Update the weights with gradient descent</h2>
+
+      <p>
+        Backpropagation gives us the gradients. The optimizer uses those gradients to update the weights.
+        For this example, use a learning rate of:
+      </p>
+
+      <div class="equation">η = 0.01</div>
+
+      <h3>Update w₁</h3>
+      <div class="equation">w₁(new)
+= w₁(old) - η × ∂L/∂w₁
+= 0.5 - 0.01 × (-56)
+= 0.5 + 0.56
+= 1.06</div>
+
+      <h3>Update w₂</h3>
+      <div class="equation">w₂(new)
+= w₂(old) - η × ∂L/∂w₂
+= 0.8 - 0.01 × (-35)
+= 0.8 + 0.35
+= 1.15</div>
+
+      <div class="grid">
+        <div class="result">
+          w₁: 0.50 → 1.06
+        </div>
+        <div class="result">
+          w₂: 0.80 → 1.15
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Important:</strong> the optimizer does not “know” the target directly.
+        Backpropagation converts the loss into gradients for each parameter, and the optimizer
+        uses those gradients to decide how to change each weight.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">Bias parameters</div>
+      <h2>What is bias and where does it come from?</h2>
+
+      <p>
+        A <strong>bias</strong> is another trainable parameter in a neural network. It is added after
+        the weighted input and before the activation function. In our original walkthrough we omitted
+        bias to keep the backpropagation example simple.
+      </p>
+
+      <div class="equation">Without bias:
+z₁ = x × w₁
+
+With bias:
+z₁ = x × w₁ + b₁</div>
+
+      <p>
+        For example, if <span class="mono">x = 5</span>, <span class="mono">w₁ = 0.5</span>,
+        and <span class="mono">b₁ = 0.1</span>:
+      </p>
+
+      <div class="equation">z₁ = x × w₁ + b₁
+   = 5 × 0.5 + 0.1
+   = 2.6
+
+a₁ = ReLU(2.6)
+   = 2.6</div>
+
+      <p>
+        Weights are commonly initialized with a randomized initialization strategy. Biases are also
+        initialized before training, but they are often initialized to zero rather than randomly.
+        Both weights and biases are then learned during training.
+      </p>
+
+      <h3>Each layer has independent bias parameters</h3>
+
+      <p>
+        Bias is <strong>not one shared number across the entire neural network</strong>. Different
+        layers have their own independent bias parameters.
+      </p>
+
+      <div class="equation">Layer 1:
+z₁ = x × w₁ + b₁
+
+Layer 2:
+z₂ = a₁ × w₂ + b₂
+
+b₁ and b₂ are independent trainable parameters.
+They do not need to have the same value.</div>
+
+      <h3>Backpropagation also calculates bias gradients</h3>
+
+      <p>
+        Backpropagation calculates gradients for <strong>all trainable parameters</strong>, not only
+        the weights. That includes the biases.
+      </p>
+
+      <div class="equation">Layer 1 gradients:
+∂L/∂w₁
+∂L/∂b₁
+
+Layer 2 gradients:
+∂L/∂w₂
+∂L/∂b₂</div>
+
+      <p>
+        The optimizer then uses each parameter's gradient to update that parameter independently.
+      </p>
+
+      <div class="note">
+        <strong>Learning-rate notation:</strong> the symbol <span class="mono">η</span> is the Greek
+        letter <strong>eta</strong> and is commonly used to represent the <strong>learning rate</strong>.
+        The learning rate controls the size of each optimizer update. For example,
+        <span class="mono">η = 0.01</span> means the optimizer applies 1% of the calculated gradient
+        when performing this simple gradient-descent update.
+      </div>
+
+      <div class="equation">w₁(new) = w₁(old) - η × ∂L/∂w₁
+b₁(new) = b₁(old) - η × ∂L/∂b₁
+
+w₂(new) = w₂(old) - η × ∂L/∂w₂
+b₂(new) = b₂(old) - η × ∂L/∂b₂</div>
+
+      <div class="result">
+        Backpropagation calculates the gradients. The optimizer uses those gradients to update
+        both weights and biases.
+      </div>
+
+      <h3>Biases in real neural networks and CNNs</h3>
+
+      <p>
+        Our example uses one scalar weight and one scalar bias per layer only to make the mathematics
+        easy to follow. Real networks contain many parameters.
+      </p>
+
+      <div class="grid">
+        <div class="note">
+          <strong>Dense / fully connected layer</strong><br>
+          Bias is typically independent per output neuron. For example, a layer with 100 output
+          neurons normally has 100 bias values.
+        </div>
+        <div class="note">
+          <strong>Convolutional layer</strong><br>
+          Bias is typically independent per output filter/channel. For example, a convolutional
+          layer with 64 filters normally has 64 bias values.
+        </div>
+      </div>
+
+      <p>
+        In a convolutional layer, one filter produces one output feature map. The bias associated
+        with that output filter/channel is added at every spatial position in that filter's feature map.
+      </p>
+
+      <div class="equation">64 convolution filters
+        ↓
+64 output feature maps / channels
+        ↓
+typically 64 independent bias values
+(one bias associated with each output filter/channel)</div>
+
+      <div class="note">
+        <strong>Key idea:</strong> biases are independent trainable parameters. They are not generally
+        shared across different layers. Backpropagation computes a gradient for each trainable bias,
+        and the optimizer updates each bias using its corresponding gradient.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">Complete picture</div>
+      <h2>All the math in one place</h2>
+
+      <div class="summary-box">
+<pre>FORWARD
+x = 5       ← input
+w₁ = 0.5    ← initial random weight in NN Layer 1
+w₂ = 0.8    ← initial random weight in NN Layer 2
+
+z₁ = x × w₁ = 2.5
+a₁ = ReLU(z₁) = 2.5
+z₂ = a₁ × w₂ = 2.0
+a₂ = ReLU(z₂) = 2.0
+L = (a₂ - 9)² = 49   ← loss
+
+
+BACKWARD: GRADIENT FOR w₂
+∂L/∂w₂
+= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂w₂
+= (-14) × (1) × (2.5)
+= -35
+
+
+BACKWARD: GRADIENT FOR w₁
+∂L/∂w₁
+= ∂L/∂a₂
+  × ∂a₂/∂z₂
+  × ∂z₂/∂a₁
+  × ∂a₁/∂z₁
+  × ∂z₁/∂w₁
+
+= (-14) × (1) × (0.8) × (1) × (5)
+= -56
+
+
+OPTIMIZER (η = 0.01)
+w₁(new) = 0.5 - 0.01 × (-56) = 1.06
+w₂(new) = 0.8 - 0.01 × (-35) = 1.15</pre>
+      </div>
+
+      <p class="mini">
+        Training would now repeat: forward pass with the new weights → calculate loss →
+        backpropagate gradients → update weights again.
+      </p>
+    </section>
+
+
+
+    <section class="card">
+      <div class="pill">ReLU derivative</div>
+      <h2>8. How do we calculate the derivative of ReLU?</h2>
+
+      <p>
+        ReLU, or <strong>Rectified Linear Unit</strong>, is defined as:
+      </p>
+
+      <div class="equation">ReLU(x) = max(0, x)
+
+ReLU(x) =
+  0,  if x &lt; 0
+  x,  if x ≥ 0</div>
+
+      <p>
+        To calculate its derivative, look at the <strong>slope</strong> of the function in each region.
+        The derivative tells us how much the output changes when the input changes slightly.
+      </p>
+
+      <h3>Case 1: x &lt; 0</h3>
+
+      <p>
+        For negative values, ReLU always outputs zero:
+      </p>
+
+      <div class="equation">x       ReLU(x)
+
+-3  →     0
+-2  →     0
+-1  →     0
+-0.1 →    0</div>
+
+      <p>
+        The graph is horizontal in this region. A horizontal line has slope 0, so:
+      </p>
+
+      <div class="equation">ReLU'(x) = 0    when x &lt; 0</div>
+
+      <h3>Case 2: x &gt; 0</h3>
+
+      <p>
+        For positive values, ReLU simply returns x:
+      </p>
+
+      <div class="equation">ReLU(x) = x</div>
+
+      <p>
+        The line y = x has slope 1, so:
+      </p>
+
+      <div class="equation">ReLU'(x) = 1    when x &gt; 0</div>
+
+      <h3>Visual behavior of ReLU</h3>
+
+      <p>
+        The left side is flat with slope 0. The right side follows y = x with slope 1.
+        The corner at zero is where the behavior changes.
+      </p>
+
+      <div class="graph-wrap" style="width:100%; max-width:760px; margin:20px auto;">
+        <svg viewBox="0 0 760 390" role="img" aria-label="Graph of ReLU showing zero output for x less than zero and y equals x for x greater than or equal to zero" style="width:100%; height:auto; border:1px solid var(--border); border-radius:14px; background:#fff;">
+          <line x1="70" y1="320" x2="700" y2="320" stroke="#667085" stroke-width="2"/>
+          <line x1="380" y1="355" x2="380" y2="35" stroke="#667085" stroke-width="2"/>
+
+          <!-- x-axis ticks -->
+          <line x1="200" y1="315" x2="200" y2="325" stroke="#667085" stroke-width="2"/>
+          <line x1="290" y1="315" x2="290" y2="325" stroke="#667085" stroke-width="2"/>
+          <line x1="470" y1="315" x2="470" y2="325" stroke="#667085" stroke-width="2"/>
+          <line x1="560" y1="315" x2="560" y2="325" stroke="#667085" stroke-width="2"/>
+          <line x1="650" y1="315" x2="650" y2="325" stroke="#667085" stroke-width="2"/>
+
+          <!-- y-axis ticks -->
+          <line x1="375" y1="240" x2="385" y2="240" stroke="#667085" stroke-width="2"/>
+          <line x1="375" y1="160" x2="385" y2="160" stroke="#667085" stroke-width="2"/>
+          <line x1="375" y1="80" x2="385" y2="80" stroke="#667085" stroke-width="2"/>
+
+          <!-- x labels -->
+          <text x="185" y="345" font-size="16" fill="#667085">-2</text>
+          <text x="275" y="345" font-size="16" fill="#667085">-1</text>
+          <text x="375" y="345" font-size="16" fill="#667085">0</text>
+          <text x="462" y="345" font-size="16" fill="#667085">1</text>
+          <text x="552" y="345" font-size="16" fill="#667085">2</text>
+          <text x="642" y="345" font-size="16" fill="#667085">3</text>
+
+          <!-- y labels -->
+          <text x="348" y="245" font-size="16" fill="#667085">1</text>
+          <text x="348" y="165" font-size="16" fill="#667085">2</text>
+          <text x="348" y="85" font-size="16" fill="#667085">3</text>
+
+          <!-- ReLU curve: y=0 for x<0 -->
+          <line x1="90" y1="320" x2="380" y2="320" stroke="#3157d5" stroke-width="6" stroke-linecap="round"/>
+
+          <!-- ReLU curve: y=x for x>=0 -->
+          <line x1="380" y1="320" x2="650" y2="80" stroke="#3157d5" stroke-width="6" stroke-linecap="round"/>
+
+          <!-- origin -->
+          <circle cx="380" cy="320" r="7" fill="#0f766e"/>
+          <text x="397" y="300" font-size="16" fill="#0f766e" font-weight="700">(0, 0)</text>
+
+          <!-- annotations -->
+          <text x="105" y="290" font-size="18" fill="#1f2937" font-weight="700">slope = 0</text>
+          <text x="535" y="125" font-size="18" fill="#1f2937" font-weight="700">slope = 1</text>
+          <text x="110" y="55" font-size="17" fill="#667085">x &lt; 0 → ReLU(x) = 0</text>
+          <text x="500" y="55" font-size="17" fill="#667085">x &gt; 0 → ReLU(x) = x</text>
+          <text x="680" y="342" font-size="18" fill="#1f2937">x</text>
+          <text x="395" y="42" font-size="18" fill="#1f2937">ReLU(x)</text>
+        </svg>
+      </div>
+
+      <h3>What happens at x = 0?</h3>
+
+      <p>
+        Exactly at zero, ReLU has a sharp corner. The slope from the left is 0, while the slope
+        from the right is 1. Because the two one-sided slopes are different, the ordinary derivative
+        <strong>does not exist at x = 0</strong>.
+      </p>
+
+      <div class="equation">left-hand slope  = 0
+right-hand slope = 1
+
+0 ≠ 1
+
+Therefore: ReLU'(0) does not exist.</div>
+
+      <p>
+        In practical neural-network implementations, we need a value to use during backpropagation.
+        By convention, the derivative at zero is commonly defined as:
+      </p>
+
+      <div class="equation">ReLU'(0) = 0    (conventional choice)</div>
+
+      <div class="result">
+        Final practical rule:
+        ReLU'(x) = 0 for x &lt; 0,
+        ReLU'(x) = 1 for x &gt; 0,
+        and ReLU'(0) is not mathematically defined, but is conventionally taken as 0 in this walkthrough.
+      </div>
+
+      <h3>Why this matters in backpropagation</h3>
+
+      <p>
+        During backpropagation, the incoming gradient is multiplied by this local derivative:
+      </p>
+
+      <div class="equation">∂L/∂z = ∂L/∂a × ReLU'(z)</div>
+
+      <p>
+        So if z is negative, the ReLU derivative is 0 and the gradient through that ReLU becomes 0.
+        If z is positive, the derivative is 1 and the incoming gradient passes through unchanged.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="pill">Loss function</div>
+      <h2>9. Loss Function Equivalence: Subtraction and How It Works During Backpropagation</h2>
+
+      <p>
+        In this walkthrough the loss is written as <span class="mono">L = (a₂ - target)²</span>.
+        You could reverse the subtraction and write <span class="mono">L = (target - a₂)²</span>
+        without changing the loss.
+      </p>
+
+      <div class="equation">(a - target) = -(target - a)
+
+Therefore:
+
+(a - target)²
+= [-(target - a)]²
+= (target - a)²</div>
+
+      <p>Using our values <span class="mono">a₂ = 2</span> and <span class="mono">target = 9</span>:</p>
+
+      <div class="equation">(a₂ - target)² = (2 - 9)² = (-7)² = 49
+
+(target - a₂)² = (9 - 2)² = (7)² = 49</div>
+
+      <div class="result">Both forms produce exactly the same loss: L = 49.</div>
+
+      <h3>What happens during backpropagation?</h3>
+
+      <p>
+        The two forms also produce the <strong>same gradient</strong> with respect to the prediction
+        <span class="mono">a</span>. The second form may initially look as though it should have the
+        opposite sign, but the chain rule introduces an additional <span class="mono">-1</span>.
+      </p>
+
+      <h3>Form 1: L = (a - target)²</h3>
+
+      <div class="equation">∂L/∂a
+= 2(a - target)
+
+For a = 2 and target = 9:
+
+∂L/∂a
+= 2(2 - 9)
+= -14</div>
+
+      <h3>Form 2: L = (target - a)²</h3>
+
+      <p>Let <span class="mono">u = target - a</span>. Then the chain rule gives:</p>
+
+      <div class="equation">∂L/∂a
+= ∂L/∂u × ∂u/∂a
+
+= 2(target - a) × (-1)
+
+= -2(target - a)
+
+= 2(a - target)</div>
+
+      <p>The <span class="mono">-1</span> appears because:</p>
+
+      <div class="equation">∂(target - a)/∂a
+= ∂target/∂a - ∂a/∂a
+= 0 - 1
+= -1</div>
+
+      <p>Using our values:</p>
+
+      <div class="equation">∂L/∂a
+= 2(9 - 2) × (-1)
+= 14 × (-1)
+= -14</div>
+
+      <div class="result">
+        So both loss expressions give the same loss and the same backpropagation gradient:
+        ∂L/∂a = -14.
+      </div>
+
+      <h3>Why do we square the error?</h3>
+
+      <p>
+        The raw difference <span class="mono">a - target</span> can be positive or negative.
+        If we used the raw difference itself as the loss, errors on opposite sides of the target
+        could cancel each other when combining examples.
+      </p>
+
+      <div class="equation">prediction too low:
+a - target = 2 - 9 = -7
+
+prediction too high:
+a - target = 16 - 9 = +7</div>
+
+      <p>
+        Squaring makes both errors positive:
+      </p>
+
+      <div class="equation">(-7)² = 49
+(+7)² = 49</div>
+
+      <p>
+        Squaring also makes <strong>larger errors grow much faster than smaller errors</strong>.
+        This means the loss penalizes predictions that are far from the target more strongly.
+      </p>
+
+      <div class="equation">error = 1  → squared error = 1
+error = 2  → squared error = 4
+error = 3  → squared error = 9
+error = 7  → squared error = 49</div>
+
+      <p>
+        Another useful property is that squared error is smooth and differentiable, which gives us
+        a simple gradient that tells the optimizer both the direction and magnitude of the correction:
+      </p>
+
+      <div class="equation">L = (a - target)²
+
+∂L/∂a = 2(a - target)</div>
+
+      <div class="grid">
+        <div class="note">
+          <strong>If a &lt; target</strong><br>
+          The gradient is negative. Gradient descent subtracts a negative value, encouraging parameter
+          changes that increase the prediction along the relevant local path.
+        </div>
+        <div class="note">
+          <strong>If a &gt; target</strong><br>
+          The gradient is positive. Gradient descent subtracts a positive value, encouraging parameter
+          changes that decrease the prediction along the relevant local path.
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>Important:</strong> squared error is useful for this teaching example and is common in
+        regression. It is not the only loss function. Different ML tasks may use losses such as
+        cross-entropy, depending on what the model is learning.
+      </div>
+    </section>
+
+    <div class="footer">Self-contained HTML — no external libraries or network access required.</div>
+  </main>
+</body>
+</html>
