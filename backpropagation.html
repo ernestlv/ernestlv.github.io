@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Machine Learning Backpropagation Math Simplified</title>
+  <title>Machine Learning Backpropagation Math - Simplified</title>
   <style>
     :root {
       --bg: #f6f7fb;
@@ -197,9 +197,9 @@
 </head>
 <body>
   <main class="container">
-    <h1>Machine Learning Backpropagation Math Simplified</h1>
+    <h1>Machine Learning Backpropagation Math - Simplified</h1>
     <div class="subtitle">
-      A complete numerical example using a two-layer network, shwoing every intermediate derivative step.
+      A complete numerical example using a two-layer network, showing every intermediate step.
     </div>
 
     <section class="card">
@@ -210,33 +210,34 @@
 
       <div class="grid">
         <div class="note"><strong>x = 5</strong><br>Input value to the neural network.</div>
-        <div class="note"><strong>w₁ = 0.5</strong><br>Initial random trainable weight in neural-network Layer 1.</div>
-        <div class="note"><strong>w₂ = 0.8</strong><br>Initial random trainable weight in neural-network Layer 2.</div>
-        <div class="note"><strong>L = 49</strong><br>Loss: the scalar value measuring how far the network output is from the target in this example.</div>
+        <div class="note"><strong>w₁ = 0.5</strong><br>Initial random weight in neural-network Layer 1.</div>
+        <div class="note"><strong>w₂ = 0.8</strong><br>Initial random weight in neural-network Layer 2.</div>
+        <div class="note"><strong>L = 49</strong><br>Loss: the scalar value measuring how far the  output is from the target in this example.</div>
       </div>
 
       <div class="equation">x = 5                 ← input
-w₁ = 0.5              ← initial random weight, NN Layer 1
-w₂ = 0.8              ← initial random weight, NN Layer 2
+w₁ = 0.5              ← initial weight, NN Layer 1
+w₂ = 0.8              ← initial weight, NN Layer 2
 
+Layer 1
 z₁ = x × w₁ = 5 × 0.5 = 2.5
 a₁ = ReLU(z₁) = ReLU(2.5) = 2.5
 
+Layer 2
 z₂ = a₁ × w₂ = 2.5 × 0.8 = 2.0
 a₂ = ReLU(z₂) = ReLU(2.0) = 2.0
 
-L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
-
-      <div class="note">
-        <strong>Training context:</strong> w₁ and w₂ start as initialized weights (randomly initialized in this simplified example).
-        Backpropagation calculates a gradient for each trainable weight, and the optimizer then updates those weights.
-      </div>
+Loss Calculation
+L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
       <div class="pill">Backpropagation</div>
+      <div class="note">
+        Backpropagation calculates a gradient for each weight, and the optimizer updates those weights.
+      </div>
       <h2>1. Start at the loss</h2>
-      <p>We first calculate the gradient of the loss with respect to the final activation <span class="mono">a₂</span>.</p>
+      <p>We calculate the gradient of the loss with respect to the final activation <span class="mono">a₂</span>.</p>
 
       <div class="equation">∂L/∂a₂ = ∂[(a₂ - target)²]/∂a₂
        = 2(a₂ - target)
@@ -247,7 +248,7 @@ L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">2</span>Backpropagate through ReLU at z₂</h2>
+      <h2><span class="step-number">2</span>Backpropagate the gradient through ReLU at z₂ using the chain rule</h2>
       <p>Since <span class="mono">a₂ = ReLU(z₂)</span> and <span class="mono">z₂ = 2 &gt; 0</span>, the ReLU derivative is 1.</p>
 
       <div class="equation">∂a₂/∂z₂ = ReLU'(z₂)
@@ -312,12 +313,12 @@ L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
 = (-14) × (1) × (2.5)
 = -35</div>
 
-      <div class="result">Gradient for w₂: ∂L/∂w₂ = -35</div>
+      <div class="result">Using the chain rule we calculate the Gradient for w₂: ∂L/∂w₂ = -35</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">4</span>Backpropagate toward the first layer</h2>
-      <p>Now propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
+      <h2><span class="step-number">4</span>we use Backpropagation to pass the Loss gradient thru the second layer toward the first layer and use the chain rule, to calculate the gradient of the initial activation</h2>
+      <p>Propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
 
       <div class="equation">∂z₂/∂a₁ = w₂
            = 0.8</div>
@@ -327,11 +328,11 @@ L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
 = (-14) × (1) × (0.8)
 = -11.2</div>
 
-      <div class="result">Gradient at a₁: ∂L/∂a₁ = -11.2</div>
+      <div class="result">Gradient of first activation a₁: ∂L/∂a₁ = -11.2</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">5</span>Backpropagate through ReLU at z₁</h2>
+      <h2><span class="step-number">5</span>we Backpropagate the gradient through ReLU at z₁</h2>
 
       <div class="equation">∂a₁/∂z₁ = ReLU'(z₁)
            = ReLU'(2.5)
@@ -346,7 +347,7 @@ L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">6</span>Calculate the gradient for w₁</h2>
+      <h2><span class="step-number">6</span>Now use a final chain rule to calculate the gradient for w₁</h2>
       <p>Because <span class="mono">z₁ = x × w₁</span>, the final local derivative is:</p>
 
       <div class="equation">∂z₁/∂w₁ = x
@@ -402,7 +403,6 @@ L = (a₂ - target)² = (2 - 9)² = 49  ← loss</div>
       </div>
 
       <div class="note">
-        <strong>Important:</strong> the optimizer does not “know” the target directly.
         Backpropagation converts the loss into gradients for each parameter, and the optimizer
         uses those gradients to decide how to change each weight.
       </div>
@@ -437,8 +437,8 @@ a₁ = ReLU(2.6)
    = 2.6</div>
 
       <p>
-        Weights are commonly initialized with a randomized initialization strategy. Biases are also
-        initialized before training, but they are often initialized to zero rather than randomly.
+        Weights are commonly initialized with a random value. Biases are also
+        initialized before training with a random value.
         Both weights and biases are then learned during training.
       </p>
 
