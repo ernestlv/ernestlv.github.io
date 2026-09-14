@@ -205,7 +205,7 @@
     <section class="card">
       <h2>Abstract</h2>
       <h3>How Machines Learn</h3>
-      <p>The chain rule of calculus allows machines to calculate how changes in input parameters affect the final output - (a.k.a the error). These calculations enable a machine to adjust its parameters through a technique called <b>backpropagation.</b> to reduce the error.</p>
+      <p>The chain rule of calculus allows machines to calculate how changes in input parameters affect the final output - (a.k.a the error). These calculations enable a machine to adjust its parameters through a technique called <b>backpropagation</b> to reduce the error.</p>
       <h3>How Neural Networks Use the Chain Rule</h3>
       <p><b>Connecting Layers:</b> Neural networks stack multiple layers (functions) where the output of one layer becomes the input for the next.</p>
       <p><b>Measuring Impact:</b> The chain rule multiplies the derivatives of these chained layers together to find the total rate of change.</p>
@@ -222,7 +222,6 @@
         <div class="note"><strong>x = 5</strong><br>Input value to the neural network.</div>
         <div class="note"><strong>w₁ = 0.5</strong><br>Initial random weight in neural-network Layer 1.</div>
         <div class="note"><strong>w₂ = 0.8</strong><br>Initial random weight in neural-network Layer 2.</div>
-        <div class="note"><strong>L = 49</strong><br>Loss: the scalar value measuring how far the  output is from the target in this example.</div>
       </div>
 
       <div class="equation">x = 5                 ← input
@@ -237,7 +236,7 @@ Layer 2
 z₂ = a₁ × w₂ = 2.5 × 0.8 = 2.0
 a₂ = ReLU(z₂) = ReLU(2.0) = 2.0
 
-Loss Calculation
+Loss Calculation - Error
 L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
@@ -324,7 +323,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">4</span>we use backpropagation to pass the gradient thru the layers, to calculate the gradient of the initial activation</h2>
+      <h2><span class="step-number">4</span>we use backpropagation to pass the loss gradient thru the layers and calculate the gradient of the initial weight</h2>
       <p>Propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
 
       <div class="equation">∂z₂/∂a₁ = w₂
