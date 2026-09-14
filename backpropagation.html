@@ -415,8 +415,60 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
         uses those gradients to decide how to change each weight.
       </div>
     </section>
-
     <section class="card">
+      <div class="pill">Epoch</div>
+      <h2><span class="step-number">8</span>Repeat</h2>
+      <p>Execute a new forward pass using the new weight values, calculate the new Loss and repeat <b>backpropagation</b> until the error is below an acceptable boundary.</p>
+    </section>
+    
+    <section class="card">
+      <div class="pill">Complete picture</div>
+      <h2>All the math in one place</h2>
+
+      <div class="summary-box">
+<pre>FORWARD
+x = 5       ← input
+w₁ = 0.5    ← initial random weight in NN Layer 1
+w₂ = 0.8    ← initial random weight in NN Layer 2
+
+z₁ = x × w₁ = 2.5
+a₁ = ReLU(z₁) = 2.5
+z₂ = a₁ × w₂ = 2.0
+a₂ = ReLU(z₂) = 2.0
+L = (a₂ - 9)² = 49   ← loss
+
+
+BACKWARD: GRADIENT FOR w₂
+∂L/∂w₂
+= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂w₂
+= (-14) × (1) × (2.5)
+= -35
+
+
+BACKWARD: GRADIENT FOR w₁
+∂L/∂w₁
+= ∂L/∂a₂
+  × ∂a₂/∂z₂
+  × ∂z₂/∂a₁
+  × ∂a₁/∂z₁
+  × ∂z₁/∂w₁
+
+= (-14) × (1) × (0.8) × (1) × (5)
+= -56
+
+
+OPTIMIZER (η = 0.01)
+w₁(new) = 0.5 - 0.01 × (-56) = 1.06
+w₂(new) = 0.8 - 0.01 × (-35) = 1.15</pre>
+      </div>
+
+      <p class="mini">
+        Training would now repeat: forward pass with the new weights → calculate loss →
+        backpropagate gradients → update weights again.
+      </p>
+    </section>
+
+        <section class="card">
       <div class="pill">Bias parameters</div>
       <h2>What is bias and where does it come from?</h2>
 
@@ -542,58 +594,6 @@ typically 64 independent bias values
         and the optimizer updates each bias using its corresponding gradient.
       </div>
     </section>
-     <section class="card">
-      <h2><span class="step-number">8</span>Repeat</h2>
-      <p>Execute a new forward pass using the new weight values, calculate the new Loss and repeat <b>backpropagation</b> until the error is below an acceptable boundary.</p>
-     </section>
-    <section class="card">
-      <div class="pill">Complete picture</div>
-      <h2>All the math in one place</h2>
-
-      <div class="summary-box">
-<pre>FORWARD
-x = 5       ← input
-w₁ = 0.5    ← initial random weight in NN Layer 1
-w₂ = 0.8    ← initial random weight in NN Layer 2
-
-z₁ = x × w₁ = 2.5
-a₁ = ReLU(z₁) = 2.5
-z₂ = a₁ × w₂ = 2.0
-a₂ = ReLU(z₂) = 2.0
-L = (a₂ - 9)² = 49   ← loss
-
-
-BACKWARD: GRADIENT FOR w₂
-∂L/∂w₂
-= ∂L/∂a₂ × ∂a₂/∂z₂ × ∂z₂/∂w₂
-= (-14) × (1) × (2.5)
-= -35
-
-
-BACKWARD: GRADIENT FOR w₁
-∂L/∂w₁
-= ∂L/∂a₂
-  × ∂a₂/∂z₂
-  × ∂z₂/∂a₁
-  × ∂a₁/∂z₁
-  × ∂z₁/∂w₁
-
-= (-14) × (1) × (0.8) × (1) × (5)
-= -56
-
-
-OPTIMIZER (η = 0.01)
-w₁(new) = 0.5 - 0.01 × (-56) = 1.06
-w₂(new) = 0.8 - 0.01 × (-35) = 1.15</pre>
-      </div>
-
-      <p class="mini">
-        Training would now repeat: forward pass with the new weights → calculate loss →
-        backpropagate gradients → update weights again.
-      </p>
-    </section>
-
-
 
     <section class="card">
       <div class="pill">ReLU derivative</div>
