@@ -323,7 +323,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">4</span>we continue passing the loss gradient thru the layers until we calculate the gradient of the initial weight</h2>
+      <h2><span class="step-number">4</span>We continue passing back the loss gradient through the layers until we calculate the gradient of the initial weight</h2>
       <p>Propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
 
       <div class="equation">∂z₂/∂a₁ = w₂
@@ -338,7 +338,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">5</span>we backpropagate the gradient through ReLU at z₁</h2>
+      <h2><span class="step-number">5</span>We backpropagate the gradient through ReLU at z₁</h2>
 
       <div class="equation">∂a₁/∂z₁ = ReLU'(z₁)
            = ReLU'(2.5)
