@@ -542,7 +542,10 @@ typically 64 independent bias values
         and the optimizer updates each bias using its corresponding gradient.
       </div>
     </section>
-
+     <section class="card">
+      <h2><span class="step-number">8</span>Repeat</h2>
+      <p>Execute a new forward pass using the new weight values, calculate the new Loss and repeat <b>backpropagation</b> until the error is below an acceptable boundary.</p>
+     </section>
     <section class="card">
       <div class="pill">Complete picture</div>
       <h2>All the math in one place</h2>
@@ -594,7 +597,7 @@ w₂(new) = 0.8 - 0.01 × (-35) = 1.15</pre>
 
     <section class="card">
       <div class="pill">ReLU derivative</div>
-      <h2>8. How do we calculate the derivative of ReLU?</h2>
+      <h2>How do we calculate the derivative of ReLU?</h2>
 
       <p>
         ReLU, or <strong>Rectified Linear Unit</strong>, is defined as:
@@ -746,7 +749,7 @@ Therefore: ReLU'(0) does not exist.</div>
 
     <section class="card">
       <div class="pill">Loss function</div>
-      <h2>9. Loss Function Equivalence: Subtraction and How It Works During Backpropagation</h2>
+      <h2>Loss Function Equivalence: Subtraction and How It Works During Backpropagation</h2>
 
       <p>
         In this walkthrough the loss is written as <span class="mono">L = (a₂ - target)²</span>.
