@@ -243,10 +243,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
 
     <section class="card">
       <div class="pill">Backpropagation</div>
-      <div class="note">
-        Backpropagation calculates a gradient for each weight, and the optimizer updates those weights.
-      </div>
-      <h2>1. Start at the loss</h2>
+      <h2><span class="step-number">1</span>Start at the loss</h2>
       <p>We calculate the gradient of the loss with respect to the final activation <span class="mono">a₂</span>.</p>
 
       <div class="equation">∂L/∂a₂ = ∂[(a₂ - target)²]/∂a₂
@@ -327,7 +324,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">4</span>we use Backpropagation to pass the Loss gradient thru the second layer toward the first layer and use the chain rule, to calculate the gradient of the initial activation</h2>
+      <h2><span class="step-number">4</span>we use backpropagation to pass the gradient thru the layers, to calculate the gradient of the initial activation</h2>
       <p>Propagate from <span class="mono">z₂</span> back to <span class="mono">a₁</span>.</p>
 
       <div class="equation">∂z₂/∂a₁ = w₂
@@ -342,7 +339,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">5</span>we Backpropagate the gradient through ReLU at z₁</h2>
+      <h2><span class="step-number">5</span>we backpropagate the gradient through ReLU at z₁</h2>
 
       <div class="equation">∂a₁/∂z₁ = ReLU'(z₁)
            = ReLU'(2.5)
@@ -357,7 +354,7 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
     </section>
 
     <section class="card">
-      <h2><span class="step-number">6</span>Now use a final chain rule to calculate the gradient for w₁</h2>
+      <h2><span class="step-number">6</span>Now we use a final chain rule to calculate the gradient of w₁</h2>
       <p>Because <span class="mono">z₁ = x × w₁</span>, the final local derivative is:</p>
 
       <div class="equation">∂z₁/∂w₁ = x
@@ -376,11 +373,13 @@ L = (a₂ - target)² = (2 - 9)² = 49</div>
 = -56</div>
 
       <div class="result">Gradient for w₁: ∂L/∂w₁ = -56</div>
+      <div class="note">
+        Backpropagation calculates a gradient for each weight, and the optimizer will update those weights.
+      </div>
     </section>
-
     <section class="card">
       <div class="pill">Optimizer</div>
-      <h2>7. Update the weights with gradient descent</h2>
+      <h2><span class="step-number">7</span>Update the weights with gradient descent</h2>
 
       <p>
         Backpropagation gives us the gradients. The optimizer uses those gradients to update the weights.
