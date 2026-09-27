@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNN Fundamentals: How machines recognize images</title>
+  <style>
+    :root {
+      --bg: #f6f7fb;
+      --card: #fff;
+      --text: #1f2937;
+      --muted: #667085;
+      --border: #d9dee8;
+      --accent: #3157d5;
+      --accent-soft: #eef2ff;
+      --good: #0f766e;
+      --good-soft: #ecfdf5;
+      --warn: #9a3412;
+      --warn-soft: #fff7ed;
+      --code-bg: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      line-height: 1.58;
+    }
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 42px auto 70px;
+    }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 4vw, 3rem); margin: 0 0 10px; }
+    h2 { font-size: 1.55rem; margin-top: 0; }
+    h3 { font-size: 1.15rem; margin-top: 28px; }
+    p { margin: 9px 0 15px; }
+    .subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 28px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 28px rgba(20, 30, 55, 0.08);
+    }
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fff;
+    }
+    .mini-card strong { display: block; margin-bottom: 4px; }
+    .equation {
+      margin: 14px 0;
+      padding: 15px 17px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 10px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+    .result {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 11px;
+      background: var(--good-soft);
+      border: 1px solid #b7eadf;
+      color: #0b5d56;
+      font-weight: 700;
+    }
+    .note {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 11px;
+      background: var(--warn-soft);
+      border: 1px solid #fed7aa;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      align-items: center;
+      margin: 17px 0 10px;
+    }
+    .node {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 13px;
+      background: #fff;
+      font-weight: 700;
+    }
+    .arrow { color: var(--muted); font-weight: 800; }
+    .diagram {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow-x: auto;
+      background: #fafbff;
+    }
+    .diagram pre {
+      margin: 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      line-height: 1.55;
+      font-size: .94rem;
+      white-space: pre;
+    }
+    .code {
+      color: #f9fafb;
+      background: var(--code-bg);
+      border-radius: 13px;
+      padding: 18px;
+      overflow-x: auto;
+    }
+    .code pre {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      line-height: 1.65;
+      font-size: .94rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0 4px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--border);
+      padding: 11px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #fafbff; }
+    .mono {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .9rem;
+      margin-top: 30px;
+    }
+    @media (max-width: 650px) {
+      .container { width: min(100% - 18px, 1100px); margin-top: 20px; }
+      .card { padding: 18px; border-radius: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>CNN Fundamentals: How machines recognize images</h1>
+    <div class="subtitle">
+      A detailed guide to the convolutional neural network (CNN) concepts.
+      How filters are applied, how feature maps are produced, and how a CNN learns different features of an image.
+    </div>
+
+    <section class="card">
+      <div class="pill">Abstract</div>
+      <h2>How machines turn pixels into models</h2>
+      <p>
+        A convolutional neural network (CNN) starts with an image that translates into a numerical tensor and repeatedly applies
+        filters to learn the patterns in an image. Hence, each filter produces a map of patterns a feature map. Each feature map 
+        represent different aspects of the image.
+      </p>
+
+      <div class="flow">
+        <div class="node">Image</div>
+        <div class="arrow">→</div>
+        <div class="node">Tensor</div>
+        <div class="arrow">→</div>
+        <div class="node">Filters</div>
+        <div class="arrow">→</div>
+        <div class="node">Feature Map 1<br>...<br>Feature Map n</div>
+        <div class="arrow">→</div>
+        <div class="node">New Filters</div>
+        <div class="arrow">→</div>
+        <div class="node">Feature Map 1<br>...<br>Feature Map n</div>
+        <div class="arrow">→</div>
+        <div class="node">...</div>
+        <div class="arrow">→</div>
+        <div class="node">Model</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">2. Basic Concepts</div>
+      <br><br>
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Filter</strong>
+          A grid of weights.
+        </div>
+        <div class="mini-card">
+          <strong>Cell</strong>
+          The product of applying a filter over an image or featute map.
+        </div>
+        <div class="mini-card">
+          <strong>Feature Map</strong>
+          A grid of cells. We can have many feature maps in each layer of a CNN.
+        </div>
+        <div class="mini-card">
+          <strong>Activation</strong>
+          The value stored in a cell after the filter result
+          is passed through an activation function (for example, ReLU).
+        </div>
+        <div class="mini-card">
+          <strong>Convolution</strong>
+          When the filter is moved across the image to calculate an activation, at each image position, producing cells and a feature map.
+        </div>
+        <div class="mini-card">
+          <strong>Receptive Field</strong>
+          The area of an image affected by the filter.
+        </div>
+      </div>
+      <div class="diagram">
+<pre>
+ONE FILTER
+    │
+    │ applied at many positions of an image
+    ├───────────────► cell 1
+    ├───────────────► cell 2
+    ├───────────────► cell 3
+    ├───────────────► cell 4
+    │
+    └───────────────► ...
+                         │
+                         ▼
+                  ONE FEATURE MAP
+                  (many cells)
+</pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">3. What is a filter?</div>
+      <h2>A filter is a small matrix of weights</h2>
+
+      <p>
+        Example a <span class="mono">3 × 3</span> filter:
+      </p>
+
+      <div class="equation">Filter weights
+
+┌────┬────┬────┐
+│ w₁ │ w₂ │ w₃ │
+├────┼────┼────┤
+│ w₄ │ w₅ │ w₆ │
+├────┼────┼────┤
+│ w₇ │ w₈ │ w₉ │
+└────┴────┴────┘
+
+9 trainable weights</div>
+
+      <p>
+        At initialization, the weights are random numbers. A filter is not manually programmed to recognize a feature.
+        The numbers are parameters that the CNN learns during training.
+      </p>
+
+      <div class="note">
+        <strong>Each layer has its own set of filters with its own learnable weights.</strong> During backpropagation, 
+        a gradient is calculated for each filter weight, and the optimizer updates each weight accordingly. Although 
+        each filter has its own parameters, all layers are trained together because their gradients are connected through 
+        the network by the <a href="//ernestlv.github.io/ai.html">chain rule</a>.
+      </div>
+
+      <div class="diagram">
+<pre>
+Layer 1
+  Filter A -> its own weights
+  Filter B -> its own weights
+  Filter C -> its own weights
+       |
+       v
+  feature maps
+       |
+       v
+Layer 2
+  Filter D -> its own weights
+  Filter E -> its own weights
+  Filter F -> its own weights
+       |
+       v
+     Loss
+       |
+       v
+Backpropagation calculates gradients
+for the weights of every layer
+       |
+       v
+Optimizer updates those weights
+
+Separate parameters, trained together.</pre>
+      </div>
+
+      <p>
+        During training, the network makes predictions, calculates a loss, backpropagates
+        gradients, and an optimizer adjusts the filter's weights. Over many training
+        iterations, the weights can become useful for detecting patterns such as edges,
+        textures, or more complex combinations.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="pill">4. Convoution Part 1: Producing a cell</div>
+      <h2>Image region (Receptive Field) → filter → activation value</h2>
+
+      <p>
+        Suppose a <span class="mono">3 × 3</span> filter is applied at this region of
+        an image:
+      </p>
+
+      <div class="equation">Local Image Region (Receptive Field)
+
+┌────┬────┬────┐
+│  2 │  4 │  1 │
+├────┼────┼────┤
+│  5 │  3 │  2 │
+├────┼────┼────┤
+│  1 │  6 │  3 │
+└────┴────┴────┘</div>
+
+      <p>And suppose the filter contains these weights:</p>
+
+      <div class="equation">Filter
+
+┌────┬────┬────┐
+│ 0.2│ 0.1│ 0.3│
+├────┼────┼────┤
+│ 0.4│ 0.2│ 0.1│
+├────┼────┼────┤
+│ 0.1│ 0.3│ 0.2│
+└────┴────┴────┘</div>
+
+      <p>
+        The first part of the convolution multiplies corresponding values, sums the products (dot product),
+        and normally adds a bias:
+      </p>
+
+      <div class="equation">z = Σ(input × filter weight) + bias</div>
+
+      <p>
+        That produces one value <span class="mono">z</span>. If the layer uses ReLU, the
+        value then passes through the activation function:
+      </p>
+
+      <div class="equation">a = ReLU(z) = max(0, z)</div>
+
+      <div class="result">
+        That final value is the activation  and becomes <strong>one cell</strong> in the feature map.
+      </div>
+
+      <div class="diagram">
+<pre>
+3×3 Receptive Field
+       │
+       │ element-by-element multiply + sum + bias
+       ▼
+pre-activation z
+       │
+       │ ReLU
+       ▼
+activation value a
+       │
+       ▼
+ONE CELL in the feature map
+</pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">5. Convolution part 2: Moving the filter</div>
+      <h2>One filter produces an entire feature map</h2>
+
+      <p>
+        A filter is moved across each position in the image and the same calculation is
+        repeated on each row and column of the input image.
+      </p>
+      <p>
+        For example, the filter can starts from the upper left corner of the image then it moves one column to the left,
+until it reaches the end of the row; then moves one row down and start from the left again. Initially, each column and 
+row in the image represent pixels. However, after the first convolutional layer completes a feature map is produced and 
+each column or row represent a cell. Therefore new filters in each layer are applied to the feature maps produced in the  
+previous layers.
+      </p>
+
+      <div class="diagram">
+<pre>
+INPUT IMAGE
+
+┌──────────────────────────────┐
+│  ┌─────┐                     │
+│  │ 3×3 │                     │  ← filter at position 1 will move left.
+│  └─────┘                     │
+│        ┌─────┐               │
+│        │ 3×3 │               │  ← same filter moved down to the next row.
+│        └─────┘               │
+│              ┌─────┐         │
+│              │ 3×3 │         │  ← same filter moved again
+│              └─────┘         │
+└──────────────────────────────┘
+
+Each position produces one activation.
+
+                    ↓
+
+OUTPUT FEATURE MAP
+
+┌───────┬───────┬───────┬───────┐
+│ 0.10  │ 0.20  │ 0.03  │  ...  │
+├───────┼───────┼───────┼───────┤
+│ 0.80  │ 0.92  │ 0.11  │  ...  │
+├───────┼───────┼───────┼───────┤
+│ 0.04  │ 0.71  │ 0.63  │  ...  │
+├───────┼───────┼───────┼───────┤
+│  ...  │  ...  │  ...  │  ...  │
+└───────┴───────┴───────┴───────┘
+
+One cell = one activation value.
+The whole grid = one feature map.
+</pre>
+      </div>
+
+      <p>
+        If the filter responds strongly to a particular pattern, the cells where that
+        pattern occurs will tend to have larger activations.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="pill">6. Why there can be many feature maps</div>
+      <h2>Multiple filters look for different characteristics in the image</h2>
+
+      <p>
+        A convolutional layer normally contains multiple filters. Each filter has its own
+        weights and therefore can learn a different patterns.
+      </p>
+
+      <div class="diagram">
+<pre>
+INPUT IMAGE
+     │
+     ├── Filter 1 ──► Feature map 1
+     │
+     ├── Filter 2 ──► Feature map 2
+     │
+     ├── Filter 3 ──► Feature map 3
+     │
+     ├── Filter 4 ──► Feature map 4
+     │
+     └── Filter 5 ──► Feature map 5
+                 ...
+</pre>
+      </div>
+
+      <p>
+        For example, early filters may become sensitive to different edge orientations,
+        color transitions, or simple textures. Other filters may respond to combinations
+        of those features. The network learns these filters during training.
+      </p>
+
+      <p>
+        If a layer has 64 output filters and each feature map is 32 × 32, the output can be
+        represented as:
+      </p>
+
+      <div class="equation">32 × 32 × 64
+
+32 × 32 = cells per feature map
+64      = number of feature maps / output channels
+
+Total activation values = 32 × 32 × 64 = 65,536</div>
+
+      <div class="result">
+        One filter normally corresponds to one feature map/channel, with one
+        activation (cell) at each feature map position.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">7. What exactly is an activation?</div>
+      <h2>One cell contains one activation value</h2>
+
+      <p>
+        An activation is the numeric response of a neuron/channel at a particular location. 
+        In the CNN picture we've been using, each cell contains one value.
+      </p>
+
+      <div class="equation">Feature map
+
+┌──────┬──────┬──────┐
+│ 0.12 │ 0.00 │ 0.72 │
+├──────┼──────┼──────┤
+│ 0.08 │ 1.34 │ 0.41 │
+├──────┼──────┼──────┤
+│ 0.00 │ 0.77 │ 0.23 │
+└──────┴──────┴──────┘
+
+Each cell contains one activation value.</div>
+
+      <p>
+        A larger positive activation often means the  filter produced a stronger response at that location. 
+        A value of zero can occur, for example, when ReLU receives a negative pre-activation.
+      </p>
+
+      <div class="note">
+        <strong>Terminology note:</strong> people sometimes say "the activations of a layer"
+        to refer to the entire feature map. In that broader usage, "activation" can mean
+        the tensor as a whole. In this guide, an activation means one value at
+        one cell and channel.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">8. Feature map dimensions</div>
+      <h2>What does 32 × 32 feature map mean?</h2>
+
+      <p>
+        A 32 × 32 feature map means a grid of 32 rows and 32 columns:
+      </p>
+
+      <div class="equation">32 × 32
+= 1,024 cells
+= 1,024 activation values</div>
+
+      <p>
+        It is more precise to call these <strong>cells</strong> or <strong> positions</strong>
+        rather than pixels. A cell in a feature map does not necessarily correspond to one original
+        image pixel.
+      </p>
+
+      <div class="result">
+        Image → pixels. Feature map → cells containing activations.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">9. Receptive field</div>
+      <h2>What does one feature-map cell represent in the original image?</h2>
+
+      <p>
+        In an early convolutional layer, a filter may be applied to a small region of
+        the input. For example, in the first layer a 3 × 3 filter can apply to 
+        a 3 × 3 region of pixels, so the receptive field initially represent that region 
+        of 3 x 3 pixels.
+      </p>
+
+      <div class="diagram">
+<pre>
+ORIGINAL IMAGE
+
+┌───────────────────────────────┐
+│                               │
+│      ┌───────────────┐        │
+│      │ receptive     │        │
+│      │ field         │        │
+│      │               │        │
+│      └───────────────┘        │
+│                               │
+└───────────────────────────────┘
+                │
+                ▼
+    area of the original image 
+    that influcence the current 
+    activation.
+</pre>
+      </div>
+
+      <p>
+        The important concept is the <strong>receptive field</strong> is the region of an earlier
+        input that can influence a particular activation.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="pill">10. Going deeper</div>
+      <h2>The receptive field grows as we stack layers</h2>
+
+      <p>
+        This is where it is useful to distinguish a <strong>filter</strong> from a
+        <strong>receptive field</strong>. A filter does not "expand".
+        Instead, as convolutional layers are stacked and pooling is applied,
+        an activation deeper in the network can depend on a larger region of the original image.
+      </p>
+
+      <div class="diagram">
+<pre>
+ORIGINAL IMAGE
+      │
+      ▼
+Layer 1
+small region, receptive fields closer to pixels
+      │
+      ▼
+Layer 2
+each cell represents a larger region of original image
+      │
+      ▼
+Pooling - downsampling
+      │
+      ▼
+Layer 3
+each cell correspond to a larger region of the original image
+      │
+      ▼
+Deeper layers
+larger-scale patterns and more abstract representations
+</pre>
+      </div>
+
+      <p>
+        For example, an early cell might be influenced by a small patch of
+        pixels. A deeper cell may depend on many cells from earlier layers, and those cells
+        each already depend on regions of the original image. The effective receptive field
+        therefore grows.
+      </p>
+
+      <div class="note">
+        <strong>Note:</strong> pooling makes a feature map smaller; it does not make the filter 
+        itself larger. What grows is the amount of the original image region that can influence a deeper
+        activation: its effective receptive field.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">11. What pooling changes</div>
+      <h2>Pooling changes resolution, not the filter itself</h2>
+
+      <p>
+        A pooling operation such as 2 × 2 max pooling summarizes local activations and commonly
+        reduces the height and width of a feature map.
+      </p>
+
+      <div class="equation">Before pooling:
+
+4 × 4 feature map
+
+┌────┬────┬────┬────┐
+│ 1  │ 3  │ 2  │ 1  │
+├────┼────┼────┼────┤
+│ 5  │ 4  │ 1  │ 0  │
+├────┼────┼────┼────┤
+│ 2  │ 6  │ 3  │ 2  │
+├────┼────┼────┼────┤
+│ 1  │ 0  │ 2  │ 7  │
+└────┴────┴────┴────┘
+
+2 × 2 max pooling
+
+After pooling:
+
+2 × 2 feature map
+
+┌────┬────┐
+│ 5  │ 2  │
+├────┼────┤
+│ 6  │ 7  │
+└────┴────┘</div>
+
+      <h3>How four activation values become one pooled cell</h3>
+
+      <p>
+        With a <span class="mono">2 × 2</span> pooling window and stride 2, the feature map is divided
+        into non-overlapping groups of four cells. Each group of four activation values is summarized
+        into <strong>one activation value</strong> in the new feature map.
+      </p>
+
+      <div class="diagram">
+<pre>4 × 4 FEATURE MAP                         2 × 2 POOLED FEATURE MAP
+
+┌─────────┬─────────┐
+│  1   3  │  2   1  │
+│  5   4  │  1   0  │       2 × 2        ┌─────┬─────┐
+├─────────┼─────────┤   max pooling  →   │  5  │  2  │
+│  2   6  │  3   2  │                    ├─────┼─────┤
+│  1   0  │  2   7  │                    │  6  │  7  │
+└─────────┴─────────┘                    └─────┴─────┘
+
+Each 2 × 2 region on the left corresponds to one cell on the right.</pre>
+      </div>
+
+      <h3>Max pooling</h3>
+
+      <p>
+        In <strong>max pooling</strong>, the largest activation in each pooling region is selected.
+        Using the four regions above:
+      </p>
+
+      <div class="equation">
+Top-left region:     max(1, 3, 5, 4) = 5
+Top-right region:    max(2, 1, 1, 0) = 2
+Bottom-left region:  max(2, 6, 1, 0) = 6
+Bottom-right region: max(3, 2, 2, 7) = 7
+
+Result:
+
+┌────┬────┐
+│ 5  │ 2  │
+├────┼────┤
+│ 6  │ 7  │
+└────┴────┘</div>
+
+      <p>
+        A large activation means that the filter responded strongly to its learned feature at that
+        location. Max pooling therefore preserves the <strong>strongest detection</strong> within each
+        local region while discarding the exact position of that detection inside the region.
+      </p>
+
+      <h3>Average pooling</h3>
+
+      <p>
+        Pooling does not have to select the maximum. <strong>Average pooling</strong> combines the same
+        four cells by calculating their arithmetic mean. For example, the top-left region becomes:
+      </p>
+
+      <div class="equation">
+┌────┬────┐
+│ 1  │ 3  │
+├────┼────┤
+│ 5  │ 4  │
+└────┴────┘
+
+(1 + 3 + 5 + 4) / 4 = 3.25
+
+The four activation values become one activation value: 3.25</div>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Max pooling</strong>
+          Four local activation values → keep the largest activation.
+        </div>
+        <div class="mini-card">
+          <strong>Average pooling</strong>
+          Four local activation values → calculate their average.
+        </div>
+      </div>
+
+      <h3>Pooling is applied to every feature map</h3>
+
+      <p>
+        Pooling normally reduces the spatial dimensions of each feature map independently; it does
+        not combine different feature maps together. If a convolutional layer produced 32 feature
+        maps, each with dimensions <span class="mono">4 × 4</span>, applying 2 × 2 pooling with stride 2
+        produces 32 feature maps of size <span class="mono">2 × 2</span>.
+      </p>
+
+      <div class="equation">
+Before pooling:  4 × 4 × 32
+                         ↓
+                 2 × 2 pooling
+                         ↓
+After pooling:   2 × 2 × 32
+
+Height and width shrink.
+The number of feature maps / channels stays the same.</div>
+
+      <div class="result">
+        The key idea: one pooled cell summarizes a group of cells from the previous feature map.
+        With 2 × 2 pooling and stride 2, four previous activation values become one new activation value.
+      </div>
+
+      <p>
+        The number of cells is therefore reduced. However, each cell after pooling summarizes
+        information from multiple previous cells, which contributes to the growth of the effective
+        receptive field in later layers.
+      </p>
+    </section>
+
+    <section class="card">
+      <div class="pill">12. Filter behavior across the CNN</div>
+      <h2>Feature maps become increasingly abstract</h2>
+
+      <p>
+        A useful high-level picture is:
+      </p>
+
+      <div class="flow">
+        <div class="node">Pixels</div>
+        <div class="arrow">→</div>
+        <div class="node">Edges / colors</div>
+        <div class="arrow">→</div>
+        <div class="node">Textures / shapes</div>
+        <div class="arrow">→</div>
+        <div class="node">Parts</div>
+        <div class="arrow">→</div>
+        <div class="node">Larger patterns</div>
+      </div>
+
+      <p>
+        Early filters operate close to raw pixels. Deeper filters operate on feature maps
+        rather than directly on pixels, so they can learn combinations of lower-level features.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Early layer</strong>
+          Small receptive fields; simple local patterns such as edges and basic textures.
+        </div>
+        <div class="mini-card">
+          <strong>Middle layer</strong>
+          More combinations of lower-level features; larger effective receptive fields.
+        </div>
+        <div class="mini-card">
+          <strong>Deep layer</strong>
+          Features can represent increasingly complex structures using information aggregated
+          from broader regions.
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">13. One complete mental model</div>
+      <h2>Put all the concepts together</h2>
+
+      <div class="code">
+<pre>INPUT
+  Image pixels
+       │
+       ▼
+CONVOLUTIONAL LAYER
+  Multiple filters
+       │
+       ├── Filter 1
+       │      │
+       │      └── scans the input
+       │             │
+       │             └── one local region → one set of activations per region
+       │
+       ├── Filter 2
+       │      │
+       │      └── scans the input → another set of activations
+       │
+       └── Filter N
+              │
+              └── scans the input → another set of activations
+                       │
+                       ▼
+              FEATURE MAPS / OUTPUT CHANNELS PER FILTER
+                       │
+                       ├── Feature map 1
+                       │     ├── cell → activation value
+                       │     ├── cell → activation value
+                       │     └── ...
+                       │
+                       ├── Feature map 2
+                       │     ├── cell → activation value
+                       │     └── ...
+                       │
+                       └── Feature map N
+
+Then:
+  feature maps
+       ↓
+  optional pooling
+       ↓
+  next convolutional layer
+       ↓
+  filters operate on the previous feature maps
+       ↓
+  deeper activations have larger effective receptive fields
+       ↓
+  increasingly abstract patterns learned</pre>
+      </div>
+
+      <div class="result">
+        The most important distinction to remember:
+        <br><br>
+        <strong>Filter</strong> = learned weights used repeatedly across positions.
+        <br>
+        <strong>Cell</strong> = one position in a feature map.
+        <br>
+        <strong>Activation</strong> = value stored in that cell.
+        <br>
+        <strong>Feature map</strong> = all the cells produced by one filter.
+        <br>
+        <strong>Receptive field</strong> = the region of earlier input that can influence a cell.
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="pill">14. One final distinction</div>
+      <h2>“The filter expands” vs. “the receptive field expands”</h2>
+
+      <p>
+        It is tempting to say that a filter "gets bigger" as the CNN gets deeper. For a standard
+        CNN, that is usually not the best description. A convolutional filter might remain 3 × 3
+        from one layer to another.
+      </p>
+
+      <div class="equation">Example:
+
+Layer 1 filter: 3 × 3
+Layer 2 filter: 3 × 3
+Layer 3 filter: 3 × 3
+
+The filter size can stay the same.
+
+Yet:
+
+Layer 1 cell  → sees a relatively small image region
+Layer 2 cell  → can depend on a larger original-image region
+Layer 3 cell  → can depend on an even larger original-image region</div>
+
+      <p>
+        That larger dependency comes from stacking operations, including convolutions,
+        and pooling. Thus the thing that "grows" is the <strong>receptive field</strong>
+        of a deeper activation, not the filter's dimensions.
+      </p>
+
+      <div class="note">
+        “As we go deeper in a CNN, the receptive field of deeper
+        activations generally grows, allowing them to incorporate information from larger regions
+        of the original image.”
+      </div>
+    </section>
+
+    <div class="footer">
+      Standalone HTML guide — no external libraries or network access required.
+    </div>
+  </main>
+</body>
+</html>
