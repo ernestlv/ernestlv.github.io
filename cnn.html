@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CNN Fundamentals: How machines recognize images</title>
+  <title>CNN Fundamentals</title>
   <style>
     :root {
       --bg: #f6f7fb;
@@ -167,18 +167,18 @@
 </head>
 <body>
   <main class="container">
-    <h1>CNN Fundamentals: How machines recognize images</h1>
+    <h1>CNN Fundamentals: How machines see</h1>
     <div class="subtitle">
       A detailed guide to the convolutional neural network (CNN) concepts.
-      How filters are applied, how feature maps are produced, and how a CNN learns different features of an image.
+      How kernels (filters) are applied, how feature maps are produced, and how a machine learns different aspects of an image.
     </div>
 
     <section class="card">
       <div class="pill">Abstract</div>
-      <h2>How machines turn pixels into models</h2>
+      <h2>How machines see</h2>
       <p>
-        A convolutional neural network (CNN) starts with an image that translates into a numerical tensor and repeatedly applies
-        filters to learn the patterns in an image. Hence, each filter produces a map of patterns a feature map. Each feature map 
+        A machine uses a convolutional neural network (CNN) that transform an image into a numerical tensor and repeatedly applies
+        a convolution. The machine passes the image through a set of filters to learn the different patterns that conform it. Hence, eaxh filter produces a map of patterns called a feature map. Each feature map 
         represent different aspects of the image.
       </p>
 
@@ -206,16 +206,16 @@
       <br><br>
       <div class="grid">
         <div class="mini-card">
-          <strong>Filter</strong>
+          <strong>Kernel (Filter)</strong>
           A grid of weights.
         </div>
         <div class="mini-card">
           <strong>Cell</strong>
-          The product of applying a filter over an image or featute map.
+          The product of applying a kernel (filter) over an image or featute map.
         </div>
         <div class="mini-card">
           <strong>Feature Map</strong>
-          A grid of cells. We can have many feature maps in each layer of a CNN.
+          A grid of activations (cells). We can have many feature maps in each layer of a CNN.
         </div>
         <div class="mini-card">
           <strong>Activation</strong>
@@ -228,7 +228,7 @@
         </div>
         <div class="mini-card">
           <strong>Receptive Field</strong>
-          The area of an image affected by the filter.
+          The area of an image affected by the kernel (filter).
         </div>
       </div>
       <div class="diagram">
@@ -251,14 +251,14 @@ ONE FILTER
     </section>
 
     <section class="card">
-      <div class="pill">3. What is a filter?</div>
-      <h2>A filter is a small matrix of weights</h2>
+      <div class="pill">3. What is a kernel (filter)?</div>
+      <h2>A kernel is a small matrix of weights</h2>
 
       <p>
-        Example a <span class="mono">3 × 3</span> filter:
+        Example a <span class="mono">3 × 3</span> kernel (filter):
       </p>
 
-      <div class="equation">Filter weights
+      <div class="equation">Kernel weights
 
 ┌────┬────┬────┐
 │ w₁ │ w₂ │ w₃ │
@@ -271,12 +271,12 @@ ONE FILTER
 9 trainable weights</div>
 
       <p>
-        At initialization, the weights are random numbers. A filter is not manually programmed to recognize a feature.
+        At initialization, the weights are random numbers. A kernel is not manually programmed to recognize a feature.
         The numbers are parameters that the CNN learns during training.
       </p>
 
       <div class="note">
-        <strong>Each layer has its own set of filters with its own learnable weights.</strong> During backpropagation, 
+        <strong>Each layer has its own set of kernels (filters) with its own learnable weights.</strong> During backpropagation, 
         a gradient is calculated for each filter weight, and the optimizer updates each weight accordingly. Although 
         each filter has its own parameters, all layers are trained together because their gradients are connected through 
         the network by the <a href="//ernestlv.github.io/ai.html">chain rule</a>.
