@@ -167,7 +167,7 @@
 </head>
 <body>
   <main class="container">
-    <h1>CNN Fundamentals: How machines see</h1>
+    <h1>CNN Fundamentals</h1>
     <div class="subtitle">
       A detailed guide to the convolutional neural network (CNN) concepts.
       How kernels (filters) are applied, how feature maps are produced, and how a machine learns different aspects of an image.
@@ -175,10 +175,10 @@
 
     <section class="card">
       <div class="pill">Abstract</div>
-      <h2>How machines see</h2>
+      <h2>How machines learn to ID images</h2>
       <p>
-        A machine uses a convolutional neural network (CNN) that transform an image into a numerical tensor and repeatedly applies
-        a convolution. The machine passes the image through a set of filters to learn the different patterns that conform it. Hence, eaxh filter produces a map of patterns called a feature map. Each feature map 
+        To learn a machine uses a convolutional neural network (CNN) that transforms an image into a numerical tensor and repeatedly applies
+        a convolution. A convolution means the machine passes the image through a set of filters, called kernels, to learn the different patterns that conform it producing a map of patterns called feature maps. Each feature map 
         represent different aspects of the image.
       </p>
 
@@ -187,7 +187,7 @@
         <div class="arrow">→</div>
         <div class="node">Tensor</div>
         <div class="arrow">→</div>
-        <div class="node">Filters</div>
+        <div class="node">Filters (Kernels)</div>
         <div class="arrow">→</div>
         <div class="node">Feature Map 1<br>...<br>Feature Map n</div>
         <div class="arrow">→</div>
@@ -211,11 +211,11 @@
         </div>
         <div class="mini-card">
           <strong>Cell</strong>
-          The product of applying a kernel (filter) over an image or featute map.
+          The dot product of applying a kernel (filter) over an image or featute map.
         </div>
         <div class="mini-card">
           <strong>Feature Map</strong>
-          A grid of activations (cells). We can have many feature maps in each layer of a CNN.
+          A grid of activations (cells). We can have many feature maps in each layer of a CNN. Feature maps are also called channels.
         </div>
         <div class="mini-card">
           <strong>Activation</strong>
@@ -224,7 +224,8 @@
         </div>
         <div class="mini-card">
           <strong>Convolution</strong>
-          When the filter is moved across the image to calculate an activation, at each image position, producing cells and a feature map.
+          When the kernel (filter) is moved across the image to calculate an activation, at each image position, producing cells and a feature map. Other important
+          concept is stride, which is the number of positions (cells) the kernel moves on each convolution.
         </div>
         <div class="mini-card">
           <strong>Receptive Field</strong>
@@ -271,32 +272,32 @@ ONE FILTER
 9 trainable weights</div>
 
       <p>
-        At initialization, the weights are random numbers. A kernel is not manually programmed to recognize a feature.
+        At initialization, the weights are random numbers. <b>A kernel is not manually programmed</b> to recognize a feature.
         The numbers are parameters that the CNN learns during training.
       </p>
 
       <div class="note">
         <strong>Each layer has its own set of kernels (filters) with its own learnable weights.</strong> During backpropagation, 
-        a gradient is calculated for each filter weight, and the optimizer updates each weight accordingly. Although 
-        each filter has its own parameters, all layers are trained together because their gradients are connected through 
+        a gradient is calculated for each kernel weight, and the optimizer updates each weight accordingly. Although 
+        each kernel has its own parameters, all layers are trained together because their gradients are connected through 
         the network by the <a href="//ernestlv.github.io/ai.html">chain rule</a>.
       </div>
 
       <div class="diagram">
 <pre>
 Layer 1
-  Filter A -> its own weights
-  Filter B -> its own weights
-  Filter C -> its own weights
+  Kernel A -> its own weights
+  Kernel B -> its own weights
+  Kernel C -> its own weights
        |
        v
   feature maps
        |
        v
 Layer 2
-  Filter D -> its own weights
-  Filter E -> its own weights
-  Filter F -> its own weights
+  Kernel D -> its own weights
+  Kernel E -> its own weights
+  Kernel F -> its own weights
        |
        v
      Loss
@@ -321,7 +322,7 @@ Separate parameters, trained together.</pre>
 
     <section class="card">
       <div class="pill">4. Convoution Part 1: Producing a cell</div>
-      <h2>Image region (Receptive Field) → filter → activation value</h2>
+      <h2>Image region (Receptive Field) → Kernel (filter) → activation value</h2>
 
       <p>
         Suppose a <span class="mono">3 × 3</span> filter is applied at this region of
@@ -338,7 +339,7 @@ Separate parameters, trained together.</pre>
 │  1 │  6 │  3 │
 └────┴────┴────┘</div>
 
-      <p>And suppose the filter contains these weights:</p>
+      <p>And suppose the filter (kernel) contains these weights:</p>
 
       <div class="equation">Filter
 
@@ -387,19 +388,17 @@ ONE CELL in the feature map
     </section>
 
     <section class="card">
-      <div class="pill">5. Convolution part 2: Moving the filter</div>
-      <h2>One filter produces an entire feature map</h2>
+      <div class="pill">5. Convolution part 2: Moving the kernel (filter)</div>
+      <h2>One kernel (filter) produces an entire feature map</h2>
 
       <p>
-        A filter is moved across each position in the image and the same calculation is
+        A kernel is moved across each position in the image and the same calculation is
         repeated on each row and column of the input image.
       </p>
       <p>
-        For example, the filter can starts from the upper left corner of the image then it moves one column to the left,
-until it reaches the end of the row; then moves one row down and start from the left again. Initially, each column and 
-row in the image represent pixels. However, after the first convolutional layer completes a feature map is produced and 
-each column or row represent a cell. Therefore new filters in each layer are applied to the feature maps produced in the  
-previous layers.
+        For example, the filter can starts from the upper left corner of the image then it moves one position to the left,
+until it reaches the end of the row; then moves one row down and start from the left again. This is where the concept of <b>stride</b>
+        becomes important it tells the machine how many positions to move the kernel when scanning the image.
       </p>
 
       <div class="diagram">
@@ -408,7 +407,7 @@ INPUT IMAGE
 
 ┌──────────────────────────────┐
 │  ┌─────┐                     │
-│  │ 3×3 │                     │  ← filter at position 1 will move left.
+│  │ 3×3 │                     │  ← filter at position 1 will move left. stride = 1
 │  └─────┘                     │
 │        ┌─────┐               │
 │        │ 3×3 │               │  ← same filter moved down to the next row.
@@ -450,7 +449,7 @@ The whole grid = one feature map.
       <h2>Multiple filters look for different characteristics in the image</h2>
 
       <p>
-        A convolutional layer normally contains multiple filters. Each filter has its own
+        A convolutional layer normally contains multiple (kernels) filters. Each filter has its own
         weights and therefore can learn a different patterns.
       </p>
 
@@ -458,15 +457,15 @@ The whole grid = one feature map.
 <pre>
 INPUT IMAGE
      │
-     ├── Filter 1 ──► Feature map 1
+     ├── Kernel 1 ──► Feature map 1
      │
-     ├── Filter 2 ──► Feature map 2
+     ├── Kernel 2 ──► Feature map 2
      │
-     ├── Filter 3 ──► Feature map 3
+     ├── Kernel 3 ──► Feature map 3
      │
-     ├── Filter 4 ──► Feature map 4
+     ├── Kernel 4 ──► Feature map 4
      │
-     └── Filter 5 ──► Feature map 5
+     └── Kernel 5 ──► Feature map 5
                  ...
 </pre>
       </div>
@@ -478,8 +477,8 @@ INPUT IMAGE
       </p>
 
       <p>
-        If a layer has 64 output filters and each feature map is 32 × 32, the output can be
-        represented as:
+        If a layer has 64 filters this will produce 64 feature maps (or channels) and each 
+        if feature map is 32 × 32, the output can be represented as:
       </p>
 
       <div class="equation">32 × 32 × 64
@@ -493,6 +492,12 @@ Total activation values = 32 × 32 × 64 = 65,536</div>
         One filter normally corresponds to one feature map/channel, with one
         activation (cell) at each feature map position.
       </div>
+      <p class="note">
+        A color image initially has three channels because uses three colors RGB (red, green, blue); Hence the convolution process will apply equally to each color channel,
+        then the three activation values produced for each RGB channel are added together to produce a single activation value that is added to the kernel feature map. 
+        This is true for every kernel (filter) and for every channel (feature map) produced by this process at different layers. Hence a CNN with 64 filters in the first layer,
+        will have 3 input channels (the RGB) and 64 output channels (the 64 feature maps produced by the 64 filters)
+      </p>
     </section>
 
     <section class="card">
@@ -557,8 +562,8 @@ Each cell contains one activation value.</div>
       <h2>What does one feature-map cell represent in the original image?</h2>
 
       <p>
-        In an early convolutional layer, a filter may be applied to a small region of
-        the input. For example, in the first layer a 3 × 3 filter can apply to 
+        In an early convolutional layer, a kernel may be applied to a small region of
+        the input. For example, in the first layer a 3 × 3 kernel can apply to 
         a 3 × 3 region of pixels, so the receptive field initially represent that region 
         of 3 x 3 pixels.
       </p>
@@ -595,8 +600,8 @@ ORIGINAL IMAGE
       <h2>The receptive field grows as we stack layers</h2>
 
       <p>
-        This is where it is useful to distinguish a <strong>filter</strong> from a
-        <strong>receptive field</strong>. A filter does not "expand".
+        This is where it is useful to distinguish a <strong>kernel (filter)</strong> from a
+        <strong>receptive field</strong>. A kernel does not "expand".
         Instead, as convolutional layers are stacked and pooling is applied,
         an activation deeper in the network can depend on a larger region of the original image.
       </p>
@@ -782,6 +787,13 @@ The number of feature maps / channels stays the same.</div>
         information from multiple previous cells, which contributes to the growth of the effective
         receptive field in later layers.
       </p>
+      <p class="note">
+        Another interesting effect in CNN is that as we reduce the feature map size with pooling, we increase the number of channels
+        that capture different aspects of the image at different layers.
+      </p>
+      <p class="note">
+        Pooling is important because reduces memory consumption and optimize computation.
+      </p>
     </section>
 
     <section class="card">
@@ -838,7 +850,7 @@ The number of feature maps / channels stays the same.</div>
 CONVOLUTIONAL LAYER
   Multiple filters
        │
-       ├── Filter 1
+       ├── Filter (Kernel) 1
        │      │
        │      └── scans the input
        │             │
@@ -883,13 +895,13 @@ Then:
       <div class="result">
         The most important distinction to remember:
         <br><br>
-        <strong>Filter</strong> = learned weights used repeatedly across positions.
+        <strong>Filter (Kernel)</strong> = learned weights used repeatedly across positions.
         <br>
         <strong>Cell</strong> = one position in a feature map.
         <br>
         <strong>Activation</strong> = value stored in that cell.
         <br>
-        <strong>Feature map</strong> = all the cells produced by one filter.
+        <strong>Feature map (channel)</strong> = all the cells produced by one filter.
         <br>
         <strong>Receptive field</strong> = the region of earlier input that can influence a cell.
       </div>
